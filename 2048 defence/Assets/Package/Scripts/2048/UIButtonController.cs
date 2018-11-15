@@ -10,7 +10,9 @@ public class UIButtonController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         mainController = transform.GetComponent<MainHolderController>();
-	}
+        GameGrid1.UnselectGrid();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -26,9 +26,11 @@ public class MainHolderController : MonoBehaviour {
 
         if (GridFocused == 0)
         {
-
-                interactButtonsHolder.SetActive(false);
-            
+            interactButtonsHolder.SetActive(false);
+        }
+        else
+        {
+            interactButtonsHolder.SetActive(true);
         }
 
 

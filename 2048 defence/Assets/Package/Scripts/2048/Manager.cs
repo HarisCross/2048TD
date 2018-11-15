@@ -18,7 +18,7 @@ public class Manager : MonoBehaviour
     private float GridSpacing = 1f;
 
     public bool ObjectSelected = false;
-
+    private bool exportedThisMovement = false;
     public bool movingGrid = false;
 
     private Vector2 startPos, targetPos,startScale,TargetScale;
@@ -50,19 +50,27 @@ public class Manager : MonoBehaviour
             {
                 case ItemDir.Up:
                     CurrentGrid.MoveGridVertical(ItemDir.Up);
+                    exportedThisMovement = false;
+
                     break;
 
                 case ItemDir.Down:
                     CurrentGrid.MoveGridVertical(ItemDir.Down);
+                    exportedThisMovement = false;
+
                     break;
 
                 case ItemDir.Left:
                     //print("moving left" + InpController.tempDir);
                     CurrentGrid.MoveGridHorizontal(ItemDir.Left);
+                    exportedThisMovement = false;
+
                     break;
 
                 case ItemDir.Right:
                     CurrentGrid.MoveGridHorizontal(ItemDir.Right);
+                    exportedThisMovement = false;
+
                     break;
 
 
@@ -98,6 +106,7 @@ public class Manager : MonoBehaviour
     }
     public void UnselectGrid()
     {
+        t = 0;
         //move grid over to turret and change its scale
         movingGrid = true;
         MainHolder.AnimationOccuring = true;
@@ -112,6 +121,7 @@ public class Manager : MonoBehaviour
     }
     public void SelectGrid()
     {
+        t = 0;
         movingGrid = true;
         MainHolder.AnimationOccuring = true;
         MainHolder.GridFocused = 0;
@@ -127,8 +137,8 @@ public class Manager : MonoBehaviour
     
     void MoveAndScaleGrid()//called in update, should move grid holder towards turret until close then set bool to false
     {
-
-            t += Time.deltaTime / movementTimer;
+       
+        t += Time.deltaTime / movementTimer;
             transform.position = Vector2.Lerp(startPos, targetPos, t);
 
             transform.localScale = Vector2.Lerp(startScale, TargetScale, t);
@@ -261,7 +271,7 @@ public class Manager : MonoBehaviour
     public void ExportHighestNumberFromGrid()
     {
         //search grid for hgihest numbers, aedd to list, choose random from list and pass that value to turret and reset that tile
-
+        if (exportedThisMovement) return;
         int highestValue = 0,randValue;
         List<GridSpot> highestGridSpots = new List<GridSpot>();
         GridSpot spotChosen;
@@ -275,6 +285,7 @@ public class Manager : MonoBehaviour
                 //reset list, change highet value
                 highestGridSpots.Clear();
                 highestGridSpots.Add(spot);
+                highestValue = spot.NumberValue;
             }
 
             if (spot.NumberValue == highestValue)
@@ -284,8 +295,7 @@ public class Manager : MonoBehaviour
             }
 
         }
-
-        if(highestGridSpots.Count > 1)
+        if (highestGridSpots.Count > 1)
         {
             randValue = Random.Range(0, highestGridSpots.Count);
             spotChosen = highestGridSpots[randValue];
@@ -294,10 +304,12 @@ public class Manager : MonoBehaviour
         {
             spotChosen = highestGridSpots[1];
         }
+      //  print("spot to remove: " + spotChosen);
 
         GridTower.shotResources += spotChosen.NumberValue;
-        ResetGridTile(spotChosen);
 
+        ResetGridTile(spotChosen);
+        exportedThisMovement = true;
 
     }
     private void ResetGridTile(GridSpot spot)
