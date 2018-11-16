@@ -8,89 +8,57 @@ public class MinionDetails : MonoBehaviour {
 
 
     public int health = 0;
-
-
+    [SerializeField]
+    private bool movingMinion = false;
 
     public MinionController parent;
+    public SpawnerController spawner;
 
 
-    public Tilemap tileMap;
-    private Vector3Int targetTilePos, currentTilePos;
-   // private TileBase targetTile, currentTile;
-    private Vector3 targetPos, currentPos;
+    public int CurrentNode = -1;
+    public Vector2 NextPosition,StartPosition;
+    public float timer = 0f, moveSpeed = 1f;
 
-    Vector3Int cellPosition;
-    int gridX, gridY,gridZ;
 
     void Start()
     {
-        cellPosition = tileMap.WorldToCell(transform.position);
-
-        gridX = cellPosition[0];
-        gridY = cellPosition[1];
-        gridZ = cellPosition[2];
-        currentTilePos = cellPosition;
-        //print("X: " + gridX + "   Y: " + gridY + "   Z: " + gridZ);
-
-        GetNextPosition();
+        StartPosition = transform.position;
     } 
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+        if(NextPosition != null)
+        {
+            MoveMinion();
+           // print(NextPosition);
+        }
+
+
 	}
 
 
     private void OnDestroy()
     {
-        parent.Minions.Remove(transform.gameObject);
-    }
-    public void StartMovement()
-    {
-
-        //  targetTile = tileMap.GetTile(targetTilePos);
-        //  currentTile = tileMap.GetTile(currentTilePos);
-
-        // targetPos = targetTile.
-
-        targetPos = targetTilePos;
-        currentPos = currentTilePos;
-
-        //print("from: " + currentPos + " to " + targetPos);
-
+        spawner.Minions.Remove(transform.gameObject);
     }
 
-    private void GetNextPosition()
+    public void MoveMinion()
     {
+        timer += Time.deltaTime * moveSpeed;
 
-        for(int x = gridX - 1; x <= gridX + 1; x++)
+       transform.position =  Vector2.Lerp(StartPosition, NextPosition, timer);
+
+        if(Vector2.Distance(transform.position,NextPosition) < 0.1f)
         {
-            for (int y = gridY - 1; y <= gridY + 1; y++)
-            {
-
-                Vector3Int  tempVec3Int = new Vector3Int(x, y, gridZ);
-
-                if (tempVec3Int != cellPosition)
-                {
-
-
-                    if (tileMap.GetSprite(tempVec3Int))
-                    {
-                        print("got sprite" + tempVec3Int);
-                        //currentTilePos = cellPosition;
-                        targetTilePos = tempVec3Int;
-
-                    }
-                    //print(tempVec3Int);
-                }
-            }
-
-
+            spawner.UpdateMinionTarget(transform.gameObject);
         }
 
 
-
     }
+   
+
+
 
 
 }

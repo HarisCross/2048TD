@@ -61,7 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MinionController.cs" />
+    <Compile Include="Assets\DestroyOnContact.cs" />
+    <Compile Include="Assets\Node.cs" />
     <Compile Include="Assets\Package\Scripts\2048\GridButton.cs" />
     <Compile Include="Assets\Package\Scripts\2048\GridSpot.cs" />
     <Compile Include="Assets\Package\Scripts\2048\InputController.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Assets\Package\Scripts\2048\Manager.cs" />
     <Compile Include="Assets\Package\Scripts\2048\NumGrid.cs" />
     <Compile Include="Assets\Package\Scripts\2048\UIButtonController.cs" />
+    <Compile Include="Assets\Package\Scripts\TD\Enemy\MinionController.cs" />
     <Compile Include="Assets\Package\Scripts\TD\Enemy\MinionDetails.cs" />
     <Compile Include="Assets\Package\Scripts\TD\Enemy\SpawnerController.cs" />
     <Compile Include="Assets\Package\Scripts\TD\Towers\ProjectileController.cs" />

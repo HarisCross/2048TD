@@ -6,6 +6,10 @@ public class TowerController : MonoBehaviour {
 
     private float rotateSpeed = 10f;
 
+    Vector3 targetVector;
+    float angleToRotate;
+    Quaternion amountToRotate;
+
     [Header("Shot/costs")]
     public int shotResources;
     public float costPerShot = 2f;
@@ -29,7 +33,16 @@ public class TowerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(CurrentTarget != null) RotateTowardEnemy();
+        if (CurrentTarget != null) {
+
+            RotateTowardEnemy();
+            ShootAtTarget();
+        }
+        else
+        {
+            if(listOfTargets.Count > 0) UpdateTarget();
+
+        }
 
 
 
@@ -37,9 +50,7 @@ public class TowerController : MonoBehaviour {
 
     private void RotateTowardEnemy()
     {
-        Vector3 targetVector;
-        float angleToRotate;
-        Quaternion amountToRotate;
+        
 
 
 
@@ -54,20 +65,16 @@ public class TowerController : MonoBehaviour {
 
 
     }
+    private void UpdateTarget()
+    {
+        //assign a current target from the list of targets
+        print("assgined target");
+        CurrentTarget = listOfTargets[0];
+
+    }
     private void ShootAtTarget()
     {
-        if(CurrentTarget != null)
-        {
-            //if you have target then fire
-
-
-
-
-
-
-
-
-        }
+        
 
 
     }
@@ -83,12 +90,7 @@ public class TowerController : MonoBehaviour {
     {
        
         listOfTargets.Remove(collision.transform.gameObject);
-
+        if (listOfTargets.Count > 0) UpdateTarget();
     }
-    private void UpdateCurrentTarget()
-    {
 
-
-
-    }
 }

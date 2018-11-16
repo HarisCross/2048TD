@@ -119,7 +119,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  movingMinion: 0
   parent: {fileID: 0}
+  spawner: {fileID: 0}
+  CurrentNode: -1
+  NextPosition: {x: 0, y: 0}
+  StartPosition: {x: 0, y: 0}
+  timer: 0
+  moveSpeed: 1
 --- !u!212 &212136955766204964
 SpriteRenderer:
   m_ObjectHideFlags: 1
