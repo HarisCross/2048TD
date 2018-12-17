@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CountUIDisp.cs" />
     <Compile Include="Assets\DestroyOnContact.cs" />
     <Compile Include="Assets\Node.cs" />
     <Compile Include="Assets\Package\Scripts\2048\GridButton.cs" />
@@ -71,11 +72,14 @@
     <Compile Include="Assets\Package\Scripts\2048\Manager.cs" />
     <Compile Include="Assets\Package\Scripts\2048\NumGrid.cs" />
     <Compile Include="Assets\Package\Scripts\2048\UIButtonController.cs" />
+    <Compile Include="Assets\Package\Scripts\TD\Enemy\BulletController.cs" />
+    <Compile Include="Assets\Package\Scripts\TD\Enemy\BulletNumberDisplay.cs" />
     <Compile Include="Assets\Package\Scripts\TD\Enemy\MinionController.cs" />
     <Compile Include="Assets\Package\Scripts\TD\Enemy\MinionDetails.cs" />
     <Compile Include="Assets\Package\Scripts\TD\Enemy\SpawnerController.cs" />
-    <Compile Include="Assets\Package\Scripts\TD\Towers\ProjectileController.cs" />
+    <Compile Include="Assets\Package\Scripts\TD\Enemy\WaveDetails.cs" />
     <Compile Include="Assets\Package\Scripts\TD\Towers\TowerController.cs" />
+    <Compile Include="Assets\Package\Scripts\TD\Towers\TUIController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

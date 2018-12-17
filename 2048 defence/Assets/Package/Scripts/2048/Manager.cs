@@ -36,6 +36,7 @@ public class Manager : MonoBehaviour
         Initialize();
         CurrentGrid = new NumGrid();
         CurrentGrid = transform.GetComponent<NumGrid>();
+        UnselectGrid();
     }
 
     // Update is called once per frame

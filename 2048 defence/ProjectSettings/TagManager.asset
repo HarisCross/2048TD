@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GridNumber
   - Enemy
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -57,4 +58,7 @@ TagManager:
     locked: 0
   - name: SpriteStationary1
     uniqueID: 3938560331
+    locked: 0
+  - name: Grid
+    uniqueID: 4145149853
     locked: 0

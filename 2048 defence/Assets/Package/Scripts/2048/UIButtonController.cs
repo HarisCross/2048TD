@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIButtonController : MonoBehaviour {
 
-    MainHolderController mainController;
+    public MainHolderController mainController;
 
     public Manager GameGrid1;
 	// Use this for initialization
