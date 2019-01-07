@@ -15,22 +15,24 @@ public class SpawnerController : MonoBehaviour {
    
 
     [Header("Wave Options")]
-    public List<GameObject> CurrentMinions = new List<GameObject>();
+   // public List<GameObject> CurrentMinions = new List<GameObject>();
     public List<WaveDetails> waveDetailsList = new List<WaveDetails>();
-
+    public WaveDetails currWaveDetails;
     public Component[] components;
+   // [SerializeField]
+    public int waveMinionCounter = 0;
    // public WaveDetails[] waveDetailsList;
 
-    private int waveMaxCount = 3;
+    public int waveMaxCount = 2;
     public int currentWave = 0;
-
+    int minionToReturnNumber;
     public float timeUntilWavesStart = 2f;
-    public float timeBetweenWaves = 8f;
+    public float timeBetweenWaves =10f;
 
-   // public int minionSpawnCount = 0;
-   // private int minionSpawnMax = 5;
+    // public int minionSpawnCount = 0;
+    // private int minionSpawnMax = 5;
 
-
+    public LevelManager levelManager;
 
 
     [Header("SpawnerOptions")]
@@ -42,7 +44,7 @@ public class SpawnerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
+        
         InvokeRepeating("StartWave", timeUntilWavesStart, timeBetweenWaves);
 
         pathway = pathWayHolder.GetComponentsInChildren<Node>();
@@ -52,6 +54,7 @@ public class SpawnerController : MonoBehaviour {
         foreach(WaveDetails waveDets in components)
         {
             waveDetailsList.Add(waveDets);
+            waveDets.spawnContrller = this;
         }
 	}
 	
@@ -64,44 +67,81 @@ public class SpawnerController : MonoBehaviour {
 	}
     void StartWave()
     {
+        
+        if (currentWave == waveMaxCount)
+        {
+            CancelInvoke("StartWave");
+            print("finished waves");
+            return;
+        }
+      //  print("starting wave: " + currentWave);
+        levelManager.WaveComplete(this, currentWave);
         CancelInvoke("SpawnEnemy");
 
-        WaveDetails currWaveDetails = waveDetailsList[currentWave];
+        currWaveDetails = waveDetailsList[currentWave];
         currentWave++;
+        waveMinionCounter = 0;
 
         float waveStartDelay = currWaveDetails.waveStartDelay;
-        float spawnMinionDelay = currWaveDetails.waveStartDelay;
-       // float minionSpawnMax = currWaveDetails.waveStartDelay;
+        float spawnMinionDelay = currWaveDetails.spawnMinionDelay;
+        // float minionSpawnMax = currWaveDetails.waveStartDelay;
+        minionToReturnNumber = waveMinionCounter;
+        InvokeRepeating("SpawnEnemy",waveStartDelay,spawnMinionDelay);
 
-         InvokeRepeating("SpawnEnemy",waveStartDelay,spawnMinionDelay);
+    }
+    GameObject GetMinionToSpawn()
+    {
+        //get a minion from the current wave minions, go sequentially to allow for specific waves of enemys.
+        //repeat if max minions is more than the minion list
 
+        GameObject ret;
+        int minionListLength = currWaveDetails.Minions.Count;
+        //minionToReturnNumber = waveMinionCounter;
+        //print("length: " + minionListLength + ", return number: " + minionToReturnNumber + ", wave min counter: " + waveMinionCounter);
+
+        if(minionToReturnNumber > (minionListLength-1))//length may be 6 but has 0-5 within so minus 1 to prevent index error
+        {
+            //if minions couinter is larger then length reset it to 0
+            minionToReturnNumber = 0;
+
+        }
+
+        ret = currWaveDetails.Minions[minionToReturnNumber];
+        //print("returned: " + ret.name);
+        return ret;
     }
     void SpawnEnemy()
     {
-
+        if(waveMinionCounter > currWaveDetails.waveMinionMax)
+        {
+            CancelInvoke("SpawnEnemy");
+            
+            waveMinionCounter = 0;
+            return;
+        }
         //spawn enemy if amount spawned is less than amount to spawn
+        GameObject minion = GetMinionToSpawn();
 
-        GameObject tempGO = Instantiate(Minions[0], transform.position, transform.rotation);
+        GameObject tempGO = Instantiate(minion, transform.position, transform.rotation);
         MinionDetails tempClassOfInst = tempGO.GetComponent<MinionDetails>();
-        //ustempGO.name = tempGO.name + minionSpawnCount;
+
+
         tempGO.transform.parent = enemyGOHolder.transform;
         tempClassOfInst.parent = minionController;
-        // tempClassOfInst.tileMap = tempClassOfInst.parent.PathwayTilemap;
         tempClassOfInst.spawner = this;
         tempClassOfInst.NextPosition = pathway[tempClassOfInst.CurrentNode + 1].gameObject.transform.position;
-        CurrentMinions.Add(tempGO);
+        //CurrentMinions.Add(tempGO);
+
+        currWaveDetails.CurrentMinionsInPlay.Add(tempGO);
+
         tempClassOfInst.healthCurrent = 6f;
-       // minionSpawnCount++;
 
+        tempClassOfInst.moveSpeed = currWaveDetails.waveMinionSpeed;
 
+        waveMinionCounter++;
+        minionToReturnNumber++;
     }
-    //GameObject GetRandomEnemy()
-    //{
-    //    int len = Minions.Count;
-    //    int rand = Random.Range(0, len);
-    //    GameObject temp = Minions[rand];
-    //    return temp;
-    //}
+
     public void UpdateMinionTarget(GameObject minion)
     {
         //itterate through all minions and update thier target pos to the next one in array

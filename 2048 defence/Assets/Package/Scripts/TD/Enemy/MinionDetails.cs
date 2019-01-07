@@ -53,7 +53,7 @@ public class MinionDetails : MonoBehaviour {
         }
 
         if(healthCurrent < 1) {
-            print("minion killed : " + healthCurrent);
+          //  print("minion killed : " + healthCurrent);
             Destroy(this.transform.gameObject);
         }
 
@@ -77,7 +77,8 @@ public class MinionDetails : MonoBehaviour {
     {
         if (spawner != null)
         {
-            spawner.CurrentMinions.Remove(transform.gameObject);
+            spawner.currWaveDetails.CurrentMinionsInPlay.Remove(transform.gameObject);
+            spawner.currWaveDetails.CheckMinionsRemainingInWave();
         }
         Destroy(thisTextUIDisplay);
     }
