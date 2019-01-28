@@ -36,7 +36,7 @@ public class Manager : MonoBehaviour
         Initialize();
         CurrentGrid = new NumGrid();
         CurrentGrid = transform.GetComponent<NumGrid>();
-        UnselectGrid();
+        UnselectGridAtSrtart();
     }
 
     // Update is called once per frame
@@ -120,6 +120,27 @@ public class Manager : MonoBehaviour
         TargetScale = new Vector2(0.2f, 0.2f);
 
     }
+
+    public void UnselectGridAtSrtart()
+    {
+        t = 0;
+        //move grid over to turret and change its scale
+        movingGrid = true;
+        MainHolder.AnimationOccuring = true;
+        MainHolder.GridFocused = 0;
+
+        startPos = transform.position;
+        targetPos = turretChosen.transform.GetChild(1).transform.position;
+
+        startScale = transform.localScale;
+        TargetScale = new Vector2(0.2f, 0.2f);
+
+
+        transform.position = targetPos;
+
+        transform.localScale = TargetScale;
+    }
+
     public void SelectGrid()
     {
         t = 0;
@@ -307,8 +328,8 @@ public class Manager : MonoBehaviour
         }
       //  print("spot to remove: " + spotChosen);
 
-        GridTower.shotResources += spotChosen.NumberValue;
-
+       // GridTower.shotResources += spotChosen.NumberValue;
+        GridTower.AddResources(spotChosen.NumberValue);
         ResetGridTile(spotChosen);
         exportedThisMovement = true;
 

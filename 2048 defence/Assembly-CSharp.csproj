@@ -62,8 +62,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\CountUIDisp.cs" />
+    <Compile Include="Assets\CrosshairController.cs" />
+    <Compile Include="Assets\CrosshairsActiveController.cs" />
     <Compile Include="Assets\DestroyOnContact.cs" />
+    <Compile Include="Assets\LevelInitManager.cs" />
     <Compile Include="Assets\LevelManager.cs" />
+    <Compile Include="Assets\LevelMenuManager.cs" />
+    <Compile Include="Assets\MenuLoader.cs" />
     <Compile Include="Assets\Node.cs" />
     <Compile Include="Assets\Package\Scripts\2048\GridButton.cs" />
     <Compile Include="Assets\Package\Scripts\2048\GridSpot.cs" />

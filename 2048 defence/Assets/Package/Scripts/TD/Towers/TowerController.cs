@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class TowerController : MonoBehaviour
 {
+    public GameObject targetCrosshairs;
+
     private float rotateSpeed = 10f;
     private bool audioRotating = false;
 
@@ -17,6 +19,7 @@ public class TowerController : MonoBehaviour
     public AudioSource audioSourceTurning;
 
     [Header("Shot/costs")]
+    public int AMOUNTTOSTARTWITH = 0;
     public float shotResources;
 
     public float costPerShot = 2f;
@@ -35,14 +38,11 @@ public class TowerController : MonoBehaviour
     public GameObject bulletHolder;
 
 
-
-
-
     // Use this for initialization
     private void Start()
     {
-        ModifyFirerateAndShotpower();
-        InvokeRepeating("ShootAtTarget", turretShootingStartDelay, turretShootingDelay);
+        //ModifyFirerateAndShotpower();
+        AddResources(AMOUNTTOSTARTWITH);
     }
 
     // Update is called once per frame
@@ -61,49 +61,91 @@ public class TowerController : MonoBehaviour
             //currentlyShooting = false;
         }
     }
-    private void AssignAudioSources()
+    void UpdateCrosshairsTarget(GameObject newTarget)
     {
+        //sends the towers target to the crosshairs
 
+        if(newTarget != targetCrosshairs.GetComponent<CrosshairController>().target)
+        {
+            targetCrosshairs.GetComponent<CrosshairController>().AddTarget(newTarget);
+        }
 
 
     }
-    private void ModifyFirerateAndShotpower()
+    public void UpdateFirerateAndShotpower()
+    {
+        CancelInvoke("ShootAtTarget");
+        InvokeRepeating("ShootAtTarget", turretShootingStartDelay, turretShootingDelay);
+
+    }
+    public void AddResources(int amountToAdd)
+    {
+
+        //adds values to storage, changes power and firerate then restarts repeating fire func to change fire rate
+        shotResources += amountToAdd;
+        ModifyFirerateAndShotpower(amountToAdd);
+        UpdateFirerateAndShotpower();
+
+    }
+    private void ModifyFirerateAndShotpower(int amountAdded)
     {
         //call after every shot to change firerate and power of next shot
+        
 
         //change turretshootingdelay ( 1f) and costpershot ( 2f)
-        if (shotResources < 10f)
+        switch (amountAdded)
         {
-            
+            case 1:
+                costPerShot = 0f;
+                turretShootingDelay = 0f;
+                break;
+            case 2:
+                costPerShot = 1f;
+                turretShootingDelay = 0.5f;
+                break;
+            case 4:
+                costPerShot = 1f;
+                turretShootingDelay = 0.5f;
+                break;
+            case 8:
+                costPerShot = 2f;
+                turretShootingDelay = 0.75f;
+                break;
+            case 16:
+                costPerShot = 2f;
+                turretShootingDelay = 0.75f;
+                break;
+            case 32:
+                costPerShot = 4f;
+                turretShootingDelay = 1f;
+                break;
+            case 64:
+                costPerShot = 8f;
+                turretShootingDelay = 1.25f;
+                break;
+            case 128:
+                costPerShot = 16f;
+                turretShootingDelay = 1.5f;
+                break;
+            case 256:
+                costPerShot = 32f;
+                turretShootingDelay = 1.75f;
+                break;
+            case 512:
+                costPerShot = 64f;
+                turretShootingDelay = 2f;
+                break;
+            case 1024:
+                costPerShot = 128f;
+                turretShootingDelay = 3f;
+                break;
+            case 2048:
+                costPerShot = 256f;
+                turretShootingDelay = 4f;
+                break;
 
 
         }
-        else
-        {
-            if (shotResources < 25f)
-            {
-                
-            }
-            else
-            {
-                if (shotResources < 50f)
-                {
-                    
-                }
-                else
-                {
-                    if (shotResources < 100f)
-                    {
-                        
-                    }
-                    else
-                    {
-                        
-                    }
-                }
-            }
-        }
-
 
 
     }
@@ -119,14 +161,7 @@ public class TowerController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, amountToRotate, Time.deltaTime * rotateSpeed);
 
     }
-    void ChangeFireRate(int newFirerate)
-    {
-        CancelInvoke("ShootAtTarget");
 
-        turretShootingDelay = newFirerate;
-
-        InvokeRepeating("ShootAtTarget", turretShootingStartDelay, turretShootingDelay);
-    }
     private void UpdateTarget()
     {
         audioPlayRotating();
@@ -142,18 +177,19 @@ public class TowerController : MonoBehaviour
             CurrentTarget = null;
 
         }
-       
+        UpdateCrosshairsTarget(CurrentTarget);
     }
 
     private void ShootAtTarget()
     {
-        //  print("Shooting");
+
         // currentlyShooting = true;
 
         float shotValue = 0f;
 
         if(shotResources >= costPerShot && CurrentTarget != null)
         {
+            print("firing");
             shotValue = costPerShot;
             shotResources -= costPerShot;
 
@@ -163,7 +199,7 @@ public class TowerController : MonoBehaviour
 
                 tempBullet.gameObject.GetComponent<BulletController>().AddValues(CurrentTarget, shotValue);
 
-            ModifyFirerateAndShotpower();
+          //  ModifyFirerateAndShotpower();
             audioPlayShotFired();
 
         }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
 
+    public int LevelNumber = -1;
+    string playPrefsLevelCounter = "playPrefsLevelCounter";
+
     private List<GameObject> CurrentMinions = new List<GameObject>();
 
     public List<SpawnerController> spawners = new List<SpawnerController>();
@@ -33,6 +36,14 @@ public class LevelManager : MonoBehaviour {
         //wave timer has triggered to end the wave and if poss start next one
 
         print(spawnController.transform.gameObject + " ended wave by time limit: " + waveNumber);
+
+    }
+
+    public void FinishLevel()
+    {
+        //to be called upon wave completion
+
+        PlayerPrefs.SetInt(playPrefsLevelCounter, LevelNumber);
 
     }
 }
