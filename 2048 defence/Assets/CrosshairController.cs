@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CrosshairController : MonoBehaviour {
-
+public class CrosshairController : MonoBehaviour
+{
     public GameObject target { get; private set; }
     private Vector3 newPos;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
+    // Use this for initialization
+    private void Start()
+    {
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
         if (target != null)
         {
-
             //this.transform.position = target.transform.position;
             newPos = target.transform.position;
             newPos.z = 0;
@@ -29,15 +27,11 @@ public class CrosshairController : MonoBehaviour {
         {
             if (this.transform.GetComponent<SpriteRenderer>().enabled == true)
                 this.transform.GetComponent<SpriteRenderer>().enabled = false;
-
         }
-
-
-
     }
+
     public void AddTarget(GameObject targ)
     {
         target = targ;//does what it says on the tin
-
     }
 }

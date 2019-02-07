@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveDetails : MonoBehaviour {
-
-    
-
+public class WaveDetails : MonoBehaviour
+{
     public List<GameObject> Minions = new List<GameObject>();
     public List<GameObject> CurrentMinionsInPlay = new List<GameObject>();
 
@@ -18,25 +15,24 @@ public class WaveDetails : MonoBehaviour {
     public float spawnMinionDelay = 0.5f;
     public float waveMinionMax = 5f;
     public float waveMinionSpeed = 1f;
+
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private void Start()
+    {
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+    }
+
     public void CheckMinionsRemainingInWave()
     {
         //called on minion death to check count of currMins, if 0 then they all must be dead or my code is worse than i thought
 
-        if(CurrentMinionsInPlay.Count == 0)
+        if (CurrentMinionsInPlay.Count == 0)
         {
-
             spawnContrller.levelManager.WaveEnded(spawnContrller, spawnContrller.currentWave);
-
-
         }
     }
 }

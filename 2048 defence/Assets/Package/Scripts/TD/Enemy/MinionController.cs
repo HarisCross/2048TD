@@ -1,21 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Tilemaps;
+﻿using UnityEngine;
 
-public class MinionController : MonoBehaviour {
+public class MinionController : MonoBehaviour
+{
+    private void Start()
+    {
+    }
 
-
-	void Start () {
-
-        
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-
-	}
-
+    // Update is called once per frame
+    private void Update()
+    {
+    }
 }

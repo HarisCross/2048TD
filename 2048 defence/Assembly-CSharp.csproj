@@ -87,6 +87,7 @@
     <Compile Include="Assets\Package\Scripts\TD\Enemy\WaveDetails.cs" />
     <Compile Include="Assets\Package\Scripts\TD\Towers\TowerController.cs" />
     <Compile Include="Assets\Package\Scripts\TD\Towers\TUIController.cs" />
+    <Compile Include="Assets\PathwayHolder.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

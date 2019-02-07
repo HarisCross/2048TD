@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GridSpot : MonoBehaviour {
-
+public class GridSpot : MonoBehaviour
+{
     public float GridSpacing = 1f;
 
     public GameObject DefaultGO;
     public GameObject SpriteToShow;
 
-
     [Header("Grid Spot Values")]
     public int NumberValue;
+
     public int RowLoc;
     public int ColLoc;
     public NumGrid CurrentGrid;
@@ -22,18 +20,16 @@ public class GridSpot : MonoBehaviour {
         SpriteToShow = newGO;
     }
 
-    public void ModifyNumber(GameObject newSprite,int newNumber)
+    public void ModifyNumber(GameObject newSprite, int newNumber)
     {
-
         DefaultGO.SetActive(false);
         Destroy(SpriteToShow);
         SpriteToShow = Instantiate(newSprite, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         SpriteToShow.transform.parent = transform;
         NumberValue = newNumber;
-
     }
 
-    public void Initialise(int num, int col, int row,NumGrid Grid)
+    public void Initialise(int num, int col, int row, NumGrid Grid)
     {
         NumberValue = num;
         RowLoc = row;
@@ -50,6 +46,7 @@ public class GridSpot : MonoBehaviour {
     {
         hasBeenMerged = false;
     }
+
     public void ResetSpotToDefaults()
     {
         hasBeenMerged = false;
@@ -58,6 +55,5 @@ public class GridSpot : MonoBehaviour {
         DefaultGO.SetActive(true);
         Destroy(SpriteToShow);
         NumberValue = 0;
-
     }
 }

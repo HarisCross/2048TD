@@ -1,44 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
-public class TUIController : MonoBehaviour {
-
+public class TUIController : MonoBehaviour
+{
     public GameObject TextGO;
-    private TextMeshProUGUI textComp;
+    private TextMeshPro textComp;
     private TowerController towCont;
 
-	// Use this for initialization
-	void Start () {
-
-        textComp = TextGO.GetComponent<TextMeshProUGUI>();
+    // Use this for initialization
+    private void Start()
+    {
+        textComp = TextGO.GetComponent<TextMeshPro>();
         towCont = transform.GetComponent<TowerController>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-        CountCheck();
-
-
     }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        CountCheck();
+        KeepTextStraight();
+    }
+
     private void CountCheck()
     {
         //if there is no ammo display that
 
-        if(towCont.shotResources == 0)
+        if (towCont.shotResources == 0)
         {
-
             textComp.text = "NO AMMO";
-
         }
         else
         {
             textComp.text = towCont.shotResources.ToString();
-
         }
+    }
 
+    private void KeepTextStraight()
+    {
+        Vector3 newRot = new Vector3(0, 0, transform.rotation.z);
+
+        TextGO.transform.rotation = Quaternion.Euler(newRot.x, newRot.y, newRot.z);
     }
 }

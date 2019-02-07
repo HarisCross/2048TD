@@ -53,12 +53,12 @@ TagManager:
   - name: EnemyPathway
     uniqueID: 2657238413
     locked: 0
-  - name: UI
-    uniqueID: 3598313517
+  - name: Grid
+    uniqueID: 4145149853
     locked: 0
   - name: SpriteStationary1
     uniqueID: 3938560331
     locked: 0
-  - name: Grid
-    uniqueID: 4145149853
+  - name: UI
+    uniqueID: 3598313517
     locked: 0
