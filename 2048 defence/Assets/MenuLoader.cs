@@ -17,7 +17,7 @@ public class MenuLoader : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        DontDestroyOnLoad(this.transform);
+     //   DontDestroyOnLoad(this.transform);
         debugUIText = debugUI.GetComponent<Text>();
 
         foreach (Transform child in buttonHolder.transform)
@@ -44,7 +44,7 @@ public class MenuLoader : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetInt(playPrefsLevelCounter, -1);
+            PlayerPrefs.SetInt(playPrefsLevelCounter, 0);
             debugUIText.text = "created level save counter";
         }
         UpdateButtons();
@@ -55,7 +55,7 @@ public class MenuLoader : MonoBehaviour
         //UpdateMenu();
         //to be called and run through each button while only activating those which are under the level counter
 
-        int levelsToBeUnblocked = (currentLevel + 1);
+        int levelsToBeUnblocked = (currentLevel );
         // print(levelsToBeUnblocked);
 
         for (int i = 0; i < buttonsList.Count; i++)
@@ -70,21 +70,21 @@ public class MenuLoader : MonoBehaviour
         }
     }
 
-    public void loadLevel1()
+    public void loadLevel()
     {
-        int levelToLoad = 1;
-        LevelLoader(levelToLoad);
+       // int levelToLoad = PlayerPrefs.GetInt(playPrefsLevelCounter);
+        LevelLoader(1);//loads teh game scene
     }
 
     public void loadLevel2()
     {
-        int levelToLoad = 3;
+        int levelToLoad = 2;
         LevelLoader(levelToLoad);
     }
 
     public void loadLevel3()
     {
-        int levelToLoad = 2;
+        int levelToLoad = 3;
         LevelLoader(levelToLoad);
     }
 
@@ -94,6 +94,7 @@ public class MenuLoader : MonoBehaviour
     }
 
     //pout in func to be called on new scene loaded which uses the pp level number to load the appropriate level prefab
+
 
 
 }

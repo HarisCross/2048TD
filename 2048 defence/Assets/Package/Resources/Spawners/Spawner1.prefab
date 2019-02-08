@@ -96,7 +96,7 @@ MonoBehaviour:
   waveStartDelay: 0
   spawnMinionDelay: 1
   waveMinionMax: 5
-  waveMinionSpeed: 0.5
+  waveMinionSpeed: 1.5
 --- !u!114 &114659243745454970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,7 +119,7 @@ MonoBehaviour:
   waveStartDelay: 0
   spawnMinionDelay: 0.5
   waveMinionMax: 8
-  waveMinionSpeed: 1
+  waveMinionSpeed: 3
 --- !u!114 &114693812988124550
 MonoBehaviour:
   m_ObjectHideFlags: 1

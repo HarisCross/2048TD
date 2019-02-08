@@ -32,7 +32,7 @@ public class UIButtonController : MonoBehaviour
     {
         int boardNumber = mainController.GridFocused;
 
-        GameGrids[boardNumber - 1].GetComponent<Manager>().UnselectGrid();
+        GameGrids[boardNumber].GetComponent<Manager>().UnselectGrid();
 
         //switch (boardNumber)
         //{
@@ -44,7 +44,7 @@ public class UIButtonController : MonoBehaviour
     public void ResetGridButton()
     {
         int boardNumber = mainController.GridFocused;
-        GameGrids[boardNumber - 1].GetComponent<Manager>().ResetGrid();
+        GameGrids[boardNumber].GetComponent<Manager>().ResetGrid();
         //switch (boardNumber)
         //{
         //    case 1: GameGrid1.ResetGrid(); break;
@@ -55,7 +55,7 @@ public class UIButtonController : MonoBehaviour
     public void ExportGridButton()
     {
         int boardNumber = mainController.GridFocused;
-        GameGrids[boardNumber - 1].GetComponent<Manager>().ExportHighestNumberFromGrid();
+        GameGrids[boardNumber].GetComponent<Manager>().ExportHighestNumberFromGrid();
         //switch (boardNumber)
         //{
         //    case 1: GameGrid1.ExportHighestNumberFromGrid(); break;

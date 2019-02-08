@@ -11,10 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Package/Scenes/WIPScene.unity
     guid: 7d72e7649d7a216498b0a56b52bd7382
-  - enabled: 1
-    path: Assets/Package/Scenes/WIPScene 1.unity
-    guid: 5d5ccc463e5ab7f43aa00d5ce73753ce
-  - enabled: 1
-    path: Assets/Package/Scenes/WIPScene 2.unity
-    guid: 60bf945d39ad3c54e927065a885fe184
   m_configObjects: {}

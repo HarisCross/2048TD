@@ -26,7 +26,7 @@ public class MinionDetails : MonoBehaviour
 
     public int CurrentNode = -1;
     public Vector2 NextPosition, StartPosition;
-    public float timer = 0f, moveSpeed = 1f;
+    public float timer = 0f, moveSpeed = 3f;
 
     private void Start()
     {

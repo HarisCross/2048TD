@@ -100,7 +100,7 @@ public class LevelInitManager : MonoBehaviour
     {
         //for each turret pos spawn a turret at that pos and assign it the variables it needs
         //then spawn the ui needed for it - crosshair, shot counter and button to actiavte its grid
-        print("turrets spawned");
+       // print("turrets spawned");
 
         foreach (Vector3 loc in turretsPosList)
         {
@@ -125,10 +125,12 @@ public class LevelInitManager : MonoBehaviour
 
     private void SpawnGameGrid(GameObject turret)
     {
+
+        AddVarsToGridHolder();
         //for each turret spawn a game grid
         //create button to access the grid and link turret to grid and button
         //assign the grid to the grid controller
-        print("gamegrid spawned");
+        //print("gamegrid spawned");
         int counter = 0;
         foreach (Vector3 loc in gridPosList)
         {
@@ -165,8 +167,17 @@ public class LevelInitManager : MonoBehaviour
 
             counter++;
         }
-    }
 
+
+
+    }
+    private void AddVarsToGridHolder()
+    {
+        //add ui variables to the grid holder to be used and passed down
+        GridHolder.GetComponent<MainHolderController>().CentrePos = centrePos;
+        GridHolder.GetComponent<MainHolderController>().interactButtonsHolder = gridUIButtons;
+
+    }
     private void SpawnSpawner()
     {
         //foreach spawner in list spawn it at corresponding pos in poos list
@@ -180,8 +191,8 @@ public class LevelInitManager : MonoBehaviour
             int pathwayChosen = Random.Range(0, pathwaysList.Count);
             GameObject pathwayChosenGO = pathwaysList[pathwayChosen].gameObject;
 
-            print("spawner spawned");
-            print(prefabList[num].name + " to be spawned");
+           // print("spawner spawned");
+           // print(prefabList[num].name + " to be spawned");
             GameObject tempSpawner = Instantiate(prefabList[num], pathwayChosenGO.transform.GetChild(0).gameObject.transform.position, Quaternion.identity) as GameObject;//use the number given to get that from list made above and spawn using corrosponding vc3 from list
 
             //assign pathholder, enemy go holder, level manager
@@ -190,7 +201,7 @@ public class LevelInitManager : MonoBehaviour
             tempSpawner.GetComponent<SpawnerController>().pathWayHolder = pathwayParentHolder;
             tempSpawner.GetComponent<SpawnerController>().enemyGOHolder = enemyGOHolder;
             tempSpawner.transform.parent = spawnerHolder.transform;
-            print("spawner spawned");
+          //  print("spawner spawned");
             //assign random pathway to spawner, move spawner pos to first child of pathway
 
 
@@ -205,7 +216,7 @@ public class LevelInitManager : MonoBehaviour
     private void SpawnEndOfMap()
     {
         //mvoe the end of map at the final point in node chain
-        print("endofmap spawned");
+      //  print("endofmap spawned");
         GameObject parent;
         parent = endOfMap.transform.parent.transform.gameObject;
 
