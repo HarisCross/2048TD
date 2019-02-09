@@ -10,14 +10,24 @@ public class MenuLoader : MonoBehaviour
     private List<GameObject> buttonsList = new List<GameObject>();
     private Text debugUIText;
 
-    private int currentLevel = -1;//-1 means not obtained value yet
+    private int CurrentMaxLevel = 0;//-1 means not obtained value yet
 
+    private AudioManager audioMan;
+
+    [Header("Player Prefs values")]
+    private string playPrefsInitialised = "playPrefsInitialised";
     private string playPrefsLevelCounter = "playPrefsLevelCounter";
+    private string playPrefsCurrentLevel = "playPrefsCurrentLevel";
+   // private int  playPrefsCurrentLevel = 0;
 
     // Use this for initialization
-    private void Start()
+    private void Awake()
     {
-     //   DontDestroyOnLoad(this.transform);
+        audioMan = GameObject.Find("DontDestroyOnLoad").transform.GetChild(0).gameObject.GetComponent<AudioManager>();
+
+        CheckPlayerPrefs();
+
+       // DontDestroyOnLoad(this.transform);
         debugUIText = debugUI.GetComponent<Text>();
 
         foreach (Transform child in buttonHolder.transform)
@@ -26,7 +36,8 @@ public class MenuLoader : MonoBehaviour
             child.transform.GetComponent<Button>().interactable = false;
         }
 
-        UpdateMenu();
+        // UpdateMenu();
+        UpdateButtons();
     }
 
     // Update is called once per frame
@@ -34,37 +45,75 @@ public class MenuLoader : MonoBehaviour
     {
     }
 
-    private void UpdateMenu()
+    //private void UpdateMenu()
+    //{
+    //    if (PlayerPrefs.HasKey(playPrefsLevelCounter))
+    //    {
+    //        //if there is a saved level counter
+
+    //    }
+    //    else
+    //    {
+
+    //    }
+    //}
+    private void CheckPlayerPrefs()
     {
-        if (PlayerPrefs.HasKey(playPrefsLevelCounter))
+        //check if the build has already initalised the needed player prefs values
+
+        if (PlayerPrefs.HasKey(playPrefsInitialised))
         {
-            //if there is a saved level counter
-            currentLevel = PlayerPrefs.GetInt(playPrefsLevelCounter);
-            debugUIText.text = "loaded level save counter";
+            //has already initalised
+            GetAndApplyPlayerPrefs();
+
         }
         else
         {
-            PlayerPrefs.SetInt(playPrefsLevelCounter, 0);
-            debugUIText.text = "created level save counter";
-        }
-        UpdateButtons();
-    }
+            InitialisePlayerPrefValues();
 
+        }
+     //   UpdateButtons();
+
+    }
+    private void GetAndApplyPlayerPrefs()
+    {
+        //if the values are already made then retreive the values and apply them where neccesary - audio, levels
+        CurrentMaxLevel = PlayerPrefs.GetInt(playPrefsLevelCounter);
+       // debugUIText.text = "loaded level save counter";
+    }
+    private void InitialisePlayerPrefValues()
+    {
+        //if the build is new then create the set of values needed to store data
+
+        PlayerPrefs.SetString(playPrefsInitialised,"true");
+        PlayerPrefs.SetInt(playPrefsLevelCounter, CurrentMaxLevel);
+        PlayerPrefs.SetInt(playPrefsCurrentLevel, 0);
+        print(PlayerPrefs.GetInt(playPrefsLevelCounter));
+       // currentLevel = 0;
+       // debugUIText.text = "created level save counter";
+
+    }
+    private void SetCurrentLevel(int currLevel)
+    {
+        PlayerPrefs.SetInt(playPrefsCurrentLevel, currLevel);
+
+    }
     private void UpdateButtons()
     {
         //UpdateMenu();
         //to be called and run through each button while only activating those which are under the level counter
 
-        int levelsToBeUnblocked = (currentLevel );
+        //int levelsToBeUnblocked = (currentLevel );
         // print(levelsToBeUnblocked);
 
         for (int i = 0; i < buttonsList.Count; i++)
         {
             //runs through all of buttons list, sets those not <=levelstobeunlocked to none interactable
-
-            if (i < levelsToBeUnblocked)
+           
+            if (i < CurrentMaxLevel)
             {
-                //unlock
+                //unlock 
+             //   print("unlocked i: " + i);
                 buttonsList[i].GetComponent<Button>().interactable = true;
             }
         }
@@ -72,19 +121,23 @@ public class MenuLoader : MonoBehaviour
 
     public void loadLevel()
     {
-       // int levelToLoad = PlayerPrefs.GetInt(playPrefsLevelCounter);
+        //int levelToLoad = PlayerPrefs.GetInt("playPrefsCurrentLevel");
+        int levelToLoad = 1;
+        SetCurrentLevel(levelToLoad);
         LevelLoader(1);//loads teh game scene
     }
 
     public void loadLevel2()
     {
-        int levelToLoad = 2;
+        int levelToLoad =2;
+        SetCurrentLevel(levelToLoad);
         LevelLoader(levelToLoad);
     }
 
     public void loadLevel3()
     {
-        int levelToLoad = 3;
+        int levelToLoad =3;
+        SetCurrentLevel(levelToLoad);
         LevelLoader(levelToLoad);
     }
 

@@ -65,6 +65,7 @@
     <Compile Include="Assets\CrosshairController.cs" />
     <Compile Include="Assets\CrosshairsActiveController.cs" />
     <Compile Include="Assets\DestroyOnContact.cs" />
+    <Compile Include="Assets\DontDestroyOnLoad.cs" />
     <Compile Include="Assets\LevelInitManager.cs" />
     <Compile Include="Assets\LevelManager.cs" />
     <Compile Include="Assets\LevelMenuManager.cs" />
