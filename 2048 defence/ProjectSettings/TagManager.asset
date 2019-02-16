@@ -16,7 +16,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - SplashScreen
   - 
   - 
   - 
@@ -61,4 +61,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3598313517
+    locked: 0
+  - name: SplashScreen
+    uniqueID: 739523541
     locked: 0

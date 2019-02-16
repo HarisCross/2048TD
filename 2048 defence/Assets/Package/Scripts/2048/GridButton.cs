@@ -9,4 +9,8 @@ public class GridButton : MonoBehaviour
     {
         mainController.GridFocused = thisGrid;
     }
+    private void Update()
+    {
+      //  print("button at: " + this.transform.position);
+    }
 }

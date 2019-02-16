@@ -4,9 +4,25 @@ using UnityEngine.UI;
 
 public class LevelInitManager : MonoBehaviour
 {
+    //preset values to be used to position the buttons in the right spot and the right size depending on how many buttons are in uset that game
+    private Vector3[] GridButtonPosArrayS3 = new[] { new Vector3(-62, -285, 0.08f), new Vector3(31, -285, 0.08f), new Vector3(130, -285, 0.08f) };
+     private float GridButtonPosArrayS3Size = 1.5F;
+
+    private Vector3[] GridButtonPosArrayS2 = new[] { new Vector3(-40, -285, 0.08f), new Vector3(106, -285, 0.08f) };
+        private float GridButtonPosArrayS2Size = 2.2F;
+
+    private Vector3[] GridButtonPosArrayS1 = new[] { new Vector3(34, -285, 0.08f) };
+     private float GridButtonPosArrayS1Size = 4.5F;
+
+    float newScaleSizeForButton;
+    Vector3[] newPosForButton;
+    int newPosForButtonCounter = 0;
+
+
     [Header("Turret")]
     // public List<GameObject> turretsGOList = new List<GameObject>();
     public List<Vector3> turretsPosList = new List<Vector3>();
+    public List<GameObject> turretsGOList = new List<GameObject>();
 
     public GameObject turretHolder;
     public GameObject BulletHolder;
@@ -119,7 +135,33 @@ public class LevelInitManager : MonoBehaviour
 
             tempTurret.GetComponent<TowerController>().targetCrosshairs = tempCrosshairs;
 
-            SpawnGameGrid(tempTurret);
+            turretsGOList.Add(tempTurret);
+        }
+
+        int buttonsToSpawn = turretsGOList.Count;
+        //int buttonsToSpawnCounter = 0;
+        switch (buttonsToSpawn)
+        {
+            case 1:
+                newScaleSizeForButton = GridButtonPosArrayS1Size;
+                newPosForButton = GridButtonPosArrayS1;
+                break;
+            case 2:
+                newScaleSizeForButton = GridButtonPosArrayS2Size;
+                newPosForButton = GridButtonPosArrayS2;
+
+                break;
+            case 3:
+                newScaleSizeForButton = GridButtonPosArrayS3Size;
+                newPosForButton = GridButtonPosArrayS1;
+
+                break;
+            default: print("this really shouldnt ever get here"); break;
+        }
+
+        foreach (GameObject turr in turretsGOList)
+        {
+            SpawnGameGrid(turr);
         }
     }
 
@@ -132,8 +174,13 @@ public class LevelInitManager : MonoBehaviour
         //assign the grid to the grid controller
         //print("gamegrid spawned");
         int counter = 0;
-        foreach (Vector3 loc in gridPosList)
-        {
+
+        //foreach(Vector3 newPos in newPosForButton)
+        //{
+        //    print("new: " +newPos);
+        //}
+      //  foreach (Vector3 loc in gridPosList)
+     //   {
             GameObject tempGrid = Instantiate(Resources.Load("2048/GameGrid") as GameObject);
 
             tempGrid.transform.parent = GridHolder.transform;
@@ -142,18 +189,23 @@ public class LevelInitManager : MonoBehaviour
             tempGrid.GetComponent<Manager>().turretChosen = turret;
             tempGrid.GetComponent<Manager>().centreGridSpot = centrePos;
 
-            tempGrid.transform.position = gridPosList[counter];
+        tempGrid.transform.position = centrePos.transform.position ;
 
             //add listeners to button. ;link button to grid, position over turret grid pos,assign main con to button, pass grid number to button
 
             GameObject tempButton = Instantiate(Resources.Load("Turrets/OpenGridButton") as GameObject);
             tempButton.transform.parent = gridsButtons.transform;
-            Vector3 newScale = new Vector3(1, 1, 1);
+        // tempButton.transform.position = turret.transform.GetChild(1).transform.position;
+        //  print(newPosForButton[counter]);
+            tempButton.GetComponent<RectTransform>().localPosition = newPosForButton[newPosForButtonCounter];
+
+
+            Vector3 newScale = new Vector3(newScaleSizeForButton, 1, 1);
             tempButton.transform.localScale = newScale;
+
             tempButton.GetComponent<GridButton>().mainController = GridHolder.GetComponent<MainHolderController>();
             tempButton.GetComponent<GridButton>().thisGrid = (counter + 1);
 
-            tempButton.transform.position = turret.transform.GetChild(1).transform.position;
             tempButton.GetComponent<Button>().onClick.AddListener(tempGrid.GetComponent<Manager>().SelectGrid);
 
             tempGrid.GetComponent<Manager>().turretActiveButton = tempButton;
@@ -164,9 +216,13 @@ public class LevelInitManager : MonoBehaviour
             gridUIButtons.transform.GetChild(0).transform.GetComponent<Button>().onClick.AddListener(gridsHolder.GetComponent<UIButtonController>().CloseGridButton);
             gridUIButtons.transform.GetChild(1).transform.GetComponent<Button>().onClick.AddListener(gridsHolder.GetComponent<UIButtonController>().ResetGridButton);
             gridUIButtons.transform.GetChild(2).transform.GetComponent<Button>().onClick.AddListener(gridsHolder.GetComponent<UIButtonController>().ExportGridButton);
-
+           // buttonsToSpawnCounter++;
             counter++;
-        }
+            newPosForButtonCounter++;
+      //  }
+
+
+        //TODO::spawn button at correct position using array made, move game grid to below game screen, add function to raise and lower grid on button click,
 
 
 

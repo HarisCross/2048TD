@@ -40,7 +40,7 @@ public class Manager : MonoBehaviour
         Initialize();
         CurrentGrid = new NumGrid();
         CurrentGrid = transform.GetComponent<NumGrid>();
-        UnselectGridAtSrtart();
+        //UnselectGridAtSrtart();
     }
 
     // Update is called once per frame
@@ -251,7 +251,7 @@ public class Manager : MonoBehaviour
             for (int col = 0; col < 4; col++)
             {
                 // GameObject newTile =  Instantiate(GridSpot,new Vector2(col * GridSpacing,row * GridSpacing), Quaternion.identity);
-                GameObject newTile = Instantiate(GridSpot, new Vector2(col, row), Quaternion.identity);
+                GameObject newTile = Instantiate(GridSpot, new Vector3(col, row,1.234f), Quaternion.identity);
                 newTile.transform.parent = GOHolder.transform;
                 newTile.transform.GetComponent<GridSpot>().Initialise(0, col, row, CurrentGrid);
 

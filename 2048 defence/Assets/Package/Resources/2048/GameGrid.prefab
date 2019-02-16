@@ -50,7 +50,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1671035180928614}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.4594097, y: -0.091784894, z: 3.0664062}
+  m_LocalPosition: {x: 0, y: 0, z: 3.0664062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4618803273418414}
@@ -64,7 +64,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1830479687409470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: -1.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4425034099332566}
@@ -101,6 +101,7 @@ MonoBehaviour:
   turretActiveButton: {fileID: 0}
   centreGridSpot: {fileID: 0}
   ObjectSelected: 0
+  exportedThisMovement: 0
   movingGrid: 0
   CurrentGrid: {fileID: 114917405069265194}
   MainHolder: {fileID: 0}

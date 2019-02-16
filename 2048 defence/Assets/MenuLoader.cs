@@ -79,7 +79,21 @@ public class MenuLoader : MonoBehaviour
     {
         //if the values are already made then retreive the values and apply them where neccesary - audio, levels
         CurrentMaxLevel = PlayerPrefs.GetInt(playPrefsLevelCounter);
-       // debugUIText.text = "loaded level save counter";
+
+
+        ////audio
+        if(PlayerPrefs.GetInt("masterAudioSwitch") != 0)
+        {
+
+            audioMan.masterAudioSwitch = true;
+        }
+        else
+        {
+
+            audioMan.masterAudioSwitch = true;
+
+        }
+
     }
     private void InitialisePlayerPrefValues()
     {
@@ -88,9 +102,14 @@ public class MenuLoader : MonoBehaviour
         PlayerPrefs.SetString(playPrefsInitialised,"true");
         PlayerPrefs.SetInt(playPrefsLevelCounter, CurrentMaxLevel);
         PlayerPrefs.SetInt(playPrefsCurrentLevel, 0);
-        print(PlayerPrefs.GetInt(playPrefsLevelCounter));
+       // print(PlayerPrefs.GetInt(playPrefsLevelCounter));
        // currentLevel = 0;
        // debugUIText.text = "created level save counter";
+
+        ////audio - 1 for true, 0 for false
+        PlayerPrefs.SetInt("masterAudioSwitch",1);
+      //  PlayerPrefs.SetInt("masterSFXSwitch",1);
+      //  PlayerPrefs.SetInt("masterMusicSwitch",1);
 
     }
     private void SetCurrentLevel(int currLevel)
@@ -148,6 +167,14 @@ public class MenuLoader : MonoBehaviour
 
     //pout in func to be called on new scene loaded which uses the pp level number to load the appropriate level prefab
 
+    private void PlayLevelChangeAnimation()
+    {
+        //called upon scene change, will coevr screen then load next one, needs another screen to play upon scene load to unconver screen
+        //load next level when state of animation being played has changed
 
+
+
+
+    }
 
 }
