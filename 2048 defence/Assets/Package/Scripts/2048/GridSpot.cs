@@ -26,6 +26,9 @@ public class GridSpot : MonoBehaviour
         Destroy(SpriteToShow);
         SpriteToShow = Instantiate(newSprite, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         SpriteToShow.transform.parent = transform;
+        //SpriteToShow.transform.localScale.x = 1f;
+        Vector3 newScale = new Vector3(1, 1, 1);
+        SpriteToShow.transform.localScale = newScale;
         NumberValue = newNumber;
     }
 
@@ -38,10 +41,10 @@ public class GridSpot : MonoBehaviour
         transform.name = "GridSpot" + ColLoc + RowLoc;
         CurrentGrid.BoardGrid[col, row] = transform.gameObject.GetComponent<GridSpot>();
         //ChangeGOSprite(tile);
-        print("making grid spot at " + col + " : " + row);
+      //  print("making grid spot at " + col + " : " + row);
 
-       // DefaultGO = Instantiate(DefaultGO, new Vector3(transform.position.x, transform.position.y,1), Quaternion.identity);
-        DefaultGO = Instantiate(DefaultGO, new Vector3(col, row,1), Quaternion.identity);
+        DefaultGO = Instantiate(DefaultGO, new Vector3(transform.position.x, transform.position.y,1), Quaternion.identity);
+        //DefaultGO = Instantiate(DefaultGO, new Vector3(col, row,1), Quaternion.identity);
         DefaultGO.transform.parent = transform;
     }
 

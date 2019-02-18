@@ -17,7 +17,7 @@ public class LevelInitManager : MonoBehaviour
     float newScaleSizeForButton;
     Vector3[] newPosForButton;
     int newPosForButtonCounter = 0;
-
+    int counter = 0;
 
     [Header("Turret")]
     // public List<GameObject> turretsGOList = new List<GameObject>();
@@ -49,7 +49,8 @@ public class LevelInitManager : MonoBehaviour
     [Header("VarsToBeUsedToAssign")]
     private GameObject gridsButtons;
 
-    private GameObject centrePos;
+    private GameObject spawningGridPos;
+    private GameObject CentreGridPos;
     private GameObject GridHolder;
     private LevelManager levelManager;
     private GameObject gridUIButtons;
@@ -95,7 +96,8 @@ public class LevelInitManager : MonoBehaviour
     private void FindVariablesToBeUsed()
     {
         gridsButtons = GameObject.Find("GridSelectionButtons");
-        centrePos = GameObject.Find("CentreGridPos");
+        spawningGridPos = GameObject.Find("SpawningGridPos");
+        CentreGridPos = GameObject.Find("CentreGridPos");
         levelManager = GameObject.Find("LevelManager").transform.GetComponent<LevelManager>();
         crosshairsHolder = GameObject.Find("Crosshairs");
         GridHolder = GameObject.Find("GridHolder");
@@ -173,7 +175,7 @@ public class LevelInitManager : MonoBehaviour
         //create button to access the grid and link turret to grid and button
         //assign the grid to the grid controller
         //print("gamegrid spawned");
-        int counter = 0;
+        
 
         //foreach(Vector3 newPos in newPosForButton)
         //{
@@ -181,20 +183,27 @@ public class LevelInitManager : MonoBehaviour
         //}
       //  foreach (Vector3 loc in gridPosList)
      //   {
-            GameObject tempGrid = Instantiate(Resources.Load("2048/GameGrid") as GameObject);
+           // GameObject tempGrid = Instantiate(Resources.Load("2048/GameGrid") as GameObject);
+            GameObject tempGrid = Instantiate(Resources.Load("2048/GameGridTest") as GameObject);
 
             tempGrid.transform.parent = GridHolder.transform;
             tempGrid.GetComponent<Manager>().MainHolder = GridHolder.GetComponent<MainHolderController>();
             tempGrid.GetComponent<Manager>().InpController = GridHolder.GetComponent<InputController>();
             tempGrid.GetComponent<Manager>().turretChosen = turret;
-            tempGrid.GetComponent<Manager>().centreGridSpot = centrePos;
+            tempGrid.GetComponent<Manager>().BoardNumber = (counter+1);
+            tempGrid.GetComponent<Manager>().centreGridPos = CentreGridPos;
+            tempGrid.GetComponent<Manager>().spawningGridPos = spawningGridPos;
+            tempGrid.GetComponent<Manager>().BoardNumber = (counter+1);
+           // print("assigned board number: " + (counter + 1));
+            tempGrid.GetComponent<Manager>().centreGridPos = spawningGridPos;
 
-        tempGrid.transform.position = centrePos.transform.position ;
+            tempGrid.transform.position = spawningGridPos.transform.position ;
 
             //add listeners to button. ;link button to grid, position over turret grid pos,assign main con to button, pass grid number to button
 
             GameObject tempButton = Instantiate(Resources.Load("Turrets/OpenGridButton") as GameObject);
             tempButton.transform.parent = gridsButtons.transform;
+            tempButton.transform.GetChild(0).transform.GetComponent<Text>().text = "Open Grid " + newPosForButtonCounter.ToString();
         // tempButton.transform.position = turret.transform.GetChild(1).transform.position;
         //  print(newPosForButton[counter]);
             tempButton.GetComponent<RectTransform>().localPosition = newPosForButton[newPosForButtonCounter];
@@ -230,7 +239,7 @@ public class LevelInitManager : MonoBehaviour
     private void AddVarsToGridHolder()
     {
         //add ui variables to the grid holder to be used and passed down
-        GridHolder.GetComponent<MainHolderController>().CentrePos = centrePos;
+        GridHolder.GetComponent<MainHolderController>().CentrePos = spawningGridPos;
         GridHolder.GetComponent<MainHolderController>().interactButtonsHolder = gridUIButtons;
 
     }

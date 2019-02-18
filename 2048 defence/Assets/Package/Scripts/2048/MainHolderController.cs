@@ -31,4 +31,19 @@ public class MainHolderController : MonoBehaviour
             interactButtonsHolder.SetActive(true);
         }
     }
+    public void SetCurrentGrid(int newGrid)
+    {
+        if(GridFocused == 0)
+        {
+            //no grid active - open a grid
+            GridFocused = newGrid;
+        }
+        else
+        {
+            //grid active - close grids
+            GridFocused = 0;
+        }
+      //  GridFocused = newGrid;
+
+    }
 }

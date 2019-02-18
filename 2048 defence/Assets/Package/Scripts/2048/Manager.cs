@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    [SerializeField]
-    private int BoardNumber = 1;
+  //  [SerializeField]
+    public int BoardNumber = 1;
+
+    // public GameObject[] childTilesArray = new GameObject[16];
+    public List<GameObject> childTilesList = new List<GameObject>();
 
     private float movementSpeed = 1f;
 
@@ -13,12 +16,16 @@ public class Manager : MonoBehaviour
     public GameObject GridSpot;
     public GameObject turretChosen;
     public GameObject turretActiveButton;
-    public GameObject centreGridSpot;
+    public GameObject spawningGridPos;
+    public GameObject centreGridPos;
+
 
     private float GridSpacing = 1f;
 
     public bool ObjectSelected = false;
+    [SerializeField]
 
+    private bool gridActive = false;//use to check if this grid has been activated or not.
     [SerializeField]
     private bool exportedThisMovement = false;
 
@@ -81,6 +88,8 @@ public class Manager : MonoBehaviour
             }
         }
 
+
+
         if (movingGrid)
         {
             MoveAndScaleGrid();
@@ -89,6 +98,16 @@ public class Manager : MonoBehaviour
 
     private void Initialize()
     {
+
+        foreach(Transform child in GOHolder.transform)
+        {
+
+            childTilesList.Add(child.gameObject);
+
+        }
+
+        
+        
         //create number grid
         CreateBoardGrid();
         //ad two numbers to board
@@ -111,26 +130,27 @@ public class Manager : MonoBehaviour
         MainHolder.GridFocused = 0;
         turretActiveButton.SetActive(true);
         startPos = transform.position;
-        targetPos = turretChosen.transform.GetChild(1).transform.position;
+        targetPos = spawningGridPos.transform.position;
 
-        startScale = transform.localScale;
-        TargetScale = new Vector2(0.2f, 0.2f);
+        //startScale = transform.localScale;
+        //TargetScale = new Vector2(0.2f, 0.2f);
     }
 
     public void UnselectGridAtSrtart()
     {
+        print("closing grid");
         t = 0;
         //move grid over to turret and change its scale
-        movingGrid = true;
-        MainHolder.AnimationOccuring = true;
+       // movingGrid = true;
+      //  MainHolder.AnimationOccuring = true;
         MainHolder.GridFocused = 0;
-
+        gridActive = false;
         startPos = transform.position;
-        targetPos = turretChosen.transform.GetChild(1).transform.position;
+        targetPos = spawningGridPos.transform.position;
         // print(targetPos.x + " " + targetPos.y);
-        startScale = transform.localScale;
-        TargetScale = new Vector2(0.2f, 0.2f);
-        turretActiveButton.SetActive(true);
+        //startScale = transform.localScale;
+        //TargetScale = new Vector2(0.2f, 0.2f);
+       // turretActiveButton.SetActive(true);
 
         //transform.position = targetPos;
 
@@ -139,16 +159,17 @@ public class Manager : MonoBehaviour
 
     public void SelectGrid()
     {
+        print("opening grid");
         t = 0;
         movingGrid = true;
         MainHolder.AnimationOccuring = true;
         //MainHolder.GridFocused = 0;
-
+        gridActive = true;
         startPos = transform.position;
-        targetPos = centreGridSpot.transform.position;
+        targetPos = centreGridPos.transform.position;
 
-        startScale = transform.localScale;
-        TargetScale = new Vector2(1, 1);
+        //startScale = transform.localScale;
+        //TargetScale = new Vector2(1, 1);
     }
 
     private void MoveAndScaleGrid()//called in update, should move grid holder towards turret until close then set bool to false
@@ -157,7 +178,7 @@ public class Manager : MonoBehaviour
 
         transform.position = Vector2.Lerp(startPos, targetPos, t);
 
-        transform.localScale = Vector2.Lerp(startScale, TargetScale, t);
+        //transform.localScale = Vector2.Lerp(startScale, TargetScale, t);
 
         MainHolder.AnimationOccuring = false;
 
@@ -175,26 +196,50 @@ public class Manager : MonoBehaviour
 
     private void SpawnNewNumber(int numberValue = 2)// add a new number to the grid
     {
-        int randRow, randCol;
+        int randRow, randCol,spareSpotCounter = 0;
         bool FoundEmptySpot = true;//set to false
                                    //pass go to gridspot to change sprite shown
                                    //get random spot on grid, check if it is empty
 
-        do
+
+        foreach (GameObject tile in childTilesList)
         {
-            randRow = Random.Range(0, 4);
-            randCol = Random.Range(0, 4);
-            // print("trying " + randCol + randRow);
-            if (CurrentGrid.BoardGrid[randCol, randRow].NumberValue == 0)
+            //use to count how many spare spaces there are, only proceed if there are two or more else throw something
+
+            if(tile.GetComponent<GridSpot>().NumberValue == 0)
             {
-                // print("empty: " + CurrentGrid.BoardGrid[randRow, randCol].name);
-                FoundEmptySpot = false;
-
-                CurrentGrid.BoardGrid[randCol, randRow].ModifyNumber(GetSuitableSprite(numberValue), numberValue);
+                //can be used to spawn more numbers
+                spareSpotCounter++;
             }
-        } while (FoundEmptySpot);
-    }
 
+        }
+        if(spareSpotCounter >= 2)
+        {
+            do
+            {
+                randRow = Random.Range(0, 4);
+                randCol = Random.Range(0, 4);
+                // print("trying " + randCol + randRow);
+                if (CurrentGrid.BoardGrid[randCol, randRow].NumberValue == 0)
+                {
+                    // print("empty: " + CurrentGrid.BoardGrid[randRow, randCol].name);
+                    FoundEmptySpot = false;
+
+                    CurrentGrid.BoardGrid[randCol, randRow].ModifyNumber(GetSuitableSprite(numberValue), numberValue);
+                }
+            } while (FoundEmptySpot);
+        }
+        else
+        {
+            //not enough spots
+            NoEnoughSpareSpaces();
+
+        }
+    }
+    private void NoEnoughSpareSpaces()
+    {
+        print("not enough spare spaces to dspawn more");
+    }
     public GameObject GetSuitableSprite(int value)
     {
         //returns sprite to be sent to change
@@ -246,18 +291,36 @@ public class Manager : MonoBehaviour
     {
         //create grid of blank objects
 
-        for (int row = 0; row < 4; row++)
-        {
-            for (int col = 0; col < 4; col++)
-            {
-                // GameObject newTile =  Instantiate(GridSpot,new Vector2(col * GridSpacing,row * GridSpacing), Quaternion.identity);
-                GameObject newTile = Instantiate(GridSpot, new Vector3(col, row,1.234f), Quaternion.identity);
-                newTile.transform.parent = GOHolder.transform;
-                newTile.transform.GetComponent<GridSpot>().Initialise(0, col, row, CurrentGrid);
+        //for (int row = 0; row < 4; row++)
+        //{
+        //    for (int col = 0; col < 4; col++)
+        //    {
+        //        float Xpos = col-2, Ypos = row-2;
+        //        // GameObject newTile =  Instantiate(GridSpot,new Vector2(col * GridSpacing,row * GridSpacing), Quaternion.identity);
+        //        GameObject newTile = Instantiate(GridSpot, new Vector3(col, row,1.234f), Quaternion.identity);
+        //        newTile.transform.parent = GOHolder.transform;
+        //        newTile.transform.GetComponent<GridSpot>().Initialise(0, col, row, CurrentGrid);
 
-                // print("added item" + i + j);
+        //        // print("added item" + i + j);
+        //    }
+        //}
+
+        int colCounter = 0 , rowCounter = 0;
+
+        foreach(GameObject tile in childTilesList)
+        {
+
+            tile.GetComponent<GridSpot>().Initialise(0,colCounter,rowCounter, CurrentGrid);
+
+            colCounter++;
+            if(colCounter == 4)
+            {
+                colCounter = 0;
+                rowCounter++;
             }
+
         }
+
     }
 
     public void ResetGrid()
