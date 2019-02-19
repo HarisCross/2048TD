@@ -2409,6 +2409,7 @@ MonoBehaviour:
   turretsPosList:
   - {x: 1.3, y: -2, z: 0.067}
   - {x: 0, y: 3.75, z: 0.067}
+  turretsGOList: []
   turretHolder: {fileID: 1201731601049952}
   BulletHolder: {fileID: 1778393736795988}
   spawnersNumberTospawnList: 00000000
@@ -2446,8 +2447,9 @@ MonoBehaviour:
   CentrePos: {fileID: 0}
   interactButtonsHolder: {fileID: 0}
   GridFocused: 0
-  GridSelected: 1
-  AnimationOccuring: 1
+  GridSelected: 0
+  AnimationOccuring: 0
+  GridsList: []
 --- !u!114 &114233341812515282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2762,6 +2764,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoardNumber: 1
+  childTilesList: []
   GOHolder: {fileID: 1452570890553166}
   sprite_numbers:
   - {fileID: 1949636898291280, guid: 34c9447d7c22282478df214341c73bd3, type: 2}
@@ -2779,8 +2782,10 @@ MonoBehaviour:
   GridSpot: {fileID: 1859590256816460, guid: f3c3573fd310a694c856e9f207983a4c, type: 2}
   turretChosen: {fileID: 1159904882599402}
   turretActiveButton: {fileID: 0}
-  centreGridSpot: {fileID: 0}
+  spawningGridPos: {fileID: 0}
+  centreGridPos: {fileID: 0}
   ObjectSelected: 0
+  gridActive: 0
   exportedThisMovement: 0
   movingGrid: 0
   CurrentGrid: {fileID: 114686502363192870}

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Manager : MonoBehaviour
@@ -32,7 +33,7 @@ public class Manager : MonoBehaviour
     public bool movingGrid = false;
 
     private Vector2 startPos, targetPos, startScale, TargetScale;
-    private float movementTimer = 1f, t = 0;
+    private float movementTimer = 0.5f, t = 0;
 
     [Header("Script references")]
     public NumGrid CurrentGrid;
@@ -90,10 +91,10 @@ public class Manager : MonoBehaviour
 
 
 
-        if (movingGrid)
-        {
-            MoveAndScaleGrid();
-        }
+        //if (movingGrid)
+        //{
+        //   // MoveAndScaleGrid();
+        //}
     }
 
     private void Initialize()
@@ -128,71 +129,104 @@ public class Manager : MonoBehaviour
         movingGrid = true;
         MainHolder.AnimationOccuring = true;
         MainHolder.GridFocused = 0;
-        turretActiveButton.SetActive(true);
-        startPos = transform.position;
-        targetPos = spawningGridPos.transform.position;
-
-        //startScale = transform.localScale;
-        //TargetScale = new Vector2(0.2f, 0.2f);
-    }
-
-    public void UnselectGridAtSrtart()
-    {
-        print("closing grid");
-        t = 0;
-        //move grid over to turret and change its scale
-       // movingGrid = true;
-      //  MainHolder.AnimationOccuring = true;
-        MainHolder.GridFocused = 0;
-        gridActive = false;
-        startPos = transform.position;
-        targetPos = spawningGridPos.transform.position;
-        // print(targetPos.x + " " + targetPos.y);
-        //startScale = transform.localScale;
-        //TargetScale = new Vector2(0.2f, 0.2f);
        // turretActiveButton.SetActive(true);
+        startPos = centreGridPos.transform.position;
+        targetPos = spawningGridPos.transform.position;
 
-        //transform.position = targetPos;
+        //startScale = transform.localScale;
+        //TargetScale = new Vector2(0.2f, 0.2f);
 
-        //transform.localScale = TargetScale;
+        StartCoroutine(MoveFromTo(/*this.transform,*/ startPos, targetPos, 3f));
     }
+
+    //public void UnselectGridAtSrtart()
+    //{
+    //    print("closing grid");
+    //    t = 0;
+    //    //move grid over to turret and change its scale
+    //   // movingGrid = true;
+    //  //  MainHolder.AnimationOccuring = true;
+    //    MainHolder.GridFocused = 0;
+    //    gridActive = false;
+    //    startPos = centreGridPos.transform.position;
+    //    targetPos = spawningGridPos.transform.position;
+    //    // print(targetPos.x + " " + targetPos.y);
+    //    //startScale = transform.localScale;
+    //    //TargetScale = new Vector2(0.2f, 0.2f);
+    //   // turretActiveButton.SetActive(true);
+
+    //    //transform.position = targetPos;
+
+    //    //transform.localScale = TargetScale;
+    //}
 
     public void SelectGrid()
     {
-        print("opening grid");
+        print("opening grid: " + this.transform.name);
         t = 0;
         movingGrid = true;
         MainHolder.AnimationOccuring = true;
         //MainHolder.GridFocused = 0;
         gridActive = true;
-        startPos = transform.position;
+        startPos = spawningGridPos.transform.position;
         targetPos = centreGridPos.transform.position;
 
         //startScale = transform.localScale;
         //TargetScale = new Vector2(1, 1);
+
+        StartCoroutine(MoveFromTo(/*this.transform,*/startPos,targetPos,3f));
     }
-
-    private void MoveAndScaleGrid()//called in update, should move grid holder towards turret until close then set bool to false
+    private IEnumerator MoveFromTo(/*Transform objectToMove, */Vector3 a, Vector3 b, float speed)
     {
-        t += Time.deltaTime / movementTimer;
+        MainHolder.AnimationOccuring = true;
+        float step = (speed / (a - b).magnitude) * Time.fixedDeltaTime;
+        float t = 0;
+        Vector3 newPos;
+        while (t <= 1.0f)
+        {
+            t += step; // Goes from 0 to 1, incrementing by step each time
+            transform.position = Vector3.Lerp(a, b, t); // Move objectToMove closer to b
+            newPos = transform.position;
+            newPos.z = 3f;
+            transform.position = newPos;
 
-        transform.position = Vector2.Lerp(startPos, targetPos, t);
+            yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
+        }
 
-        //transform.localScale = Vector2.Lerp(startScale, TargetScale, t);
-
+       // print("mvoefromTo routine finished");
+        movingGrid = false;
         MainHolder.AnimationOccuring = false;
 
-        if (Vector2.Distance(transform.position, turretChosen.transform.GetChild(1).transform.position) > 0.1f)
-        {
-            //continue
-        }
-        else
-        {
-            movingGrid = false;
-            t = 0;
-            //cancel
-        }
+        transform.position = b;
+        newPos = transform.position;
+        newPos.z = 3f;
+        transform.position = newPos;
     }
+    //private void MoveAndScaleGrid()//called in update, should move grid holder towards turret until close then set bool to false
+    //{
+    //    print("moving grid");
+    //    t += Time.deltaTime / movementTimer;
+
+    //    print("targ: " + targetPos + "start " + startPos + "t " + t);
+    //    this.transform.position = targetPos;
+    //    //transform.position = Vector2.Lerp(startPos, targetPos, t);
+    //   // transform.position = Vector2.Lerp(transform.position, targetPos, t);
+        
+    //    //transform.localScale = Vector2.Lerp(startScale, TargetScale, t);
+
+    //    MainHolder.AnimationOccuring = false;
+
+    //    if (Vector2.Distance(transform.position, targetPos) > 0.3f)
+    //    {
+    //        //continue
+    //    }
+    //    else
+    //    {
+    //        movingGrid = false;
+    //        t = 0;
+    //        //cancel
+    //    }
+    //}
 
     private void SpawnNewNumber(int numberValue = 2)// add a new number to the grid
     {
