@@ -90,7 +90,7 @@ public class MenuLoader : MonoBehaviour
         else
         {
 
-            audioMan.masterAudioSwitch = true;
+            audioMan.masterAudioSwitch = false;
 
         }
 
