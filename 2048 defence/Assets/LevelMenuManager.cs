@@ -41,27 +41,38 @@ public class LevelMenuManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Scene currScene = SceneManager.GetActiveScene();
-
-        if (currScene.name != "MainMenu")
+        if (currScene.name == "TutScene")
         {
-            //  Debug.Log("OnSceneLoaded: " + scene.name + " : " + mode);
-            int currLevel = PlayerPrefs.GetInt("playPrefsCurrentLevel");
-
-            // print("loaded new level: " + currLevel);
-
-            // if (currLevel != 0)
-            // {
-            print("loaded game level - not menu : " + currLevel);
-
-            // int levelNumber = PlayerPrefs.GetInt("playPrefsLevelCounter");
             Vector3 pos = new Vector3(0, 0, 0);
+            //GameObject tutLevel;
+            //tutLevel = ;
 
-            Object[] prefabList;
-            prefabList = Resources.LoadAll("Levels/LevelPrefabs", typeof(GameObject));///get list of all prefabs in spawner folder
+            GameObject levelPrefab = Instantiate(Resources.Load("Levels/LevelPrefabs/TutorialLevelPrefab"), pos, Quaternion.identity) as GameObject;
+            print("loaded tutorial level prefab");
+        }
+        else
+        {
+            if (currScene.name != "MainMenu")
+            {
+                //  Debug.Log("OnSceneLoaded: " + scene.name + " : " + mode);
+                int currLevel = PlayerPrefs.GetInt("playPrefsCurrentLevel");
 
-            GameObject levelPrefab = Instantiate(prefabList[currLevel - 1], pos, Quaternion.identity) as GameObject;
-            //   }
-            //  print("level: " + levelNumber + " loaded");}
+                // print("loaded new level: " + currLevel);
+
+                // if (currLevel != 0)
+                // {
+                print("loaded game level - not menu : " + currLevel);
+
+                // int levelNumber = PlayerPrefs.GetInt("playPrefsLevelCounter");
+                Vector3 pos = new Vector3(0, 0, 0);
+
+                Object[] prefabList;
+                prefabList = Resources.LoadAll("Levels/LevelPrefabs", typeof(GameObject));///get list of all prefabs in spawner folder
+
+                GameObject levelPrefab = Instantiate(prefabList[currLevel - 1], pos, Quaternion.identity) as GameObject;
+                //   }
+                //  print("level: " + levelNumber + " loaded");}
+            }
         }
     }
 }

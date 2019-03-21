@@ -4,7 +4,9 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public int LevelNumber = -1;
-    private string playPrefsLevelCounter = "playPrefsLevelCounter";
+   // private string playPrefsLevelCounter = "playPrefsLevelCounter";
+  //  private string playPrefstutorialCompleted = "playPrefstutorialCompleted";
+
 
     // Use this for initialization
     private void Start()
@@ -14,6 +16,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        
     }
 
     public void WaveEnded(SpawnerController spawnController, int waveNumber)
@@ -34,12 +37,18 @@ public class LevelManager : MonoBehaviour
     {
         //to be called upon wave completion
 
-        PlayerPrefs.SetInt(playPrefsLevelCounter, LevelNumber);
+        PlayerPrefs.SetInt(PlayerPrefValues.playPrefsLevelCounter, LevelNumber);
     }
     public void FinishLevelFail()
     {
         //to be called upon wave completion
 
      //   PlayerPrefs.SetInt(playPrefsLevelCounter, LevelNumber);
+    }
+    public void CompleteTutorialLevel()
+    {
+
+        PlayerPrefs.SetInt(PlayerPrefValues.playPrefstutorialCompleted, 1);
+
     }
 }

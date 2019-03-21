@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Package/Scenes/MainMenu.unity
     guid: 3ce08beb1f2ebf74a9b4de80b30747b8
   - enabled: 1
+    path: Assets/Package/Scenes/TutScene.unity
+    guid: 899f5fb21e9b0124c9dabc9f37d4f217
+  - enabled: 1
     path: Assets/Package/Scenes/WIPScene.unity
     guid: 7d72e7649d7a216498b0a56b52bd7382
   m_configObjects: {}

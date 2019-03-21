@@ -150,8 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultScaleSizeCurrent: 5
   defaultScaleSizeMin: 0.1
-  healthMax: 10
-  healthCurrent: 10
+  healthMax: 7
+  healthCurrent: 7
   movingMinion: 0
   parent: {fileID: 0}
   spawner: {fileID: 0}

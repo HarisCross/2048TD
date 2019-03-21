@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelInitManager : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class LevelInitManager : MonoBehaviour
     private GameObject GridHolder;
     private LevelManager levelManager;
     private GameObject gridUIButtons;
+    private GameObject levelNumDisplayGO;
 
     private GameObject crosshairsHolder;
     // rivate GameObject textUIForTurretHolder;
@@ -98,9 +100,10 @@ public class LevelInitManager : MonoBehaviour
         gridsButtons = GameObject.Find("GridSelectionButtons");
         spawningGridPos = GameObject.Find("SpawningGridPos");
         CentreGridPos = GameObject.Find("CentreGridPos");
-        levelManager = GameObject.Find("LevelManager").transform.GetComponent<LevelManager>();
+        levelManager = GameObject.Find("DDOLScripts").GetComponent<LevelManager>();
         crosshairsHolder = GameObject.Find("Crosshairs");
         GridHolder = GameObject.Find("GridHolder");
+        levelNumDisplayGO = GameObject.Find("LevelNumDisplay");
         gridUIButtons = GameObject.Find("GridButton");//parent of the 3 grid ui buttons
 
             
@@ -111,8 +114,10 @@ public class LevelInitManager : MonoBehaviour
 
         }
         pathwaysList.Remove(pathwayParentHolder.transform.GetChild(0).gameObject);
-        
-       // textUIForTurretHolder = GameObject.Find("TurretValueUI");
+
+        // textUIForTurretHolder = GameObject.Find("TurretValueUI");
+        int levelNumber = PlayerPrefs.GetInt("playPrefsLevelCounter");
+        levelNumDisplayGO.GetComponent<TextMeshProUGUI>().text = levelNumber.ToString();
     }
 
     private void SpawnTurrets()
@@ -254,12 +259,15 @@ public class LevelInitManager : MonoBehaviour
 
         foreach (int num in spawnersNumberTospawnList)
         {
+
             int pathwayChosen = Random.Range(0, pathwaysList.Count);
             GameObject pathwayChosenGO = pathwaysList[pathwayChosen].gameObject;
+           // print("spawner spawned" + num);
+            int spawnerChosen = num;
+            print("spawned spawner number: " + spawnerChosen);
 
-           // print("spawner spawned");
-           // print(prefabList[num].name + " to be spawned");
-            GameObject tempSpawner = Instantiate(prefabList[num], pathwayChosenGO.transform.GetChild(0).gameObject.transform.position, Quaternion.identity) as GameObject;//use the number given to get that from list made above and spawn using corrosponding vc3 from list
+            // print(prefabList[num].name + " to be spawned");
+            GameObject tempSpawner = Instantiate(prefabList[spawnerChosen], pathwayChosenGO.transform.GetChild(0).gameObject.transform.position, Quaternion.identity) as GameObject;//use the number given to get that from list made above and spawn using corrosponding vc3 from list
 
             //assign pathholder, enemy go holder, level manager
 

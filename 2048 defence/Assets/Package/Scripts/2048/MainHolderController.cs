@@ -49,6 +49,8 @@ public class MainHolderController : MonoBehaviour
         //}
         //  GridFocused = newGrid;
 
+        print("actived SetCurrentGrid");
+
         if (AnimationOccuring) return;
         if (GridsList.Count == 0) return;
 
@@ -98,11 +100,6 @@ public class MainHolderController : MonoBehaviour
         //   // print("close grid");
 
         //}
-
-
-
-
-        
 
     }
 }

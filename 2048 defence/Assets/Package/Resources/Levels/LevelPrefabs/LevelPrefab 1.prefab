@@ -2412,7 +2412,7 @@ MonoBehaviour:
   turretsGOList: []
   turretHolder: {fileID: 1201731601049952}
   BulletHolder: {fileID: 1778393736795988}
-  spawnersNumberTospawnList: 00000000
+  spawnersNumberTospawnList: 01000000
   enemyGOHolder: {fileID: 1886456903806528}
   spawnerHolder: {fileID: 1080628717801498}
   pathwaysList: []
@@ -2575,6 +2575,7 @@ MonoBehaviour:
   timeBetweenWaves: 19
   levelManager: {fileID: 0}
   amountToSpawn: 5
+  tutorialSpawner: 0
 --- !u!114 &114431766672933310
 MonoBehaviour:
   m_ObjectHideFlags: 1

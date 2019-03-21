@@ -21,6 +21,7 @@ public class Manager : MonoBehaviour
     public GameObject centreGridPos;
 
 
+
     private float GridSpacing = 1f;
 
     public bool ObjectSelected = false;

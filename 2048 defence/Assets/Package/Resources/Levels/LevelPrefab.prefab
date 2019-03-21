@@ -1823,13 +1823,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452e91787cd7a0045a182f5af6395d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turretsPosList: []
   turretsGOList:
   - {fileID: 1984905474030118}
-  spawnersGOList:
-  - {fileID: 1660688189993864}
+  turretHolder: {fileID: 0}
+  BulletHolder: {fileID: 0}
+  spawnersNumberTospawnList: 
+  enemyGOHolder: {fileID: 0}
+  spawnerHolder: {fileID: 0}
+  pathwaysList: []
+  pathwayParentHolder: {fileID: 0}
   endOfMap: {fileID: 1548315910072284}
   gridsGOList:
   - {fileID: 1250482734553964}
+  gridPosList: []
+  gridsHolder: {fileID: 0}
 --- !u!114 &114187241029331232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1877,12 +1885,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cff4b0fe8c8b174184bd75f68aa2a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Grid1: {fileID: 1250482734553964}
   CentrePos: {fileID: 0}
   interactButtonsHolder: {fileID: 0}
   GridFocused: 1
   GridSelected: 1
   AnimationOccuring: 0
+  GridsList: []
 --- !u!114 &114263315367672562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2134,6 +2142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BoardNumber: 1
+  childTilesList: []
   GOHolder: {fileID: 1009840010527574}
   sprite_numbers:
   - {fileID: 1949636898291280, guid: 34c9447d7c22282478df214341c73bd3, type: 2}
@@ -2151,13 +2160,15 @@ MonoBehaviour:
   GridSpot: {fileID: 1859590256816460, guid: f3c3573fd310a694c856e9f207983a4c, type: 2}
   turretChosen: {fileID: 1984905474030118}
   turretActiveButton: {fileID: 0}
-  centreGridSpot: {fileID: 0}
+  spawningGridPos: {fileID: 0}
+  centreGridPos: {fileID: 0}
   ObjectSelected: 0
+  gridActive: 0
+  exportedThisMovement: 0
   movingGrid: 0
   CurrentGrid: {fileID: 114915828656908500}
   MainHolder: {fileID: 114230507895394104}
   InpController: {fileID: 114806071095940518}
-  GridTower: {fileID: 114333654140912254}
 --- !u!114 &114777765992090568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2216,7 +2227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainController: {fileID: 114230507895394104}
-  GameGrid1: {fileID: 114766654677204562}
+  GameGrids: []
 --- !u!114 &114911062988020240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2308,6 +2319,7 @@ MonoBehaviour:
   timeBetweenWaves: 20
   levelManager: {fileID: 0}
   amountToSpawn: 5
+  tutorialSpawner: 0
 --- !u!114 &114982845570302176
 MonoBehaviour:
   m_ObjectHideFlags: 1
