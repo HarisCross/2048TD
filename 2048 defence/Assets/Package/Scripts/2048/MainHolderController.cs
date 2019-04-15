@@ -59,8 +59,8 @@ public class MainHolderController : MonoBehaviour
             print("should close menu");
 
             ///interactButtonsHolder.GetComponent<Animator>().Play("CloseGridButton");
-            interactButtonsHolder.GetComponent<Animator>().SetBool("MenuActiveState", false);
-            interactButtonsHolder.GetComponent<Animator>().SetTrigger("MenuActiveStateTrigger");
+            //interactButtonsHolder.GetComponent<Animator>().SetBool("MenuActiveState", false);
+            //interactButtonsHolder.GetComponent<Animator>().SetTrigger("MenuActiveStateTrigger");
             interactButtonsOpen = false;
         }
         else
@@ -69,8 +69,8 @@ public class MainHolderController : MonoBehaviour
 
             print("Should open menu");
 
-            interactButtonsHolder.GetComponent<Animator>().SetBool("MenuActiveState", true);
-            interactButtonsHolder.GetComponent<Animator>().SetTrigger("MenuActiveStateTrigger");
+            //interactButtonsHolder.GetComponent<Animator>().SetBool("MenuActiveState", true);
+            //interactButtonsHolder.GetComponent<Animator>().SetTrigger("MenuActiveStateTrigger");
             interactButtonsOpen = true;
 
         }

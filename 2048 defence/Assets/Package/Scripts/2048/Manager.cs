@@ -41,6 +41,9 @@ public class Manager : MonoBehaviour
 
     public MainHolderController MainHolder;
     public InputController InpController;
+
+    public GameObject gridButtonsGO;
+    private GameObject currCanvas;
     // public TowerController GridTower;
 
     // Use this for initialization
@@ -108,7 +111,7 @@ public class Manager : MonoBehaviour
 
         }
 
-        
+        currCanvas = GameObject.Find("Canvas");
         
         //create number grid
         CreateBoardGrid();
@@ -151,7 +154,7 @@ public class Manager : MonoBehaviour
     //    gridActive = false;
     //    startPos = centreGridPos.transform.position;
     //    targetPos = spawningGridPos.transform.position;
-    //    // print(targetPos.x + " " + targetPos.y);
+    //    // print(targetPos.x + " " + targetPos.y);[
     //    //startScale = transform.localScale;
     //    //TargetScale = new Vector2(0.2f, 0.2f);
     //   // turretActiveButton.SetActive(true);
@@ -190,6 +193,16 @@ public class Manager : MonoBehaviour
             newPos = transform.position;
             newPos.z = 3f;
             transform.position = newPos;
+
+            //TODO: convert newpos.y into rectTtrasnform.y then apply to gridButtonsGO.
+            Vector2 newPosForGridButtons;
+            float offsetXAxisAmount = 25f;
+
+            //gridButtonsGO.transform.position = Camera.main.WorldToScreenPoint(newPos);
+            print(Camera.main.WorldToScreenPoint(newPos));
+
+            //print("grid would be at : " + newPosForGridButtons);
+            //
 
             yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
         }
