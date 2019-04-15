@@ -6,14 +6,14 @@ using TMPro;
 public class LevelInitManager : MonoBehaviour
 {
     //preset values to be used to position the buttons in the right spot and the right size depending on how many buttons are in uset that game
-    private Vector3[] GridButtonPosArrayS3 = new[] { new Vector3(-62, -285, 0.08f), new Vector3(31, -285, 0.08f), new Vector3(130, -285, 0.08f) };
-     private float GridButtonPosArrayS3Size = 1.5F;
+    private Vector3[] GridButtonPosArrayS3 = new[] { new Vector3(-192, -820, 0.08f), new Vector3(90, -820, 0.08f), new Vector3(370, -820, 0.08f) };
+     private float GridButtonPosArrayS3Size = 280F;
 
-    private Vector3[] GridButtonPosArrayS2 = new[] { new Vector3(-40, -285, 0.08f), new Vector3(106, -285, 0.08f) };
-        private float GridButtonPosArrayS2Size = 2.2F;
+    private Vector3[] GridButtonPosArrayS2 = new[] { new Vector3(-121, -820, 0.08f), new Vector3(299, -820, 0.08f) };
+        private float GridButtonPosArrayS2Size = 420F;
 
-    private Vector3[] GridButtonPosArrayS1 = new[] { new Vector3(34, -285, 0.08f) };
-     private float GridButtonPosArrayS1Size = 4.5F;
+    private Vector3[] GridButtonPosArrayS1 = new[] { new Vector3(88, -820, 0.08f) };
+     private float GridButtonPosArrayS1Size = 840F;
 
     float newScaleSizeForButton;
     Vector3[] newPosForButton;
@@ -210,14 +210,16 @@ public class LevelInitManager : MonoBehaviour
 
             GameObject tempButton = Instantiate(Resources.Load("Turrets/OpenGridButton") as GameObject);
             tempButton.transform.parent = gridsButtons.transform;
-            tempButton.transform.GetChild(0).transform.GetComponent<Text>().text = "Open Grid: " + newPosForButtonCounter.ToString();
+            tempButton.transform.GetChild(0).transform.GetComponent<TextMeshProUGUI>().text = "Open Grid: " + newPosForButtonCounter.ToString();
         // tempButton.transform.position = turret.transform.GetChild(1).transform.position;
         //  print(newPosForButton[counter]);
             tempButton.GetComponent<RectTransform>().localPosition = newPosForButton[newPosForButtonCounter];
 
 
-            Vector3 newScale = new Vector3(newScaleSizeForButton, 1, 1);
-            tempButton.transform.localScale = newScale;
+            Vector2 newSize = new Vector2(newScaleSizeForButton, 175);
+            Vector3 newScale = new Vector3(1, 1,1);
+            tempButton.GetComponent<RectTransform>().sizeDelta = newSize;
+            tempButton.GetComponent<RectTransform>().localScale = newScale;
 
             tempButton.GetComponent<GridButton>().mainController = GridHolder.GetComponent<MainHolderController>();
             tempButton.GetComponent<GridButton>().thisGrid = counter+1;

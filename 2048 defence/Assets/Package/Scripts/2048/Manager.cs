@@ -199,7 +199,7 @@ public class Manager : MonoBehaviour
             float offsetXAxisAmount = 25f;
 
             //gridButtonsGO.transform.position = Camera.main.WorldToScreenPoint(newPos);
-            print(Camera.main.WorldToScreenPoint(newPos));
+
 
             //print("grid would be at : " + newPosForGridButtons);
             //
