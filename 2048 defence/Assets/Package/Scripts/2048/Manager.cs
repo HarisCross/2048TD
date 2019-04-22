@@ -35,6 +35,7 @@ public class Manager : MonoBehaviour
 
     private Vector2 startPos, targetPos, startScale, TargetScale;
     private float movementTimer = 0.5f, t = 0;
+    private float UIMovementSpeed = 10f;
 
     [Header("Script references")]
     public NumGrid CurrentGrid;
@@ -140,7 +141,7 @@ public class Manager : MonoBehaviour
         //startScale = transform.localScale;
         //TargetScale = new Vector2(0.2f, 0.2f);
 
-        StartCoroutine(MoveFromTo(/*this.transform,*/ startPos, targetPos, 3f));
+        StartCoroutine(MoveFromTo(/*this.transform,*/ startPos, targetPos, UIMovementSpeed));
     }
 
     //public void UnselectGridAtSrtart()
@@ -178,7 +179,7 @@ public class Manager : MonoBehaviour
         //startScale = transform.localScale;
         //TargetScale = new Vector2(1, 1);
 
-        StartCoroutine(MoveFromTo(/*this.transform,*/startPos,targetPos,3f));
+        StartCoroutine(MoveFromTo(/*this.transform,*/startPos,targetPos, UIMovementSpeed));
     }
     private IEnumerator MoveFromTo(/*Transform objectToMove, */Vector3 a, Vector3 b, float speed)
     {
@@ -195,13 +196,19 @@ public class Manager : MonoBehaviour
             transform.position = newPos;
 
             //TODO: convert newpos.y into rectTtrasnform.y then apply to gridButtonsGO.
-            Vector2 newPosForGridButtons;
-            float offsetXAxisAmount = 25f;
+            Vector2 newPosForGridButtons, movePos;
+            float offsetXAxisAmount = -5.6f,offsetYAxisAmount = -1.85f;
 
-            //gridButtonsGO.transform.position = Camera.main.WorldToScreenPoint(newPos);
+            Vector3 offsetPos = new Vector3((newPos.x + offsetXAxisAmount), newPos.y + offsetYAxisAmount, newPos.z);
+            //print("grid would be at : " + offsetPos);
 
 
-            //print("grid would be at : " + newPosForGridButtons);
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(offsetPos);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(currCanvas.transform as RectTransform, screenPos, Camera.main, out movePos);
+            newPosForGridButtons = currCanvas.transform.TransformPoint(movePos);
+
+
+            gridButtonsGO.transform.position = newPosForGridButtons;
             //
 
             yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
