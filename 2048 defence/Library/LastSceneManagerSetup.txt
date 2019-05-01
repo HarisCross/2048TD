@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Package/Scenes/MainMenu.unity
+- path: Assets/Package/Scenes/Other/testing stiff/2048TestScene.unity
   isLoaded: 1
   isActive: 1

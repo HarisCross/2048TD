@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public enum ItemDir { None, Left, Right, Up, Down }
 
@@ -6,6 +8,12 @@ public class InputController : MonoBehaviour
 {
     public ItemDir tempDir;
     public MainHolderController mainController;
+
+    [Header("Grid Timer Settings")]
+    [SerializeField]
+    private float TimeBetweenMovements = 1f;
+    [SerializeField]
+    private bool gridMovementReady = true;
 
     // Use this for initialization
     private void Start()
@@ -32,23 +40,54 @@ public class InputController : MonoBehaviour
 
     private ItemDir GetDir()
     {
-        if (Input.GetKeyDown("up"))
+        if (gridMovementReady)
         {
-            return ItemDir.Up;
+            if (Input.GetKeyDown("up"))
+            {
+                ActiveCountdownTimer();
+                return ItemDir.Up;
+            }
+            if (Input.GetKeyDown("down"))
+            {
+                ActiveCountdownTimer();
+                return ItemDir.Down;
+            }
+            if (Input.GetKeyDown("left"))
+            {
+                ActiveCountdownTimer();
+                return ItemDir.Left;
+            }
+            if (Input.GetKeyDown("right"))
+            {
+                ActiveCountdownTimer();
+                return ItemDir.Right;
+            }
+            return ItemDir.None;
         }
-        if (Input.GetKeyDown("down"))
+        else
         {
-            return ItemDir.Down;
+            return ItemDir.None;
         }
-        if (Input.GetKeyDown("left"))
+    }
+
+    private void ActiveCountdownTimer()
+    {
+        //called to acitvate ienum timer, forces set amount of time wait between inputs to prevent spamming 
+        gridMovementReady = false;
+       // Debug.Log("GMR: " + gridMovementReady);
+        StartCoroutine("MovementCountdownTimer", TimeBetweenMovements);
+
+
+    }
+    private IEnumerator MovementCountdownTimer(int time)
+    {
+        float timer = time;
+        while (timer > 0)
         {
-            //  print("pressing left");
-            return ItemDir.Left;
+            yield return new WaitForSeconds(1);
+            timer--;
         }
-        if (Input.GetKeyDown("right"))
-        {
-            return ItemDir.Right;
-        }
-        return ItemDir.None;
+        gridMovementReady = true;
+       // Debug.Log("GMR: " + gridMovementReady);
     }
 }

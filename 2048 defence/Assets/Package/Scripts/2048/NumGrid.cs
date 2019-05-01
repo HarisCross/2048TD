@@ -90,6 +90,9 @@ public class NumGrid : MonoBehaviour
                         tempValue = null;
                     }
                 }
+
+
+
                 if (rightUpCol)
                 {
                     for (int u = col; u < 3; u++)
@@ -223,7 +226,7 @@ public class NumGrid : MonoBehaviour
 
             return spotToComp;//should return the updated current spot for futher checks
         }
-        if (spotToComp.NumberValue == curr.NumberValue && curr.hasBeenMerged == false)//if spot is same,should return new spot
+        if (spotToComp.NumberValue == curr.NumberValue && curr.hasBeenMerged == false && spotToComp.hasBeenMerged == false)//if spot is same,should return new spot
         {
             MoveItemToNewSpotMerge(curr, spotToComp);
 
