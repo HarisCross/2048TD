@@ -8,10 +8,12 @@ public class InputController : MonoBehaviour
 {
     public ItemDir tempDir;
     public MainHolderController mainController;
+    [SerializeField]
+    private LevelInitManager levelInitManager;
 
     [Header("Grid Timer Settings")]
-    [SerializeField]
-    private float TimeBetweenMovements = 1f;
+//  [SerializeField]
+    public float TimeBetweenMovements = 10f;//TODO: Change this 
     [SerializeField]
     private bool gridMovementReady = true;
 
@@ -19,6 +21,10 @@ public class InputController : MonoBehaviour
     private void Start()
     {
         mainController = transform.GetComponent<MainHolderController>();
+        if(levelInitManager != null)
+        {
+            TimeBetweenMovements = levelInitManager.TimeBetweenGridMovements;
+        }
     }
 
     private void Update()
@@ -84,8 +90,9 @@ public class InputController : MonoBehaviour
         float timer = time;
         while (timer > 0)
         {
-            yield return new WaitForSeconds(1);
-            timer--;
+            yield return new WaitForSeconds(0.01f);
+            timer -= 0.01f;
+          
         }
         gridMovementReady = true;
        // Debug.Log("GMR: " + gridMovementReady);

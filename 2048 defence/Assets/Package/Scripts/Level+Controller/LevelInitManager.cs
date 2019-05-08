@@ -47,6 +47,9 @@ public class LevelInitManager : MonoBehaviour
     public List<Vector3> gridPosList = new List<Vector3>();
     public GameObject gridsHolder;
 
+    public float TimeBetweenGridMovements = 0.25f;
+
+
     [Header("VarsToBeUsedToAssign")]
     private GameObject gridsButtons;
 
@@ -250,6 +253,7 @@ public class LevelInitManager : MonoBehaviour
         //add ui variables to the grid holder to be used and passed down
         GridHolder.GetComponent<MainHolderController>().CentrePos = spawningGridPos;
         GridHolder.GetComponent<MainHolderController>().interactButtonsHolder = gridUIButtons;
+        GridHolder.GetComponent<InputController>().TimeBetweenMovements = TimeBetweenGridMovements;
 
     }
     private void SpawnSpawner()
