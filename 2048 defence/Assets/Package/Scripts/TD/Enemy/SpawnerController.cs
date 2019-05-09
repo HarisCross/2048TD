@@ -80,6 +80,7 @@ public class SpawnerController : MonoBehaviour
 
     private void StartWave()
     {
+        levelManager.AcitvateLevelTimer();
         if (currentWave == waveMaxCount)
         {
             CancelInvoke("StartWave");

@@ -28,8 +28,8 @@ public class Manager : MonoBehaviour
     [SerializeField]
 
     private bool gridActive = false;//use to check if this grid has been activated or not.
-    [SerializeField]
-    private bool exportedThisMovement = false;
+    //[SerializeField]
+    public bool exportedThisMovement = false;
 
     public bool movingGrid = false;
 
@@ -42,6 +42,7 @@ public class Manager : MonoBehaviour
 
     public MainHolderController MainHolder;
     public InputController InpController;
+    public LevelManager levelManager;
 
     public GameObject gridButtonsGO;
     private GameObject currCanvas;
@@ -68,12 +69,13 @@ public class Manager : MonoBehaviour
                 case ItemDir.Up:
                     CurrentGrid.MoveGridVertical(ItemDir.Up);
                     exportedThisMovement = false;
-
+                    levelManager.IncrementMovementCounter();
                     break;
 
                 case ItemDir.Down:
                     CurrentGrid.MoveGridVertical(ItemDir.Down);
                     exportedThisMovement = false;
+                    levelManager.IncrementMovementCounter();
 
                     break;
 
@@ -81,12 +83,14 @@ public class Manager : MonoBehaviour
                     //print("moving left" + InpController.tempDir);
                     CurrentGrid.MoveGridHorizontal(ItemDir.Left);
                     exportedThisMovement = false;
+                    levelManager.IncrementMovementCounter();
 
                     break;
 
                 case ItemDir.Right:
                     CurrentGrid.MoveGridHorizontal(ItemDir.Right);
                     exportedThisMovement = false;
+                    levelManager.IncrementMovementCounter();
 
                     break;
 
@@ -167,7 +171,7 @@ public class Manager : MonoBehaviour
 
     public void SelectGrid()
     {
-        print("opening grid: " + this.transform.name);
+     //   print("opening grid: " + this.transform.name);
         t = 0;
         movingGrid = true;
         MainHolder.AnimationOccuring = true;
@@ -428,6 +432,7 @@ public class Manager : MonoBehaviour
         turretChosen.GetComponent<TowerController>().AddResources(spotChosen.NumberValue);
         ResetGridTile(spotChosen);
         exportedThisMovement = true;
+        levelManager.IncrementExportCounter();
     }
 
     private void ResetGridTile(GridSpot spot)

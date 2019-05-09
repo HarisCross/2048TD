@@ -1,11 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
     public int LevelNumber = -1;
-   // private string playPrefsLevelCounter = "playPrefsLevelCounter";
-  //  private string playPrefstutorialCompleted = "playPrefstutorialCompleted";
+    // private string playPrefsLevelCounter = "playPrefsLevelCounter";
+    //  private string playPrefstutorialCompleted = "playPrefstutorialCompleted";
+
+    [Header("Completion Variables")]
+    [Header("Timer")]
+    public float currentTimeTakenToFinishAllWaves = 0f;
+    [SerializeField]
+    private bool timerActiveCountdown = true;//used to stop timer, when level finished change this to stop timer and get time it all ended
+    public bool timerCurrentlyActive = false;//used to start timer
+
+    [Header("exports")]
+    public int currentExportCounter = 0;
+
+    [Header("grid movements")]
+    public int currentAmountOfTimesGridMoved = 0;
+
+
+
 
 
     // Use this for initialization
@@ -16,7 +33,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
+        print(transform.name);
     }
 
     public void WaveEnded(SpawnerController spawnController, int waveNumber)
@@ -51,4 +68,39 @@ public class LevelManager : MonoBehaviour
         PlayerPrefs.SetInt(PlayerPrefValues.playPrefstutorialCompleted, 1);
 
     }
+    public void IncrementExportCounter()
+    {
+        currentExportCounter++;
+    }
+    public void IncrementMovementCounter()
+    {
+        currentAmountOfTimesGridMoved++;
+    }
+    public void AcitvateLevelTimer()
+    {
+        if (timerCurrentlyActive == false)
+        {
+            timerCurrentlyActive = true;
+            StartCoroutine("LevelTimer");
+        }
+    }
+    private IEnumerator LevelTimer()
+    {
+        while (timerActiveCountdown)
+        {
+            yield return new WaitForSeconds(0.01f);
+            currentTimeTakenToFinishAllWaves += 0.01f;
+
+
+        }
+
+    }
+    public void ResetLevelScoreCounters()
+    {
+        currentExportCounter = 0;
+        currentAmountOfTimesGridMoved = 0;
+        currentTimeTakenToFinishAllWaves = 0f;
+
+    }
+
 }

@@ -49,14 +49,14 @@ public class MainHolderController : MonoBehaviour
         //}
         //  GridFocused = newGrid;
 
-        print("actived SetCurrentGrid");
+       // print("actived SetCurrentGrid");
 
         if (AnimationOccuring) return;
         if (GridsList.Count == 0) return;
 
         if (interactButtonsOpen)
         {
-            print("should close menu");
+          //  print("should close menu");
 
             ///interactButtonsHolder.GetComponent<Animator>().Play("CloseGridButton");
             //interactButtonsHolder.GetComponent<Animator>().SetBool("MenuActiveState", false);
@@ -67,7 +67,7 @@ public class MainHolderController : MonoBehaviour
         {
             // interactButtonsHolder.GetComponent<Animator>().Play("OpenGridButton");
 
-            print("Should open menu");
+          //  print("Should open menu");
 
             //interactButtonsHolder.GetComponent<Animator>().SetBool("MenuActiveState", true);
             //interactButtonsHolder.GetComponent<Animator>().SetTrigger("MenuActiveStateTrigger");

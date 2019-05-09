@@ -59,6 +59,7 @@ public class LevelInitManager : MonoBehaviour
     private LevelManager levelManager;
     private GameObject gridUIButtons;
     private GameObject levelNumDisplayGO;
+    
 
     private GameObject crosshairsHolder;
     // rivate GameObject textUIForTurretHolder;
@@ -200,6 +201,7 @@ public class LevelInitManager : MonoBehaviour
             tempGrid.GetComponent<Manager>().MainHolder = GridHolder.GetComponent<MainHolderController>();
             tempGrid.GetComponent<Manager>().InpController = GridHolder.GetComponent<InputController>();
             tempGrid.GetComponent<Manager>().turretChosen = turret;
+            tempGrid.GetComponent<Manager>().levelManager = levelManager;
             tempGrid.GetComponent<Manager>().BoardNumber = (counter+1);
             tempGrid.GetComponent<Manager>().centreGridPos = CentreGridPos;
             tempGrid.GetComponent<Manager>().spawningGridPos = spawningGridPos;
@@ -254,6 +256,7 @@ public class LevelInitManager : MonoBehaviour
         GridHolder.GetComponent<MainHolderController>().CentrePos = spawningGridPos;
         GridHolder.GetComponent<MainHolderController>().interactButtonsHolder = gridUIButtons;
         GridHolder.GetComponent<InputController>().TimeBetweenMovements = TimeBetweenGridMovements;
+        GridHolder.GetComponent<UIButtonController>().exportButton = gridUIButtons.transform.GetChild(2).gameObject;
 
     }
     private void SpawnSpawner()
@@ -271,7 +274,7 @@ public class LevelInitManager : MonoBehaviour
             GameObject pathwayChosenGO = pathwaysList[pathwayChosen].gameObject;
            // print("spawner spawned" + num);
             int spawnerChosen = num;
-            print("spawned spawner number: " + spawnerChosen);
+           // print("spawned spawner number: " + spawnerChosen);
 
             // print(prefabList[num].name + " to be spawned");
             GameObject tempSpawner = Instantiate(prefabList[spawnerChosen], pathwayChosenGO.transform.GetChild(0).gameObject.transform.position, Quaternion.identity) as GameObject;//use the number given to get that from list made above and spawn using corrosponding vc3 from list

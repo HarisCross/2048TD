@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIButtonController : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class UIButtonController : MonoBehaviour
 
     [SerializeField]
     private float TimeBetweenExports = 5f;
-    [SerializeField]
-    private float TimeBetweenExportsTimer = 5f;
+    //[SerializeField]
+    //private float TimeBetweenExportsTimer = 5f;
     [SerializeField]
     private bool gridExportsReady = true;
+    private bool exportButtonBeingFilled = true;// if false then is empty, if true then full 
 
+    public GameObject exportButton;
     //public Manager GameGrid1;
     //public Manager GameGrid2;
     //public Manager GameGrid3;
@@ -64,7 +67,7 @@ public class UIButtonController : MonoBehaviour
     {
         int boardNumber = mainController.GridFocused-1;
 
-        if (gridExportsReady)
+        if (gridExportsReady && GameGrids[boardNumber].GetComponent<Manager>().exportedThisMovement == false)//needs to check if tis possible to export from manager currently in use
         {
             ActiveCountdownTimer();
             GameGrids[boardNumber].GetComponent<Manager>().ExportHighestNumberFromGrid();
@@ -85,18 +88,40 @@ public class UIButtonController : MonoBehaviour
         // Debug.Log("GMR: " + gridMovementReady);
         StartCoroutine("MovementCountdownTimer", TimeBetweenExports);
 
+        //if (exportButtonBeingFilled)
+        //{
+        //    ExportButtonEmptyFillAmount();
+        //}
+        //else
+        //{
+        //    ExportButtonFillFillAmount();
+        //}
 
     }
     private IEnumerator MovementCountdownTimer(int time)
     {
-      //  float timer = time;
-        while (TimeBetweenExportsTimer > 0)
+        //should empty the fill amount in 1 second then refill it over the next 4 seconds
+        float timer = time;
+
+        while (timer > 0)
         {
-            yield return new WaitForSeconds(1);
-            TimeBetweenExportsTimer--;
+            yield return new WaitForSeconds(0.01f);
+
+            timer-=0.01f;
+
+            if(timer >= 4f)
+            {
+                       exportButton.GetComponent<Image>().fillAmount -= 0.01f;
+            }
+            else
+            {
+                        exportButton.GetComponent<Image>().fillAmount += 0.0025f;
+            }
+
         }
         gridExportsReady = true;
-        TimeBetweenExportsTimer = TimeBetweenExports;
-        // Debug.Log("GMR: " + gridMovementReady);
+      //  print("read to export again");
+        //TimeBetweenExportsTimer = TimeBetweenExports;
     }
+
 }

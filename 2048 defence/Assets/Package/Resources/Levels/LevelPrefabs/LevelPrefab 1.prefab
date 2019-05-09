@@ -281,6 +281,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tempDir: 0
   mainController: {fileID: 114230507895394104}
+  levelInitManager: {fileID: 0}
+  TimeBetweenMovements: 10
+  gridMovementReady: 1
 --- !u!114 &114901029623558178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +298,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainController: {fileID: 114230507895394104}
   GameGrids: []
+  TimeBetweenExports: 5
+  TimeBetweenExportsTimer: 5
+  gridExportsReady: 1
 --- !u!1 &1080628717801498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1914,7 +1920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506094536537018}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4605189543426646}
@@ -2465,8 +2471,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1637728883
-  m_SortingLayer: 3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2777,7 +2783,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671509925153852}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4663011951267742}
@@ -3575,6 +3581,7 @@ MonoBehaviour:
   gridPosList:
   - {x: 4.45, y: -0.09, z: 3.06}
   gridsHolder: {fileID: 1036159303081190}
+  TimeBetweenGridMovements: 0.25
 --- !u!1 &1908330002125576
 GameObject:
   m_ObjectHideFlags: 0
