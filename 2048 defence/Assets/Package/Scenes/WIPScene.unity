@@ -933,16 +933,6 @@ PrefabInstance:
       propertyPath: levelManager
       value: 
       objectReference: {fileID: 1494956756}
-    - target: {fileID: 114713825567217142, guid: 2f6f5150fe587fe438b2d4513557d023,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114713825567217142, guid: 2f6f5150fe587fe438b2d4513557d023,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f6f5150fe587fe438b2d4513557d023, type: 3}
 --- !u!1 &519420028
@@ -3239,6 +3229,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelNumber: 1
+  currentTimeTakenToFinishAllWaves: 0
+  timerActiveCountdown: 1
+  timerCurrentlyActive: 0
+  currentExportCounter: 0
+  currentAmountOfTimesGridMoved: 0
 --- !u!1 &1508944725
 GameObject:
   m_ObjectHideFlags: 0

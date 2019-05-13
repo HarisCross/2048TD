@@ -21,10 +21,11 @@ public class InputController : MonoBehaviour
     private void Start()
     {
         mainController = transform.GetComponent<MainHolderController>();
-        if(levelInitManager != null)
-        {
-            TimeBetweenMovements = levelInitManager.TimeBetweenGridMovements;
-        }
+
+        //if(levelInitManager != null)
+        //{
+        //    TimeBetweenMovements = levelInitManager.TimeBetweenGridMovements;
+        //}
     }
 
     private void Update()

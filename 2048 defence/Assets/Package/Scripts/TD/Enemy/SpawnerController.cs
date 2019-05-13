@@ -28,6 +28,8 @@ public class SpawnerController : MonoBehaviour
     // public WaveDetails[] waveDetailsList;
 
     public int waveMaxCount = 2;//used to end level, its how many waves there should be
+    [SerializeField]
+    private int wavesCompleted = 0;
     public int currentWave = 0;
     private int minionToReturnNumber;
     public float timeUntilWavesStart = 2f;//delay from start until first wave starts
@@ -50,7 +52,7 @@ public class SpawnerController : MonoBehaviour
     private void Start()
     {
         pathway = pathWayHolder.GetComponentsInChildren<Node>();
-
+        levelManager.amountOfSpawners++;
         components = GetComponents(typeof(WaveDetails));
 
         foreach (WaveDetails waveDets in components)
@@ -77,14 +79,27 @@ public class SpawnerController : MonoBehaviour
     private void Update()
     {
     }
+    public void CheckIfAllWavesDoneAndMinsDead()
+    {
+        //called by wave details when all of its minions are dead
+        wavesCompleted+=1;
 
+        if(wavesCompleted == waveMaxCount)
+        {
+            print("All waves completed for: " + this.transform.gameObject.name);
+            levelManager.counterSpawnersCompleted++;
+            levelManager.LevelCompeletion();
+        }
+
+    }
     private void StartWave()
     {
         levelManager.AcitvateLevelTimer();
         if (currentWave == waveMaxCount)
         {
             CancelInvoke("StartWave");
-            print("finished waves");
+          //  print("finished waves");
+            //this spawner has finished all the waves assigned to it
             return;
         }
         //  print("starting wave: " + currentWave);
@@ -166,6 +181,7 @@ public class SpawnerController : MonoBehaviour
         //CurrentMinions.Add(tempGO);
 
         currWaveDetails.CurrentMinionsInPlay.Add(tempGO);
+        currWaveDetails.minionsSpawned++;
 
         tempClassOfInst.healthCurrent = 6f;
 
@@ -211,13 +227,22 @@ public class SpawnerController : MonoBehaviour
     {
         //itterate through all minions and update thier target pos to the next one in array
 
-        // foreach(GameObject minion in Minions)
-        //{
+        //if done last node on pathway then change target to second node in array
+
         MinionDetails tempMinDetails = minion.GetComponent<MinionDetails>();
 
         tempMinDetails.StartPosition = minion.transform.position;
+        if(tempMinDetails.CurrentNode + 1== pathway.Length)//when on last node change current to start to allow enemies to continue around
+        {
+
+            tempMinDetails.CurrentNode = 0;
+
+        }
+      //  print(tempMinDetails.CurrentNode + " : " + pathway.Length);
         tempMinDetails.NextPosition = pathway[tempMinDetails.CurrentNode + 1].gameObject.transform.position;
         tempMinDetails.CurrentNode++;
+
+
         tempMinDetails.timer = 0f;
 
         // }

@@ -102,12 +102,12 @@ public class UIButtonController : MonoBehaviour
     {
         //should empty the fill amount in 1 second then refill it over the next 4 seconds
         float timer = time;
-
+       // print("timer is " + time);
         while (timer > 0)
         {
             yield return new WaitForSeconds(0.01f);
 
-            timer-=0.01f;
+            timer -=0.01f;
 
             if(timer >= 4f)
             {

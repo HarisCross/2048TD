@@ -20,9 +20,15 @@ public class LevelManager : MonoBehaviour
 
     [Header("grid movements")]
     public int currentAmountOfTimesGridMoved = 0;
+    [Header("spawner info")]
+    public int amountOfSpawners;
+    public int counterSpawnersCompleted = 0;
 
+    [Header("Win Condition arrays")]
 
-
+    public int[] winBoundariesTimeTaken; //in seconds
+    public int[] winBoundariesGridMovements; //amount of swipes used on the grids
+    public int[] winBoundariesGridExports; //amount of times a value is exported
 
 
     // Use this for initialization
@@ -33,7 +39,6 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        print(transform.name);
     }
 
     public void WaveEnded(SpawnerController spawnController, int waveNumber)
@@ -41,13 +46,26 @@ public class LevelManager : MonoBehaviour
         //wave's minions have all died
 
         print(spawnController.transform.gameObject + "has ended wave by KO : " + waveNumber);
-    }
 
+
+    }
+    public void LevelCompeletion()
+    {
+
+        if (counterSpawnersCompleted == amountOfSpawners)
+        {
+            //all spawners have finihsed thier waves hence the level is 
+
+            print("THE LEVEL IS OVER");
+
+        }
+
+    }
     public void WaveComplete(SpawnerController spawnController, int waveNumber)
     {
         //wave timer has triggered to end the wave and if poss start next one
 
-        print(spawnController.transform.gameObject + " ended wave by time limit: " + waveNumber);
+      //  print(spawnController.transform.gameObject + " ended wave by time limit: " + waveNumber);
     }
 
     public void FinishLevelSuccess()
@@ -86,12 +104,16 @@ public class LevelManager : MonoBehaviour
     }
     private IEnumerator LevelTimer()
     {
+        float tempFloat;
         while (timerActiveCountdown)
         {
-            yield return new WaitForSeconds(0.01f);
-            currentTimeTakenToFinishAllWaves += 0.01f;
+            yield return new WaitForSeconds(0.025f);
+            tempFloat = currentTimeTakenToFinishAllWaves += 0.025f;
+          //  currentTimeTakenToFinishAllWaves += 0.1f;
 
+            //System.Math.Round(currentTimeTakenToFinishAllWaves, 2);
 
+            currentTimeTakenToFinishAllWaves = (float)System.Math.Round(tempFloat, 2);
         }
 
     }

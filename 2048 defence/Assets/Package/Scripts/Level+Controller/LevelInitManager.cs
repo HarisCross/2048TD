@@ -47,7 +47,7 @@ public class LevelInitManager : MonoBehaviour
     public List<Vector3> gridPosList = new List<Vector3>();
     public GameObject gridsHolder;
 
-    public float TimeBetweenGridMovements = 0.25f;
+    public float TimeBetweenGridMovements = 1f;//time between grid movements
 
 
     [Header("VarsToBeUsedToAssign")]
@@ -65,6 +65,12 @@ public class LevelInitManager : MonoBehaviour
     // rivate GameObject textUIForTurretHolder;
     // public List<GameObject> crosshairs = new List<GameObject>();
     //public List<GameObject> textUIForTurrets = new List<GameObject>();
+
+    [Header("Win Conditions")]//time, grid movements and exports
+
+    public int[] winBoundariesTimeTaken = new int[] { 30, 60, 90 }; //in seconds
+    public int[] winBoundariesGridMovements = new int[] { 60,120,180 }; //amount of swipes used on the grids
+    public int[] winBoundariesGridExports = new int[] { 25,50,75 }; //amount of times a value is exported
 
     // Use this for initialization
     private void Start()
@@ -180,7 +186,7 @@ public class LevelInitManager : MonoBehaviour
     private void SpawnGameGrid(GameObject turret)
     {
 
-        AddVarsToGridHolder();
+        AddVarsToScripts();
         //for each turret spawn a game grid
         //create button to access the grid and link turret to grid and button
         //assign the grid to the grid controller
@@ -250,13 +256,20 @@ public class LevelInitManager : MonoBehaviour
 
 
     }
-    private void AddVarsToGridHolder()
+    private void AddVarsToScripts()
     {
         //add ui variables to the grid holder to be used and passed down
         GridHolder.GetComponent<MainHolderController>().CentrePos = spawningGridPos;
         GridHolder.GetComponent<MainHolderController>().interactButtonsHolder = gridUIButtons;
+
         GridHolder.GetComponent<InputController>().TimeBetweenMovements = TimeBetweenGridMovements;
+
         GridHolder.GetComponent<UIButtonController>().exportButton = gridUIButtons.transform.GetChild(2).gameObject;
+
+        //add arrays to levelmanager
+        levelManager.winBoundariesTimeTaken = winBoundariesTimeTaken;
+        levelManager.winBoundariesGridMovements = winBoundariesGridMovements;
+        levelManager.winBoundariesGridExports = winBoundariesGridExports;
 
     }
     private void SpawnSpawner()
