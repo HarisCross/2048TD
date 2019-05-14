@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public int LevelNumber = -1;
+    public EndLevelController endLevelController;
     // private string playPrefsLevelCounter = "playPrefsLevelCounter";
     //  private string playPrefstutorialCompleted = "playPrefstutorialCompleted";
 
@@ -57,6 +58,7 @@ public class LevelManager : MonoBehaviour
             //all spawners have finihsed thier waves hence the level is 
 
             print("THE LEVEL IS OVER");
+            endLevelController.TriggerEndSplashScreen(winBoundariesTimeTaken,winBoundariesGridMovements,winBoundariesGridExports,currentTimeTakenToFinishAllWaves,currentExportCounter,currentAmountOfTimesGridMoved);
 
         }
 

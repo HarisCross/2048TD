@@ -513,3 +513,7 @@ C:\Users\haris\Documents\GitHub\2048TD\2048 defence\obj\Debug\Assembly-CSharp.cs
 C:\Users\haris\Documents\GitHub\2048TD\2048 defence\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\haris\Documents\GitHub\2048TD\2048 defence\obj\Debug\Assembly-CSharp.dll
 C:\Users\haris\Documents\GitHub\2048TD\2048 defence\obj\Debug\Assembly-CSharp.pdb
+C:\Users\haris\Documents\GitHub\2048TD\2048 defence\Temp\bin\Debug\ChannelPurchase.dll
+C:\Users\haris\Documents\GitHub\2048TD\2048 defence\Temp\bin\Debug\Editor.dll
+C:\Users\haris\Documents\GitHub\2048TD\2048 defence\Temp\bin\Debug\UnityStore.dll
+C:\Users\haris\Documents\GitHub\2048TD\2048 defence\Temp\bin\Debug\XiaomiSupport.dll

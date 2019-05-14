@@ -57,6 +57,7 @@ public class LevelInitManager : MonoBehaviour
     private GameObject CentreGridPos;
     private GameObject GridHolder;
     private LevelManager levelManager;
+    private EndLevelController endLevelController;
     private GameObject gridUIButtons;
     private GameObject levelNumDisplayGO;
     
@@ -115,8 +116,9 @@ public class LevelInitManager : MonoBehaviour
         GridHolder = GameObject.Find("GridHolder");
         levelNumDisplayGO = GameObject.Find("LevelNumDisplay");
         gridUIButtons = GameObject.Find("GridButton");//parent of the 3 grid ui buttons
+        endLevelController = GameObject.Find("LevelEndScreenBackGround").GetComponent<EndLevelController>();
+        
 
-            
         foreach(Transform child in pathwayParentHolder.transform)
         {
 
@@ -270,7 +272,7 @@ public class LevelInitManager : MonoBehaviour
         levelManager.winBoundariesTimeTaken = winBoundariesTimeTaken;
         levelManager.winBoundariesGridMovements = winBoundariesGridMovements;
         levelManager.winBoundariesGridExports = winBoundariesGridExports;
-
+        levelManager.endLevelController = endLevelController;
     }
     private void SpawnSpawner()
     {
