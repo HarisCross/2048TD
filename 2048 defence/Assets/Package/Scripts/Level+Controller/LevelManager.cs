@@ -57,10 +57,15 @@ public class LevelManager : MonoBehaviour
         {
             //all spawners have finihsed thier waves hence the level is 
 
-            print("THE LEVEL IS OVER");
+           // print("THE LEVEL IS OVER");
             endLevelController.TriggerEndSplashScreen(winBoundariesTimeTaken,winBoundariesGridMovements,winBoundariesGridExports,currentTimeTakenToFinishAllWaves,currentExportCounter,currentAmountOfTimesGridMoved);
 
         }
+
+    }
+    public void TriggerEndLevelBGSplash()
+    {
+        endLevelController.TriggerEndLevelBGSplash();
 
     }
     public void WaveComplete(SpawnerController spawnController, int waveNumber)

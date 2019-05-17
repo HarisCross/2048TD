@@ -9,7 +9,8 @@ public class MinionDetails : MonoBehaviour
 
     public float healthMax = 0;
     public float healthCurrent = 0;
-
+   // public bool triggerDestoryThisMinion = false;
+    public bool lastMinionAlive = false;
     private float percen;
     private float scaleToAimFor;
     private float amount;
@@ -46,15 +47,41 @@ public class MinionDetails : MonoBehaviour
             MoveMinion();
         }
 
+
         if (healthCurrent < 1)
         {
-            //  print("minion killed : " + healthCurrent);
-            Destroy(this.transform.gameObject);
+
+            //add check to see if was last minion alive, if so then trigger anim not destroy
+
+            if (lastMinionAlive)
+            {
+                //last minion so trigger the animtion
+                ResetScaleSize();
+                Animator anim = transform.GetComponent<Animator>();
+                anim.SetTrigger("FinalMinLevelEnd");
+
+            }
+            else
+            {
+                //not last so just delete
+                DestroyThisMinion();
+            }
+
+
+
+
         }
+
+
 
         if (scaleForHealth == true) ScaleHealth();
     }
+    public void DestroyThisMinion()
+    {
 
+        Destroy(this.transform.gameObject);
+
+    }
     public void DoDamage(float damage)
     {
         //use to deal damage to this go
@@ -118,5 +145,22 @@ public class MinionDetails : MonoBehaviour
         if (defaultScaleSizeCurrent < scaleToAimFor) scaleForHealth = false;
 
         //get percentage of current health and scale white accordingly
+    }
+    private void ResetScaleSize()
+    {
+        //ressets scal;e size before anim starts
+        print("RESET SCALE OF MINION BEFORE ANIM");
+        Vector3 defScale = new Vector3(defaultScaleSizeCurrent, defaultScaleSizeCurrent, 1);
+        healthChild.transform.localScale = defScale;
+
+    }
+    private void AnimTriggerEndOfLevel()
+    {
+        //should trigger at end of anim of last enemy
+
+        spawner.TriggerEndLevelBGSplash();//triggers spawner to trigger level to trigger endlevel controller.
+
+        print("trigger end level ui  now");
+
     }
 }

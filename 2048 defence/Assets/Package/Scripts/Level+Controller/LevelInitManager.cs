@@ -116,7 +116,7 @@ public class LevelInitManager : MonoBehaviour
         GridHolder = GameObject.Find("GridHolder");
         levelNumDisplayGO = GameObject.Find("LevelNumDisplay");
         gridUIButtons = GameObject.Find("GridButton");//parent of the 3 grid ui buttons
-        endLevelController = GameObject.Find("LevelEndScreenBackGround").GetComponent<EndLevelController>();
+        endLevelController = GameObject.Find("LevelEndScreen").GetComponent<EndLevelController>();
         
 
         foreach(Transform child in pathwayParentHolder.transform)

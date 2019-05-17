@@ -38,5 +38,18 @@ public class WaveDetails : MonoBehaviour
 
             spawnContrller.CheckIfAllWavesDoneAndMinsDead();
         }
+
+        if (CurrentMinionsInPlay.Count == 1 && minionsSpawned == waveMinionMax + 1)
+        {
+            if (spawnContrller.CheckIfLastWave(WaveNumber))
+            {
+                if (CurrentMinionsInPlay[0].GetComponent<MinionDetails>().lastMinionAlive == false)//to repeat checks if already set as true
+                {
+                    spawnContrller.CheckIfLastMinionAcrossAllWaves();
+                }
+            }
+
+        }
+
     }
 }

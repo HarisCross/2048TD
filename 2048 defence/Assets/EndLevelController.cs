@@ -36,7 +36,13 @@ public class EndLevelController : MonoBehaviour
         currentExportCounter = currExport;
         currentAmountOfTimesGridMoved = currMoves;
 
-        print("end of level Triggered");
+        //print("end of level Triggered");
+
+    }
+    public void TriggerEndLevelBGSplash()
+    {
+        //activate the end level bg splash
+        transform.GetChild(0).transform.gameObject.SetActive(true);
 
     }
 }

@@ -79,6 +79,12 @@ public class SpawnerController : MonoBehaviour
     private void Update()
     {
     }
+    public void TriggerEndLevelBGSplash()
+    {
+
+        levelManager.TriggerEndLevelBGSplash();
+
+    }
     public void CheckIfAllWavesDoneAndMinsDead()
     {
         //called by wave details when all of its minions are dead
@@ -89,6 +95,73 @@ public class SpawnerController : MonoBehaviour
             print("All waves completed for: " + this.transform.gameObject.name);
             levelManager.counterSpawnersCompleted++;
             levelManager.LevelCompeletion();
+        }
+
+    }
+    public bool CheckIfLastWave(int waveNum)
+    {
+
+        if(waveNum + 1 == waveDetailsList.Count)
+        {
+           // print("DETECTED ITS ON LAST WAVE");
+            return true;
+        }
+        else
+        {
+            //print("DETECTED ITS NOT!! ON THE LAST WAVE");
+            return false;
+        }
+    }
+
+    public void CheckIfLastMinionAcrossAllWaves()
+    {
+        //called when 1 minion left in a wave
+        //should check all waves and check if any of those have any left, if so then do nothing else then its last alive and trigger its value on mindetails
+
+        bool isLastAlive = true;
+        List<GameObject> listOfminionsLeft = new List<GameObject>();
+
+        foreach (WaveDetails waveDets in components)
+        {
+
+            //if(waveDets.CurrentMinionsInPlay.Count != 0)//if there is something alive else do nothing and check next waveDets
+            //{
+            //    if (waveDets.CurrentMinionsInPlay.Count == 1)//if 1 alivue, compare to min given.
+            //    {
+            //        if (waveDets.CurrentMinionsInPlay[0].gameObject == lastMinion)// if there is 1 in list and its same as one being checked
+            //        {
+
+
+
+            //        }
+            //        else
+            //        {
+            //            isLastAlive = false;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //more than 1 minion in list so not last alive
+            //        isLastAlive = false;
+
+            //    }
+
+            //}
+            //else
+            //{
+            //    //the wave checked is empty
+            //    isLastAlive = true;
+
+
+            //}
+            listOfminionsLeft.AddRange(waveDets.CurrentMinionsInPlay);
+
+        }
+
+        if(listOfminionsLeft.Count == 1)
+        {
+            //only 1 min alive
+            listOfminionsLeft[0].GetComponent<MinionDetails>().lastMinionAlive = true;
         }
 
     }

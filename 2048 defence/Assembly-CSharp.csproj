@@ -155,17 +155,17 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>C:/Users/haris/Documents/GitHub/2048TD/2048 defence/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/haris/Documents/GitHub/2048TD/2048 defence/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/haris/Documents/GitHub/2048TD/2048 defence/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
-    </Reference>
     <Reference Include="Editor">
       <HintPath>C:/Users/haris/Documents/GitHub/2048TD/2048 defence/Library/ScriptAssemblies/Editor.dll</HintPath>
     </Reference>
     <Reference Include="XiaomiSupport">
       <HintPath>C:/Users/haris/Documents/GitHub/2048TD/2048 defence/Library/ScriptAssemblies/XiaomiSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/haris/Documents/GitHub/2048TD/2048 defence/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.DataPrivacy">
+      <HintPath>C:/Users/haris/Documents/GitHub/2048TD/2048 defence/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>E:/UnityUni/UnityInstall/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
