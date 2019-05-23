@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour
 {
     public int LevelNumber = -1;
     public EndLevelController endLevelController;
+    public MenuLoader menuLoader;
+    public GameObject buttonHolder;
     // private string playPrefsLevelCounter = "playPrefsLevelCounter";
     //  private string playPrefstutorialCompleted = "playPrefstutorialCompleted";
 
@@ -63,10 +65,14 @@ public class LevelManager : MonoBehaviour
         }
 
     }
-    public void TriggerEndLevelBGSplash()
+    public void TriggerEndLevelBGSplash(GameObject min)
     {
-        endLevelController.TriggerEndLevelBGSplash();
+        endLevelController.TriggerEndLevelBGSplash(min);
 
+    }
+    public void TriggerEndLevelStartOfAnim()
+    {
+        menuLoader.HideButtonHolderGO(buttonHolder);
     }
     public void WaveComplete(SpawnerController spawnController, int waveNumber)
     {

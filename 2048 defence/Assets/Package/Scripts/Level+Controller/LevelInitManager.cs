@@ -60,6 +60,7 @@ public class LevelInitManager : MonoBehaviour
     private EndLevelController endLevelController;
     private GameObject gridUIButtons;
     private GameObject levelNumDisplayGO;
+    private MenuLoader menuLoader;
     
 
     private GameObject crosshairsHolder;
@@ -117,6 +118,7 @@ public class LevelInitManager : MonoBehaviour
         levelNumDisplayGO = GameObject.Find("LevelNumDisplay");
         gridUIButtons = GameObject.Find("GridButton");//parent of the 3 grid ui buttons
         endLevelController = GameObject.Find("LevelEndScreen").GetComponent<EndLevelController>();
+        menuLoader = GameObject.Find("DDOLScripts").GetComponent<MenuLoader>();
         
 
         foreach(Transform child in pathwayParentHolder.transform)
@@ -273,6 +275,8 @@ public class LevelInitManager : MonoBehaviour
         levelManager.winBoundariesGridMovements = winBoundariesGridMovements;
         levelManager.winBoundariesGridExports = winBoundariesGridExports;
         levelManager.endLevelController = endLevelController;
+        levelManager.menuLoader = menuLoader;
+        levelManager.buttonHolder = gridsButtons.transform.parent.gameObject;
     }
     private void SpawnSpawner()
     {

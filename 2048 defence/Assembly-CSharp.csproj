@@ -61,7 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\EndLevelController.cs" />
     <Compile Include="Assets\Package\Scripts\2048\GridButton.cs" />
     <Compile Include="Assets\Package\Scripts\2048\GridSpot.cs" />
     <Compile Include="Assets\Package\Scripts\2048\InputController.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="Assets\Package\Scripts\Level+Controller\CountUIDisp.cs" />
     <Compile Include="Assets\Package\Scripts\Level+Controller\DestroyOnContact.cs" />
     <Compile Include="Assets\Package\Scripts\Level+Controller\DontDestroyOnLoad.cs" />
+    <Compile Include="Assets\Package\Scripts\Level+Controller\EndLevelController.cs" />
     <Compile Include="Assets\Package\Scripts\Level+Controller\LevelInitManager.cs" />
     <Compile Include="Assets\Package\Scripts\Level+Controller\LevelManager.cs" />
     <Compile Include="Assets\Package\Scripts\Level+Controller\LevelMenuManager.cs" />

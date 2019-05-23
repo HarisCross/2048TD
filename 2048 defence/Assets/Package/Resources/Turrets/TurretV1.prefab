@@ -409,8 +409,8 @@ MonoBehaviour:
   audioSourceFiring: {fileID: 82387042185775152}
   audioSourceTurning: {fileID: 82739634893057104}
   AMOUNTTOSTARTWITH: 64
-  shotResources: 0
-  costPerShot: 0
+  shotResources: 9999
+  costPerShot: 99
   turretShootingDelay: 1
   turretShootingStartDelay: 1
   CurrentTarget: {fileID: 0}

@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 48235242}
   - component: {fileID: 48235243}
   - component: {fileID: 48235244}
+  - component: {fileID: 48235245}
   m_Layer: 0
   m_Name: DDOLScripts
   m_TagString: Untagged
@@ -286,6 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelNumber: -1
   endLevelController: {fileID: 0}
+  menuLoader: {fileID: 0}
+  buttonHolder: {fileID: 0}
   currentTimeTakenToFinishAllWaves: 0
   timerActiveCountdown: 1
   timerCurrentlyActive: 0
@@ -296,6 +299,21 @@ MonoBehaviour:
   winBoundariesTimeTaken: 
   winBoundariesGridMovements: 
   winBoundariesGridExports: 
+--- !u!114 &48235245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48235240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9dcde47a8212f4a87178e01d37b6a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debugUI: {fileID: 1439963974}
+  buttonHolder: {fileID: 0}
+  tutorialCompleted: 1
 --- !u!1 &90298475
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +393,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1697006656}
+      - m_Target: {fileID: 0}
         m_MethodName: loadLevel3
         m_Mode: 1
         m_Arguments:
@@ -570,7 +588,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1697006656}
+      - m_Target: {fileID: 0}
         m_MethodName: loadLevel2
         m_Mode: 1
         m_Arguments:
@@ -1360,7 +1378,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1697006656}
+      - m_Target: {fileID: 0}
         m_MethodName: loadTutorial
         m_Mode: 1
         m_Arguments:
@@ -1978,7 +1996,7 @@ RectTransform:
   m_Children:
   - {fileID: 1439963975}
   m_Father: {fileID: 2052400217}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2021,57 +2039,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1697006654
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1697006655}
-  - component: {fileID: 1697006656}
-  m_Layer: 5
-  m_Name: MenuLoader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1697006655
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697006654}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2052400217}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1697006656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1697006654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f9dcde47a8212f4a87178e01d37b6a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugUI: {fileID: 1439963974}
-  buttonHolder: {fileID: 1071772526}
-  tutorialCompleted: 1
 --- !u!1 &1713021294
 GameObject:
   m_ObjectHideFlags: 0
@@ -2809,7 +2776,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1697006656}
+      - m_Target: {fileID: 48235245}
         m_MethodName: loadLevel
         m_Mode: 1
         m_Arguments:
@@ -2886,7 +2853,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1697006655}
   - {fileID: 1562193999}
   m_Father: {fileID: 923609140}
   m_RootOrder: 0

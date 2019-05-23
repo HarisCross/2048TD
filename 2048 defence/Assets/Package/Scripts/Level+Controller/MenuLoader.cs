@@ -28,11 +28,11 @@ public class MenuLoader : MonoBehaviour
        // DontDestroyOnLoad(this.transform);
         debugUIText = debugUI.GetComponent<Text>();
 
-        foreach (Transform child in buttonHolder.transform)
-        {
-            buttonsList.Add(child.gameObject);
-            //child.transform.GetComponent<Button>().interactable = false;//todo// re enable when tut is finished. removed to allow easy testing
-        }
+        //foreach (Transform child in buttonHolder.transform)
+        //{
+        //    buttonsList.Add(child.gameObject);
+        //    //child.transform.GetComponent<Button>().interactable = false;//todo// re enable when tut is finished. removed to allow easy testing
+        //}
 
         // UpdateMenu();
         UpdateButtons();
@@ -134,19 +134,19 @@ public class MenuLoader : MonoBehaviour
         LevelLoader(1);//loads teh game scene
     }
 
-    public void loadLevel2()
-    {
-        int levelToLoad = 2;
-        PlayerPrefValues.SetCurrentLevel(levelToLoad);
-        LevelLoader(levelToLoad);
-    }
+    //public void loadLevel2()
+    //{
+    //    int levelToLoad = 2;
+    //    PlayerPrefValues.SetCurrentLevel(levelToLoad);
+    //    LevelLoader(levelToLoad);
+    //}
 
-    public void loadLevel3()
-    {
-        int levelToLoad = 3;
-        PlayerPrefValues.SetCurrentLevel(levelToLoad);
-        LevelLoader(levelToLoad);
-    }
+    //public void loadLevel3()
+    //{
+    //    int levelToLoad = 3;
+    //    PlayerPrefValues.SetCurrentLevel(levelToLoad);
+    //    LevelLoader(levelToLoad);
+    //}
     public void loadTutorial()
     {
         //int levelToLoad = 3;
@@ -181,5 +181,17 @@ public class MenuLoader : MonoBehaviour
 
 
     }
+
+    public void HideButtonHolderGO(GameObject buttonHold)
+    {
+        //trigger animator on button holder to have it move down and hide so its not on screen during end level
+
+        buttonHolder = buttonHold;
+
+        Animator anim = buttonHolder.transform.GetComponent<Animator>();
+        anim.SetTrigger("HideButtonHolderTrigger");
+
+    }
+
 
 }

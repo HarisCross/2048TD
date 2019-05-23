@@ -79,10 +79,15 @@ public class SpawnerController : MonoBehaviour
     private void Update()
     {
     }
-    public void TriggerEndLevelBGSplash()
+    public void TriggerEndLevelBGSplash(GameObject min)
     {
 
-        levelManager.TriggerEndLevelBGSplash();
+        levelManager.TriggerEndLevelBGSplash(min);
+
+    }
+    public void TriggerEndLevelStartOfAnim()
+    {
+        levelManager.TriggerEndLevelStartOfAnim();
 
     }
     public void CheckIfAllWavesDoneAndMinsDead()

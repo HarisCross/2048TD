@@ -149,7 +149,9 @@ public class MinionDetails : MonoBehaviour
     private void ResetScaleSize()
     {
         //ressets scal;e size before anim starts
-        print("RESET SCALE OF MINION BEFORE ANIM");
+      //  print("RESET SCALE OF MINION BEFORE ANIM");
+        scaleForHealth = false;
+        moveSpeed = 0f;
         Vector3 defScale = new Vector3(defaultScaleSizeCurrent, defaultScaleSizeCurrent, 1);
         healthChild.transform.localScale = defScale;
 
@@ -158,9 +160,16 @@ public class MinionDetails : MonoBehaviour
     {
         //should trigger at end of anim of last enemy
 
-        spawner.TriggerEndLevelBGSplash();//triggers spawner to trigger level to trigger endlevel controller.
+        spawner.TriggerEndLevelBGSplash(this.transform.gameObject);//triggers spawner to trigger level to trigger endlevel controller.
 
-        print("trigger end level ui  now");
+      //  print("trigger end level ui  now");
+
+    }
+    private void AnimTriggerStartOfEndOfLevel()
+    {
+        //should trigger at start of anim in order too move down menu as anim plays
+
+        spawner.TriggerEndLevelStartOfAnim();
 
     }
 }
