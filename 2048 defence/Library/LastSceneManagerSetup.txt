@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Package/Scenes/MainMenu.unity
+- path: Assets/Package/Scenes/WIPScene.unity
   isLoaded: 1
   isActive: 1
