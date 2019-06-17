@@ -2,12 +2,8 @@
 
 public class AudioManager : MonoBehaviour
 {
-
     public bool masterAudioSwitch = true /*masterSFXSwitch = true, masterMusicSwitch = true*/;
     //public float masterAudioSwitch = 100, masterSFXSwitch = true, masterMusicSwitch = true;
-
-
-
 
     // Use this for initialization
     private void Start()
@@ -18,7 +14,4 @@ public class AudioManager : MonoBehaviour
     private void Update()
     {
     }
-
-
-
 }

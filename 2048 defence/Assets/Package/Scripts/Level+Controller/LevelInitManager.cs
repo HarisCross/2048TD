@@ -1,28 +1,30 @@
 ﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class LevelInitManager : MonoBehaviour
 {
     //preset values to be used to position the buttons in the right spot and the right size depending on how many buttons are in uset that game
     private Vector3[] GridButtonPosArrayS3 = new[] { new Vector3(-192, -820, 0.08f), new Vector3(90, -820, 0.08f), new Vector3(370, -820, 0.08f) };
-     private float GridButtonPosArrayS3Size = 280F;
+
+    private float GridButtonPosArrayS3Size = 280F;
 
     private Vector3[] GridButtonPosArrayS2 = new[] { new Vector3(-121, -820, 0.08f), new Vector3(299, -820, 0.08f) };
-        private float GridButtonPosArrayS2Size = 420F;
+    private float GridButtonPosArrayS2Size = 420F;
 
     private Vector3[] GridButtonPosArrayS1 = new[] { new Vector3(88, -820, 0.08f) };
-     private float GridButtonPosArrayS1Size = 840F;
+    private float GridButtonPosArrayS1Size = 840F;
 
-    float newScaleSizeForButton;
-    Vector3[] newPosForButton;
-    int newPosForButtonCounter = 0;
-    int counter = 0;
+    private float newScaleSizeForButton;
+    private Vector3[] newPosForButton;
+    private int newPosForButtonCounter = 0;
+    private int counter = 0;
 
     [Header("Turret")]
     // public List<GameObject> turretsGOList = new List<GameObject>();
     public List<Vector3> turretsPosList = new List<Vector3>();
+
     public List<GameObject> turretsGOList = new List<GameObject>();
 
     public GameObject turretHolder;
@@ -31,24 +33,26 @@ public class LevelInitManager : MonoBehaviour
     [Header("Spawner")]
     public List<int> spawnersNumberTospawnList = new List<int>();
 
-  //  public List<Vector3> SpawnerPosList = new List<Vector3>();
+    //  public List<Vector3> SpawnerPosList = new List<Vector3>();
 
     public GameObject enemyGOHolder;
     public GameObject spawnerHolder;
 
     [Header("EndOfMap/Pathways")]
     public List<GameObject> pathwaysList = new List<GameObject>();
+
     public GameObject pathwayParentHolder;
     public GameObject endOfMap;
 
     [Header("2048Grid")]
     public List<GameObject> gridsGOList = new List<GameObject>();
- //   private MainHolderController mainHolderController;
+
+    //   private MainHolderController mainHolderController;
     public List<Vector3> gridPosList = new List<Vector3>();
+
     public GameObject gridsHolder;
 
     public float TimeBetweenGridMovements = 1f;//time between grid movements
-
 
     [Header("VarsToBeUsedToAssign")]
     private GameObject gridsButtons;
@@ -61,7 +65,6 @@ public class LevelInitManager : MonoBehaviour
     private GameObject gridUIButtons;
     private GameObject levelNumDisplayGO;
     private MenuLoader menuLoader;
-    
 
     private GameObject crosshairsHolder;
     // rivate GameObject textUIForTurretHolder;
@@ -69,10 +72,9 @@ public class LevelInitManager : MonoBehaviour
     //public List<GameObject> textUIForTurrets = new List<GameObject>();
 
     [Header("Win Conditions")]//time, grid movements and exports
-
-    public int[] winBoundariesTimeTaken = new int[] { 30, 60, 90 }; //in seconds
-    public int[] winBoundariesGridMovements = new int[] { 60,120,180 }; //amount of swipes used on the grids
-    public int[] winBoundariesGridExports = new int[] { 25,50,75 }; //amount of times a value is exported
+    public int[] winBoundariesTimeTaken = new int[] { 30, 60, 90, 120 }; //in seconds
+    public int[] winBoundariesGridMovements = new int[] { 60, 120, 180, 240 }; //amount of swipes used on the grids
+    public int[] winBoundariesGridExports = new int[] { 25, 50, 75, 100 }; //amount of times a value is exported
 
     // Use this for initialization
     private void Start()
@@ -119,13 +121,10 @@ public class LevelInitManager : MonoBehaviour
         gridUIButtons = GameObject.Find("GridButton");//parent of the 3 grid ui buttons
         endLevelController = GameObject.Find("LevelEndScreen").GetComponent<EndLevelController>();
         menuLoader = GameObject.Find("DDOLScripts").GetComponent<MenuLoader>();
-        
 
-        foreach(Transform child in pathwayParentHolder.transform)
+        foreach (Transform child in pathwayParentHolder.transform)
         {
-
             pathwaysList.Add(child.gameObject);
-
         }
         pathwaysList.Remove(pathwayParentHolder.transform.GetChild(0).gameObject);
 
@@ -138,7 +137,7 @@ public class LevelInitManager : MonoBehaviour
     {
         //for each turret pos spawn a turret at that pos and assign it the variables it needs
         //then spawn the ui needed for it - crosshair, shot counter and button to actiavte its grid
-       // print("turrets spawned");
+        // print("turrets spawned");
 
         foreach (Vector3 loc in turretsPosList)
         {
@@ -168,16 +167,19 @@ public class LevelInitManager : MonoBehaviour
                 newScaleSizeForButton = GridButtonPosArrayS1Size;
                 newPosForButton = GridButtonPosArrayS1;
                 break;
+
             case 2:
                 newScaleSizeForButton = GridButtonPosArrayS2Size;
                 newPosForButton = GridButtonPosArrayS2;
 
                 break;
+
             case 3:
                 newScaleSizeForButton = GridButtonPosArrayS3Size;
                 newPosForButton = GridButtonPosArrayS1;
 
                 break;
+
             default: print("this really shouldnt ever get here"); break;
         }
 
@@ -189,77 +191,71 @@ public class LevelInitManager : MonoBehaviour
 
     private void SpawnGameGrid(GameObject turret)
     {
-
         AddVarsToScripts();
         //for each turret spawn a game grid
         //create button to access the grid and link turret to grid and button
         //assign the grid to the grid controller
         //print("gamegrid spawned");
-        
 
         //foreach(Vector3 newPos in newPosForButton)
         //{
         //    print("new: " +newPos);
         //}
-      //  foreach (Vector3 loc in gridPosList)
-     //   {
-           // GameObject tempGrid = Instantiate(Resources.Load("2048/GameGrid") as GameObject);
-            GameObject tempGrid = Instantiate(Resources.Load("2048/GameGridTest") as GameObject);
+        //  foreach (Vector3 loc in gridPosList)
+        //   {
+        // GameObject tempGrid = Instantiate(Resources.Load("2048/GameGrid") as GameObject);
+        GameObject tempGrid = Instantiate(Resources.Load("2048/GameGridTest") as GameObject);
 
-            tempGrid.transform.name = tempGrid.transform.name +" : " +counter;
-            tempGrid.transform.parent = GridHolder.transform;
-            tempGrid.GetComponent<Manager>().MainHolder = GridHolder.GetComponent<MainHolderController>();
-            tempGrid.GetComponent<Manager>().InpController = GridHolder.GetComponent<InputController>();
-            tempGrid.GetComponent<Manager>().turretChosen = turret;
-            tempGrid.GetComponent<Manager>().levelManager = levelManager;
-            tempGrid.GetComponent<Manager>().BoardNumber = (counter+1);
-            tempGrid.GetComponent<Manager>().centreGridPos = CentreGridPos;
-            tempGrid.GetComponent<Manager>().spawningGridPos = spawningGridPos;
-            tempGrid.GetComponent<Manager>().gridButtonsGO = gridUIButtons;
-            tempGrid.GetComponent<Manager>().BoardNumber = (counter+1);
-           // print("assigned board number: " + (counter + 1));
+        tempGrid.transform.name = tempGrid.transform.name + " : " + counter;
+        tempGrid.transform.parent = GridHolder.transform;
+        tempGrid.GetComponent<Manager>().MainHolder = GridHolder.GetComponent<MainHolderController>();
+        tempGrid.GetComponent<Manager>().InpController = GridHolder.GetComponent<InputController>();
+        tempGrid.GetComponent<Manager>().turretChosen = turret;
+        tempGrid.GetComponent<Manager>().levelManager = levelManager;
+        tempGrid.GetComponent<Manager>().BoardNumber = (counter + 1);
+        tempGrid.GetComponent<Manager>().centreGridPos = CentreGridPos;
+        tempGrid.GetComponent<Manager>().spawningGridPos = spawningGridPos;
+        tempGrid.GetComponent<Manager>().gridButtonsGO = gridUIButtons;
+        tempGrid.GetComponent<Manager>().BoardNumber = (counter + 1);
+        // print("assigned board number: " + (counter + 1));
         GridHolder.GetComponent<MainHolderController>().GridsList.Add(tempGrid);
-              tempGrid.transform.position = spawningGridPos.transform.position ;
+        tempGrid.transform.position = spawningGridPos.transform.position;
 
-            //add listeners to button. ;link button to grid, position over turret grid pos,assign main con to button, pass grid number to button
+        //add listeners to button. ;link button to grid, position over turret grid pos,assign main con to button, pass grid number to button
 
-            GameObject tempButton = Instantiate(Resources.Load("Turrets/OpenGridButton") as GameObject);
-            tempButton.transform.parent = gridsButtons.transform;
-            tempButton.transform.GetChild(0).transform.GetComponent<TextMeshProUGUI>().text = "Open Grid: " + newPosForButtonCounter.ToString();
+        GameObject tempButton = Instantiate(Resources.Load("Turrets/OpenGridButton") as GameObject);
+        tempButton.transform.parent = gridsButtons.transform;
+        tempButton.transform.GetChild(0).transform.GetComponent<TextMeshProUGUI>().text = "Open Grid: " + newPosForButtonCounter.ToString();
         // tempButton.transform.position = turret.transform.GetChild(1).transform.position;
         //  print(newPosForButton[counter]);
-            tempButton.GetComponent<RectTransform>().localPosition = newPosForButton[newPosForButtonCounter];
+        tempButton.GetComponent<RectTransform>().localPosition = newPosForButton[newPosForButtonCounter];
 
+        Vector2 newSize = new Vector2(newScaleSizeForButton, 175);
+        Vector3 newScale = new Vector3(1, 1, 1);
+        tempButton.GetComponent<RectTransform>().sizeDelta = newSize;
+        tempButton.GetComponent<RectTransform>().localScale = newScale;
 
-            Vector2 newSize = new Vector2(newScaleSizeForButton, 175);
-            Vector3 newScale = new Vector3(1, 1,1);
-            tempButton.GetComponent<RectTransform>().sizeDelta = newSize;
-            tempButton.GetComponent<RectTransform>().localScale = newScale;
+        tempButton.GetComponent<GridButton>().mainController = GridHolder.GetComponent<MainHolderController>();
+        tempButton.GetComponent<GridButton>().thisGrid = counter + 1;
 
-            tempButton.GetComponent<GridButton>().mainController = GridHolder.GetComponent<MainHolderController>();
-            tempButton.GetComponent<GridButton>().thisGrid = counter+1;
+        //tempButton.GetComponent<Button>().onClick.AddListener(tempGrid.GetComponent<Manager>().SelectGrid);
 
-            //tempButton.GetComponent<Button>().onClick.AddListener(tempGrid.GetComponent<Manager>().SelectGrid);
+        tempGrid.GetComponent<Manager>().turretActiveButton = tempButton;
+        GridHolder.GetComponent<UIButtonController>().AddGridToList(tempGrid);
 
-            tempGrid.GetComponent<Manager>().turretActiveButton = tempButton;
-            GridHolder.GetComponent<UIButtonController>().AddGridToList(tempGrid);
+        //set up the 3 grid ui buttons,add listener to grid select button
 
-            //set up the 3 grid ui buttons,add listener to grid select button
-
-            gridUIButtons.transform.GetChild(0).transform.GetComponent<Button>().onClick.AddListener(gridsHolder.GetComponent<UIButtonController>().CloseGridButton);
-            gridUIButtons.transform.GetChild(1).transform.GetComponent<Button>().onClick.AddListener(gridsHolder.GetComponent<UIButtonController>().ResetGridButton);
-            gridUIButtons.transform.GetChild(2).transform.GetComponent<Button>().onClick.AddListener(gridsHolder.GetComponent<UIButtonController>().ExportGridButton);
-           // buttonsToSpawnCounter++;
-            counter++;
-            newPosForButtonCounter++;
-      //  }
-
+        gridUIButtons.transform.GetChild(0).transform.GetComponent<Button>().onClick.AddListener(gridsHolder.GetComponent<UIButtonController>().CloseGridButton);
+        gridUIButtons.transform.GetChild(1).transform.GetComponent<Button>().onClick.AddListener(gridsHolder.GetComponent<UIButtonController>().ResetGridButton);
+        gridUIButtons.transform.GetChild(2).transform.GetComponent<Button>().onClick.AddListener(gridsHolder.GetComponent<UIButtonController>().ExportGridButton);
+        // buttonsToSpawnCounter++;
+        counter++;
+        newPosForButtonCounter++;
+        //  }
 
         //TODO::spawn button at correct position using array made, move game grid to below game screen, add function to raise and lower grid on button click,
-
-
-
     }
+
     private void AddVarsToScripts()
     {
         //add ui variables to the grid holder to be used and passed down
@@ -277,23 +273,24 @@ public class LevelInitManager : MonoBehaviour
         levelManager.endLevelController = endLevelController;
         levelManager.menuLoader = menuLoader;
         levelManager.buttonHolder = gridsButtons.transform.parent.gameObject;
+        endLevelController.menuLoader = menuLoader;
+        endLevelController.mapGrids = transform.GetChild(2).gameObject;
     }
+
     private void SpawnSpawner()
     {
         //foreach spawner in list spawn it at corresponding pos in poos list
-       
 
         Object[] prefabList;
         prefabList = Resources.LoadAll("Spawners", typeof(GameObject));///get list of all prefabs in spawner folder
 
         foreach (int num in spawnersNumberTospawnList)
         {
-
             int pathwayChosen = Random.Range(0, pathwaysList.Count);
             GameObject pathwayChosenGO = pathwaysList[pathwayChosen].gameObject;
-           // print("spawner spawned" + num);
+            // print("spawner spawned" + num);
             int spawnerChosen = num;
-           // print("spawned spawner number: " + spawnerChosen);
+            // print("spawned spawner number: " + spawnerChosen);
 
             // print(prefabList[num].name + " to be spawned");
             GameObject tempSpawner = Instantiate(prefabList[spawnerChosen], pathwayChosenGO.transform.GetChild(0).gameObject.transform.position, Quaternion.identity) as GameObject;//use the number given to get that from list made above and spawn using corrosponding vc3 from list
@@ -304,13 +301,11 @@ public class LevelInitManager : MonoBehaviour
             tempSpawner.GetComponent<SpawnerController>().pathWayHolder = pathwayParentHolder;
             tempSpawner.GetComponent<SpawnerController>().enemyGOHolder = enemyGOHolder;
             tempSpawner.transform.parent = spawnerHolder.transform;
-          //  print("spawner spawned");
+            //  print("spawner spawned");
             //assign random pathway to spawner, move spawner pos to first child of pathway
 
-
             tempSpawner.GetComponent<SpawnerController>().pathWayHolder = pathwayChosenGO;
-          //  tempSpawner.transform.position = ;//move spawner to spawner pos of that pathway
-
+            //  tempSpawner.transform.position = ;//move spawner to spawner pos of that pathway
 
             pathwaysList.Remove(pathwayChosenGO);
         }
@@ -319,7 +314,7 @@ public class LevelInitManager : MonoBehaviour
     private void SpawnEndOfMap()
     {
         //mvoe the end of map at the final point in node chain
-      //  print("endofmap spawned");
+        //  print("endofmap spawned");
         GameObject parent;
         parent = endOfMap.transform.parent.transform.gameObject;
 

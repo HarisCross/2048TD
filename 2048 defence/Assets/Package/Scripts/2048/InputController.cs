@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum ItemDir { None, Left, Right, Up, Down }
@@ -8,12 +7,14 @@ public class InputController : MonoBehaviour
 {
     public ItemDir tempDir;
     public MainHolderController mainController;
+
     [SerializeField]
     private LevelInitManager levelInitManager;
 
     [Header("Grid Timer Settings")]
-//  [SerializeField]
-    public float TimeBetweenMovements = 10f;//TODO: Change this 
+    //  [SerializeField]
+    public float TimeBetweenMovements = 10f;//TODO: Change this
+
     [SerializeField]
     private bool gridMovementReady = true;
 
@@ -79,13 +80,12 @@ public class InputController : MonoBehaviour
 
     private void ActiveCountdownTimer()
     {
-        //called to acitvate ienum timer, forces set amount of time wait between inputs to prevent spamming 
+        //called to acitvate ienum timer, forces set amount of time wait between inputs to prevent spamming
         gridMovementReady = false;
-       // Debug.Log("GMR: " + gridMovementReady);
+        // Debug.Log("GMR: " + gridMovementReady);
         StartCoroutine("MovementCountdownTimer", TimeBetweenMovements);
-
-
     }
+
     private IEnumerator MovementCountdownTimer(int time)
     {
         float timer = time;
@@ -93,9 +93,8 @@ public class InputController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.01f);
             timer -= 0.01f;
-          
         }
         gridMovementReady = true;
-       // Debug.Log("GMR: " + gridMovementReady);
+        // Debug.Log("GMR: " + gridMovementReady);
     }
 }

@@ -20,7 +20,7 @@ public class WaveDetails : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-       // minionsToSpawn = Minions.Count;
+        // minionsToSpawn = Minions.Count;
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class WaveDetails : MonoBehaviour
     {
         //called on minion death to check count of currMins, if 0 then they all must be dead or my code is worse than i thought
 
-        if (CurrentMinionsInPlay.Count == 0 && minionsSpawned == waveMinionMax+1)
+        if (CurrentMinionsInPlay.Count == 0 && minionsSpawned == waveMinionMax + 1)
         {
             //  spawnContrller.levelManager.WaveEnded(spawnContrller, spawnContrller.currentWave);
 
@@ -48,8 +48,6 @@ public class WaveDetails : MonoBehaviour
                     spawnContrller.CheckIfLastMinionAcrossAllWaves();
                 }
             }
-
         }
-
     }
 }

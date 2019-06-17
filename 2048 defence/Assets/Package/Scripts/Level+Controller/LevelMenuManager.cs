@@ -27,9 +27,6 @@ public class LevelMenuManager : MonoBehaviour
     //{
     //    PlayerPrefs.SetInt("playPrefsCurrentLevel", 0);
 
-
-
-
     //    SceneManager.LoadScene(0);
     //}
 
@@ -38,7 +35,7 @@ public class LevelMenuManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Scene currScene = SceneManager.GetActiveScene();
         if (currScene.name == "TutScene")

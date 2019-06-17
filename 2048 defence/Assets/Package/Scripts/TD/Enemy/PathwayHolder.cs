@@ -1,19 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PathwayHolder : MonoBehaviour {
+public class PathwayHolder : MonoBehaviour
+{
+    public bool pathwayAssigned = false;
 
-    public bool pathwayAssigned = false; 
+    // Use this for initialization
+    private void Start()
+    {
+    }
 
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Update is called once per frame
+    private void Update()
+    {
+    }
 }

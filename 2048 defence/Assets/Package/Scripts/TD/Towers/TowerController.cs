@@ -191,7 +191,7 @@ public class TowerController : MonoBehaviour
 
         if (shotResources >= costPerShot && CurrentTarget != null)
         {
-          //  print("firing");
+            //  print("firing");
             shotValue = costPerShot;
             shotResources -= costPerShot;
 

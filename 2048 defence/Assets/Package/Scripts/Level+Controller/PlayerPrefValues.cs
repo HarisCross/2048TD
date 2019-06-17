@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerPrefValues : MonoBehaviour {
-
+public class PlayerPrefValues : MonoBehaviour
+{
     [Header("Player Prefs values")]
     public static string playPrefsInitialised = "playPrefsInitialised";
+
     public static string playPrefsLevelCounter = "playPrefsLevelCounter";
     public static string playPrefsCurrentLevel = "playPrefsCurrentLevel";
     public static string playPrefstutorialCompleted = "playPrefstutorialCompleted";
@@ -22,7 +21,6 @@ public class PlayerPrefValues : MonoBehaviour {
 
     public static int BoolToIntConvert(bool val)
     {
-
         if (val)
         {
             return 1;
@@ -31,12 +29,10 @@ public class PlayerPrefValues : MonoBehaviour {
         {
             return 0;
         }
-
     }
 
     public static void SetCurrentLevel(int currLevel)
     {
         PlayerPrefs.SetInt(playPrefsCurrentLevel, currLevel);
-
     }
 }

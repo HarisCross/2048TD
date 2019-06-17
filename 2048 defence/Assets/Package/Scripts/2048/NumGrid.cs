@@ -44,7 +44,7 @@ public class NumGrid : MonoBehaviour
     public void MoveGridVertical(ItemDir Direction)
     {
         //gets passed left or right
-       // print("moving grid vertical: " + Direction);
+        // print("moving grid vertical: " + Direction);
         int[] dir;
 
         if (Direction == ItemDir.Down)//sets order to do the cols in,
@@ -91,7 +91,6 @@ public class NumGrid : MonoBehaviour
                     }
                 }
 
-
                 if (rightUpCol)
                 {
                     for (int u = row; u < 3; u++)
@@ -122,7 +121,7 @@ public class NumGrid : MonoBehaviour
     public void MoveGridHorizontal(ItemDir Direction)
     {
         //gets passed left or right
-      //  print("moving grid horizontal: " + Direction);
+        //  print("moving grid horizontal: " + Direction);
         int[] dir;
 
         if (Direction == ItemDir.Left)//sets order to do the cols in, mvoing grid down

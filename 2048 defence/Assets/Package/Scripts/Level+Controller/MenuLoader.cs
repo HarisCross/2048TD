@@ -9,6 +9,7 @@ public class MenuLoader : MonoBehaviour
     public GameObject buttonHolder;
     private List<GameObject> buttonsList = new List<GameObject>();
     private Text debugUIText;
+
     [SerializeField]
     private bool tutorialCompleted = true;
 
@@ -16,7 +17,7 @@ public class MenuLoader : MonoBehaviour
 
     private AudioManager audioMan;
 
-   // private int  playPrefsCurrentLevel = 0;
+    // private int  playPrefsCurrentLevel = 0;
 
     // Use this for initialization
     private void Awake()
@@ -25,7 +26,7 @@ public class MenuLoader : MonoBehaviour
 
         CheckPlayerPrefs();
 
-       // DontDestroyOnLoad(this.transform);
+        // DontDestroyOnLoad(this.transform);
         debugUIText = debugUI.GetComponent<Text>();
 
         //foreach (Transform child in buttonHolder.transform)
@@ -51,16 +52,14 @@ public class MenuLoader : MonoBehaviour
         {
             //has already initalised
             GetAndApplyPlayerPrefs();
-
         }
         else
         {
             InitialisePlayerPrefValues();
-
         }
-     //   UpdateButtons();
-
+        //   UpdateButtons();
     }
+
     private void GetAndApplyPlayerPrefs()
     {
         //if the values are already made then retreive the values and apply them where neccesary - audio, levels
@@ -68,37 +67,32 @@ public class MenuLoader : MonoBehaviour
         tutorialCompleted = PlayerPrefValues.IntToBoolConvert(PlayerPrefs.GetInt(PlayerPrefValues.playPrefstutorialCompleted));
 
         ////audio
-        if(PlayerPrefs.GetInt("masterAudioSwitch") != 0)
+        if (PlayerPrefs.GetInt("masterAudioSwitch") != 0)
         {
-
             audioMan.masterAudioSwitch = true;
         }
         else
         {
-
             audioMan.masterAudioSwitch = false;
-
         }
-
-    }  
+    }
 
     private void InitialisePlayerPrefValues()
     {
         //if the build is new then create the set of values needed to store data
 
-        PlayerPrefs.SetInt(PlayerPrefValues.playPrefsInitialised,1);
+        PlayerPrefs.SetInt(PlayerPrefValues.playPrefsInitialised, 1);
         PlayerPrefs.SetInt(PlayerPrefValues.playPrefstutorialCompleted, 0);
         PlayerPrefs.SetInt(PlayerPrefValues.playPrefsLevelCounter, CurrentMaxLevel);
         PlayerPrefs.SetInt(PlayerPrefValues.playPrefsCurrentLevel, 0);
-       // print(PlayerPrefs.GetInt(playPrefsLevelCounter));
-       // currentLevel = 0;
-       // debugUIText.text = "created level save counter";
-        
-        ////audio - 1 for true, 0 for false
-        PlayerPrefs.SetInt("masterAudioSwitch",1);
-      //  PlayerPrefs.SetInt("masterSFXSwitch",1);
-      //  PlayerPrefs.SetInt("masterMusicSwitch",1);
+        // print(PlayerPrefs.GetInt(playPrefsLevelCounter));
+        // currentLevel = 0;
+        // debugUIText.text = "created level save counter";
 
+        ////audio - 1 for true, 0 for false
+        PlayerPrefs.SetInt("masterAudioSwitch", 1);
+        //  PlayerPrefs.SetInt("masterSFXSwitch",1);
+        //  PlayerPrefs.SetInt("masterMusicSwitch",1);
     }
 
     private void UpdateButtons()
@@ -111,14 +105,13 @@ public class MenuLoader : MonoBehaviour
 
         for (int i = 0; i < buttonsList.Count; i++)
         {
-           // print(tutorialCompleted + ": tut com");
+            // print(tutorialCompleted + ": tut com");
             //runs through all of buttons list, sets those not <=levelstobeunlocked to none interactable
             if (tutorialCompleted)//only acitvate buttons if ttu has been completed
             {
-
                 if (i < CurrentMaxLevel)
                 {
-                    //unlock 
+                    //unlock
                     //   print("unlocked i: " + i);
                     buttonsList[i].GetComponent<Button>().interactable = true;
                 }
@@ -128,46 +121,28 @@ public class MenuLoader : MonoBehaviour
 
     public void loadLevel()
     {
-        //int levelToLoad = PlayerPrefs.GetInt("playPrefsCurrentLevel");
-        int levelToLoad = 1;
-        PlayerPrefValues.SetCurrentLevel(levelToLoad);
+        //  int levelToLoad = 1;
+        //PlayerPrefValues.SetCurrentLevel(levelToLoad);
         LevelLoader(1);//loads teh game scene
     }
 
-    //public void loadLevel2()
-    //{
-    //    int levelToLoad = 2;
-    //    PlayerPrefValues.SetCurrentLevel(levelToLoad);
-    //    LevelLoader(levelToLoad);
-    //}
-
-    //public void loadLevel3()
-    //{
-    //    int levelToLoad = 3;
-    //    PlayerPrefValues.SetCurrentLevel(levelToLoad);
-    //    LevelLoader(levelToLoad);
-    //}
-    public void loadTutorial()
+    public void loadTutorial()//scene 1 is tutorial, scene 2 is WIP main scene
     {
-        //int levelToLoad = 3;
-        //PlayerPrefValues.SetCurrentLevel(levelToLoad);
-        //LevelLoader(levelToLoad);
         SceneManager.LoadScene(1);
     }
+
     private void LevelLoader(int levelToLoad)
     {
+        print("should load tut level" + levelToLoad);
+        SceneManager.LoadScene(2);
+    }
 
-        //if (tutorialCompleted)
-        //{
-        //    print("should load normal level" + levelToLoad);
-        //    SceneManager.LoadScene(2);
-        //}
-        //else
-        //{
-            print("should load tut level" + levelToLoad);
-            SceneManager.LoadScene(2);
-      //  }
+    public void LoadMainMenu()//save the current level and load the main menu again
+    {
+    }
 
+    public void LoadNextLevel()//update the current level and load the next one
+    {
     }
 
     //pout in func to be called on new scene loaded which uses the pp level number to load the appropriate level prefab
@@ -176,10 +151,6 @@ public class MenuLoader : MonoBehaviour
     {
         //called upon scene change, will coevr screen then load next one, needs another screen to play upon scene load to unconver screen
         //load next level when state of animation being played has changed
-
-
-
-
     }
 
     public void HideButtonHolderGO(GameObject buttonHold)
@@ -190,8 +161,5 @@ public class MenuLoader : MonoBehaviour
 
         Animator anim = buttonHolder.transform.GetComponent<Animator>();
         anim.SetTrigger("HideButtonHolderTrigger");
-
     }
-
-
 }

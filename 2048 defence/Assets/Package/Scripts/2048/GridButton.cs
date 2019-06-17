@@ -7,11 +7,12 @@ public class GridButton : MonoBehaviour
 
     public void ActivateGridbuttons()
     {
-    //    mainController.GridFocused = thisGrid;
+        //    mainController.GridFocused = thisGrid;
         mainController.SetCurrentGrid(thisGrid);
     }
+
     private void Update()
     {
-      //  print("button at: " + this.transform.position);
+        //  print("button at: " + this.transform.position);
     }
 }

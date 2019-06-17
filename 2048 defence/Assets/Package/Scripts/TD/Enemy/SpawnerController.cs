@@ -23,13 +23,16 @@ public class SpawnerController : MonoBehaviour
 
     // [SerializeField]
     public int waveMinionCounter = 0;
+
     public int LevelMinionCounter = 0;
 
     // public WaveDetails[] waveDetailsList;
 
     public int waveMaxCount = 2;//used to end level, its how many waves there should be
+
     [SerializeField]
     private int wavesCompleted = 0;
+
     public int currentWave = 0;
     private int minionToReturnNumber;
     public float timeUntilWavesStart = 2f;//delay from start until first wave starts
@@ -41,8 +44,9 @@ public class SpawnerController : MonoBehaviour
     public LevelManager levelManager;
 
     [Header("SpawnerOptions")]
-   // public int amountToSpawn = 1;//TODO redudndent change to above
+    // public int amountToSpawn = 1;//TODO redudndent change to above
     public bool tutorialSpawner = false;
+
     // [SerializeField]
     // private int amountSpawned = 0;//TODO redudndent change to above
     // public float repeatDelay = 3f;//TODO redudndent change to above
@@ -65,13 +69,10 @@ public class SpawnerController : MonoBehaviour
         {
             //infinite wave spawner
             InvokeRepeating("StartInfiniteWaves", timeUntilWavesStart, timeBetweenWaves);
-
-
         }
         else
         {
             InvokeRepeating("StartWave", timeUntilWavesStart, timeBetweenWaves);
-
         }
     }
 
@@ -79,36 +80,35 @@ public class SpawnerController : MonoBehaviour
     private void Update()
     {
     }
+
     public void TriggerEndLevelBGSplash(GameObject min)
     {
-
         levelManager.TriggerEndLevelBGSplash(min);
-
     }
+
     public void TriggerEndLevelStartOfAnim()
     {
         levelManager.TriggerEndLevelStartOfAnim();
-
     }
+
     public void CheckIfAllWavesDoneAndMinsDead()
     {
         //called by wave details when all of its minions are dead
-        wavesCompleted+=1;
+        wavesCompleted += 1;
 
-        if(wavesCompleted == waveMaxCount)
+        if (wavesCompleted == waveMaxCount)
         {
             print("All waves completed for: " + this.transform.gameObject.name);
             levelManager.counterSpawnersCompleted++;
             levelManager.LevelCompeletion();
         }
-
     }
+
     public bool CheckIfLastWave(int waveNum)
     {
-
-        if(waveNum + 1 == waveDetailsList.Count)
+        if (waveNum + 1 == waveDetailsList.Count)
         {
-           // print("DETECTED ITS ON LAST WAVE");
+            // print("DETECTED ITS ON LAST WAVE");
             return true;
         }
         else
@@ -128,16 +128,12 @@ public class SpawnerController : MonoBehaviour
 
         foreach (WaveDetails waveDets in components)
         {
-
             //if(waveDets.CurrentMinionsInPlay.Count != 0)//if there is something alive else do nothing and check next waveDets
             //{
             //    if (waveDets.CurrentMinionsInPlay.Count == 1)//if 1 alivue, compare to min given.
             //    {
             //        if (waveDets.CurrentMinionsInPlay[0].gameObject == lastMinion)// if there is 1 in list and its same as one being checked
             //        {
-
-
-
             //        }
             //        else
             //        {
@@ -157,26 +153,24 @@ public class SpawnerController : MonoBehaviour
             //    //the wave checked is empty
             //    isLastAlive = true;
 
-
             //}
             listOfminionsLeft.AddRange(waveDets.CurrentMinionsInPlay);
-
         }
 
-        if(listOfminionsLeft.Count == 1)
+        if (listOfminionsLeft.Count == 1)
         {
             //only 1 min alive
             listOfminionsLeft[0].GetComponent<MinionDetails>().lastMinionAlive = true;
         }
-
     }
+
     private void StartWave()
     {
         levelManager.AcitvateLevelTimer();
         if (currentWave == waveMaxCount)
         {
             CancelInvoke("StartWave");
-          //  print("finished waves");
+            //  print("finished waves");
             //this spawner has finished all the waves assigned to it
             return;
         }
@@ -190,7 +184,6 @@ public class SpawnerController : MonoBehaviour
         currWaveDetails = waveDetailsList[currentWave];
         currentWave++;
         waveMinionCounter = 0;
-        
 
         float waveStartDelay = currWaveDetails.waveStartDelay;
         float spawnMinionDelay = currWaveDetails.spawnMinionDelay;
@@ -198,6 +191,7 @@ public class SpawnerController : MonoBehaviour
         minionToReturnNumber = waveMinionCounter;
         InvokeRepeating("SpawnEnemy", waveStartDelay, spawnMinionDelay);
     }
+
     private void StartInfiniteWaves()
     {
         print("starting infinite waves");
@@ -213,9 +207,8 @@ public class SpawnerController : MonoBehaviour
         // float minionSpawnMax = currWaveDetails.waveStartDelay;
         minionToReturnNumber = waveMinionCounter;
         InvokeRepeating("SpawnMinionInfiniteWave", waveStartDelay, spawnMinionDelay);
-
-
     }
+
     private GameObject GetMinionToSpawn()
     {
         //get a minion from the current wave minions, go sequentially to allow for specific waves of enemys.
@@ -269,6 +262,7 @@ public class SpawnerController : MonoBehaviour
         LevelMinionCounter = currWaveDetails.CurrentMinionsInPlay.Count;
         minionToReturnNumber++;
     }
+
     private void SpawnMinionInfiniteWave()
     {
         print("spawning infinties waves");
@@ -276,7 +270,6 @@ public class SpawnerController : MonoBehaviour
         {
             CancelInvoke("SpawnMinionInfiniteWave");
 
-           
             return;
         }
         //spawn enemy if amount spawned is less than amount to spawn
@@ -299,8 +292,8 @@ public class SpawnerController : MonoBehaviour
 
         waveMinionCounter++;
         minionToReturnNumber++;
-
     }
+
     public void UpdateMinionTarget(GameObject minion)
     {
         //itterate through all minions and update thier target pos to the next one in array
@@ -310,16 +303,13 @@ public class SpawnerController : MonoBehaviour
         MinionDetails tempMinDetails = minion.GetComponent<MinionDetails>();
 
         tempMinDetails.StartPosition = minion.transform.position;
-        if(tempMinDetails.CurrentNode + 1== pathway.Length)//when on last node change current to start to allow enemies to continue around
+        if (tempMinDetails.CurrentNode + 1 == pathway.Length)//when on last node change current to start to allow enemies to continue around
         {
-
             tempMinDetails.CurrentNode = 0;
-
         }
-      //  print(tempMinDetails.CurrentNode + " : " + pathway.Length);
+        //  print(tempMinDetails.CurrentNode + " : " + pathway.Length);
         tempMinDetails.NextPosition = pathway[tempMinDetails.CurrentNode + 1].gameObject.transform.position;
         tempMinDetails.CurrentNode++;
-
 
         tempMinDetails.timer = 0f;
 

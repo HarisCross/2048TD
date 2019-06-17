@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MainHolderController : MonoBehaviour
 {
@@ -35,6 +35,7 @@ public class MainHolderController : MonoBehaviour
         //    interactButtonsHolder.SetActive(true);
         //}
     }
+
     public void SetCurrentGrid(int newGrid)
     {
         //if(GridFocused == 0)
@@ -49,14 +50,14 @@ public class MainHolderController : MonoBehaviour
         //}
         //  GridFocused = newGrid;
 
-       // print("actived SetCurrentGrid");
+        // print("actived SetCurrentGrid");
 
         if (AnimationOccuring) return;
         if (GridsList.Count == 0) return;
 
         if (interactButtonsOpen)
         {
-          //  print("should close menu");
+            //  print("should close menu");
 
             ///interactButtonsHolder.GetComponent<Animator>().Play("CloseGridButton");
             //interactButtonsHolder.GetComponent<Animator>().SetBool("MenuActiveState", false);
@@ -67,30 +68,23 @@ public class MainHolderController : MonoBehaviour
         {
             // interactButtonsHolder.GetComponent<Animator>().Play("OpenGridButton");
 
-          //  print("Should open menu");
+            //  print("Should open menu");
 
             //interactButtonsHolder.GetComponent<Animator>().SetBool("MenuActiveState", true);
             //interactButtonsHolder.GetComponent<Animator>().SetTrigger("MenuActiveStateTrigger");
             interactButtonsOpen = true;
-
         }
-
 
         if (GridFocused == 0)// if no grid open then open using param else close open grid
         {
             //print("open grid");
-            GridsList[newGrid-1].GetComponent<Manager>().SelectGrid();
+            GridsList[newGrid - 1].GetComponent<Manager>().SelectGrid();
             GridFocused = newGrid;
-
-
-
         }
         else
         {
-
-            GridsList[GridFocused-1].GetComponent<Manager>().UnselectGrid();
+            GridsList[GridFocused - 1].GetComponent<Manager>().UnselectGrid();
             GridFocused = 0;
-
         }
 
         //if (GridFocused == newGrid)
@@ -100,6 +94,5 @@ public class MainHolderController : MonoBehaviour
         //   // print("close grid");
 
         //}
-
     }
 }
