@@ -2,12 +2,17 @@
 
 public class PlayerPrefValues : MonoBehaviour
 {
+    //list of names used by various other scripts for creation and checking off the PP values
     [Header("Player Prefs values")]
-    public static string playPrefsInitialised = "playPrefsInitialised";
+    public static string bPlayPrefsInitialised = "bplayPrefsInitialised";
 
-    public static string playPrefsLevelCounter = "playPrefsLevelCounter";
-    public static string playPrefsCurrentLevel = "playPrefsCurrentLevel";
-    public static string playPrefstutorialCompleted = "playPrefstutorialCompleted";
+    public static string iPlayPrefsLevelCounter = "iPlayPrefsLevelCounter";//highest level completed
+    //[SerializeField]
+    //public static string iPlayPrefsCurrentLevel = "iPlayPrefsCurrentLevel";//current level being loaded
+
+    [Header("Tutorial settings")]
+    public static string bPlayPrefstutorialCompleted = "bPlayPrefstutorialCompleted";// 0 if not completed, if 0 then check next value. 1 if completed so mve onto chcking levels
+    public static string bPlayPrefstutorialStage = "iplayPrefstutorialCompleted"; //will hold number to mark progress throughout the 3 levels, if 0 then allow only tut 1, if 1 done then allow 2, if 3 done then change above bool
 
     public static bool IntToBoolConvert(int val)
     {
@@ -31,8 +36,8 @@ public class PlayerPrefValues : MonoBehaviour
         }
     }
 
-    public static void SetCurrentLevel(int currLevel)
-    {
-        PlayerPrefs.SetInt(playPrefsCurrentLevel, currLevel);
-    }
+    //public static void SetCurrentLevel(int currLevel)
+    //{
+    //    PlayerPrefs.SetInt(iPlayPrefsCurrentLevel, currLevel);
+    //}
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515213135239677456}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BGLeftScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4515213135293250625}
   - component: {fileID: 4515213135293250627}
   - component: {fileID: 4515213135293250624}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: MiddleGreenSolidImage
   m_TagString: UI
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 4515213135378483370}
   - component: {fileID: 4515213135378483372}
   - component: {fileID: 4515213135378483373}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 4515213135416718526}
   - component: {fileID: 4515213135416718656}
   - component: {fileID: 4515213135416718657}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515213135452326023}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BGRightScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 4515213135462202095}
   - component: {fileID: 4515213135462202092}
   - component: {fileID: 4515213135462202093}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,17 +393,20 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 4515213135462202092}
@@ -432,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515213135487682189}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: LevelEndSlides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +473,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515213135674472432}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: LevelEndScreenBackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +512,7 @@ GameObject:
   - component: {fileID: 4515213135692665077}
   - component: {fileID: 4515213135692665079}
   - component: {fileID: 4515213135692665076}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: TextMeshPro Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,8 +568,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Main Menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -599,7 +602,6 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_textAlignment: 514
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -626,6 +628,7 @@ MonoBehaviour:
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
@@ -640,12 +643,9 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
-  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 4515213135898073675}
   - component: {fileID: 4515213135898073672}
   - component: {fileID: 4515213135898073673}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -756,10 +756,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515213136357571817}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BGRight
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 4515213136460789672}
   - component: {fileID: 4515213136460789673}
   - component: {fileID: 4515213136460789670}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +885,7 @@ GameObject:
   - component: {fileID: 4515213136476160447}
   - component: {fileID: 4515213136476167745}
   - component: {fileID: 4515213136476160446}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -959,7 +959,7 @@ GameObject:
   - component: {fileID: 4515213136488671980}
   - component: {fileID: 4515213136488671982}
   - component: {fileID: 4515213136488671983}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: RightGreenSolidImage
   m_TagString: UI
   m_Icon: {fileID: 0}
@@ -1031,7 +1031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515213136517881898}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BGBottomButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1069,10 +1069,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515213136576448332}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BGLeft
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1106,10 +1106,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515213136647953586}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BGMiddle
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1146,7 +1146,7 @@ GameObject:
   - component: {fileID: 4515213136872495835}
   - component: {fileID: 4515213136872495832}
   - component: {fileID: 4515213136872495833}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Button (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,17 +1233,20 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 4515213136872495832}
@@ -1263,7 +1266,7 @@ GameObject:
   - component: {fileID: 4515213136877840835}
   - component: {fileID: 4515213136877840837}
   - component: {fileID: 4515213136877840834}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Base Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1377,16 +1380,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseImage: {fileID: 4515213136877840832}
+  mapGrids: {fileID: 0}
   levelEndSlides: {fileID: 4515213135487682186}
   menuLoader: {fileID: 0}
   leftImage: {fileID: 4515213137325046141}
   MiddleImage: {fileID: 4515213135293251518}
   RightImage: {fileID: 4515213136488671981}
   intHeightVars:
-  - -999
-  - -666
-  - -333
-  - 0
+  - -251
+  - -585
+  - -917
+  - -1250
+  testingValues:
+  - 75
+  - 62.5
+  - 150
 --- !u!95 &4515213136890473816
 Animator:
   serializedVersion: 3
@@ -1415,7 +1423,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4515213136945359722}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BGMiddleScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1453,7 +1461,7 @@ GameObject:
   - component: {fileID: 4515213137104512983}
   - component: {fileID: 4515213137104512985}
   - component: {fileID: 4515213137104512982}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1527,7 +1535,7 @@ GameObject:
   - component: {fileID: 4515213137127495387}
   - component: {fileID: 4515213137127495389}
   - component: {fileID: 4515213137127495386}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: TextMeshPro Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1583,8 +1591,8 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: Next Level
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1617,7 +1625,6 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_textAlignment: 514
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -1644,6 +1651,7 @@ MonoBehaviour:
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
@@ -1658,12 +1666,9 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
-  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -1688,7 +1693,7 @@ GameObject:
   - component: {fileID: 4515213137306831158}
   - component: {fileID: 4515213137306831159}
   - component: {fileID: 4515213137306831156}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1776,7 +1781,7 @@ GameObject:
   - component: {fileID: 4515213137325046140}
   - component: {fileID: 4515213137325046142}
   - component: {fileID: 4515213137325046143}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: LeftGreenSolidImage
   m_TagString: UI
   m_Icon: {fileID: 0}
@@ -1799,8 +1804,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -999}
-  m_SizeDelta: {x: 260, y: 1000}
+  m_AnchoredPosition: {x: 0, y: -1250}
+  m_SizeDelta: {x: 260, y: 1500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4515213137325046142
 CanvasRenderer:

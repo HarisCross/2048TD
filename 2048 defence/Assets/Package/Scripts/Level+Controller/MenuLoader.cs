@@ -7,15 +7,21 @@ public class MenuLoader : MonoBehaviour
 {
     public GameObject debugUI;
     public GameObject buttonHolder;
-    private List<GameObject> buttonsList = new List<GameObject>();
+    //public GameObject mainLevelLoadButton;
+    public List<Button> buttonsList = new List<Button>();
     private Text debugUIText;
 
-    [SerializeField]
-    private bool tutorialCompleted = true;
 
-    private int CurrentMaxLevel = 0;//-1 means not obtained value yet
+    [Header("Obtained player pref values")]
+    [SerializeField]
+    private bool bTutorialCompleted = true;
+    public int tutorialcurrentStage = -1;
+    [SerializeField]
+
+    private int currentLevelCompleted = 0;//-1 means not obtained value yet
 
     private AudioManager audioMan;
+    private LevelMenuManager levelMenuManager;
 
     // private int  playPrefsCurrentLevel = 0;
 
@@ -23,6 +29,7 @@ public class MenuLoader : MonoBehaviour
     private void Awake()
     {
         audioMan = GameObject.Find("DontDestroyOnLoad").transform.GetChild(0).gameObject.GetComponent<AudioManager>();
+        levelMenuManager = transform.GetComponent<LevelMenuManager>();
 
         CheckPlayerPrefs();
 
@@ -36,7 +43,7 @@ public class MenuLoader : MonoBehaviour
         //}
 
         // UpdateMenu();
-        UpdateButtons();
+        UpdateTutorialButtons();
     }
 
     // Update is called once per frame
@@ -48,13 +55,15 @@ public class MenuLoader : MonoBehaviour
     {
         //check if the build has already initalised the needed player prefs values
 
-        if (PlayerPrefs.HasKey(PlayerPrefValues.playPrefsInitialised))
+        if (PlayerPrefs.GetInt(PlayerPrefValues.bPlayPrefsInitialised) == 1)
         {
+            print("grabbing player pref valeus already made");
             //has already initalised
             GetAndApplyPlayerPrefs();
         }
         else
         {
+            print("initialising pp values");
             InitialisePlayerPrefValues();
         }
         //   UpdateButtons();
@@ -63,88 +72,121 @@ public class MenuLoader : MonoBehaviour
     private void GetAndApplyPlayerPrefs()
     {
         //if the values are already made then retreive the values and apply them where neccesary - audio, levels
-        CurrentMaxLevel = PlayerPrefs.GetInt(PlayerPrefValues.playPrefsLevelCounter);
-        tutorialCompleted = PlayerPrefValues.IntToBoolConvert(PlayerPrefs.GetInt(PlayerPrefValues.playPrefstutorialCompleted));
+        bTutorialCompleted = PlayerPrefValues.IntToBoolConvert(PlayerPrefs.GetInt(PlayerPrefValues.bPlayPrefstutorialCompleted));
 
-        ////audio
-        if (PlayerPrefs.GetInt("masterAudioSwitch") != 0)
+        if (bTutorialCompleted == false)
         {
-            audioMan.masterAudioSwitch = true;
+            //if tutorial not done then get the tutorial current stage
+
+            tutorialcurrentStage = PlayerPrefs.GetInt(PlayerPrefValues.bPlayPrefstutorialStage);
+
         }
-        else
-        {
-            audioMan.masterAudioSwitch = false;
-        }
+
+
+
+        currentLevelCompleted = PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter);
+
     }
 
     private void InitialisePlayerPrefValues()
     {
         //if the build is new then create the set of values needed to store data
 
-        PlayerPrefs.SetInt(PlayerPrefValues.playPrefsInitialised, 1);
-        PlayerPrefs.SetInt(PlayerPrefValues.playPrefstutorialCompleted, 0);
-        PlayerPrefs.SetInt(PlayerPrefValues.playPrefsLevelCounter, CurrentMaxLevel);
-        PlayerPrefs.SetInt(PlayerPrefValues.playPrefsCurrentLevel, 0);
-        // print(PlayerPrefs.GetInt(playPrefsLevelCounter));
-        // currentLevel = 0;
-        // debugUIText.text = "created level save counter";
+        PlayerPrefs.SetInt(PlayerPrefValues.bPlayPrefsInitialised, 1);
 
-        ////audio - 1 for true, 0 for false
-        PlayerPrefs.SetInt("masterAudioSwitch", 1);
-        //  PlayerPrefs.SetInt("masterSFXSwitch",1);
-        //  PlayerPrefs.SetInt("masterMusicSwitch",1);
+        PlayerPrefs.SetInt(PlayerPrefValues.bPlayPrefstutorialCompleted, 1);//TODO  : CHANGE BEFORE RELEASE AS SHOULD BE 0, THIS IS 1 TO ALLOW FOR QUICK TESTINGS
+        PlayerPrefs.SetInt(PlayerPrefValues.bPlayPrefstutorialStage, 1);
+
+        PlayerPrefs.SetInt(PlayerPrefValues.iPlayPrefsLevelCounter, 1);
+       // PlayerPrefs.SetInt(PlayerPrefValues.iPlayPrefsCurrentLevel, 0);
+
+
+
     }
 
-    private void UpdateButtons()
+    private void UpdateTutorialButtons()
     {
-        //UpdateMenu();
-        //to be called and run through each button while only activating those which are under the level counter
+            //get the pp values for tutorial and activate or deactivate all the buttons depnding on values obtianed
 
-        //int levelsToBeUnblocked = (currentLevel );
-        // print(levelsToBeUnblocked);
-
-        for (int i = 0; i < buttonsList.Count; i++)
+        if(PlayerPrefs.GetInt(PlayerPrefValues.bPlayPrefstutorialCompleted) == 1)
         {
-            // print(tutorialCompleted + ": tut com");
-            //runs through all of buttons list, sets those not <=levelstobeunlocked to none interactable
-            if (tutorialCompleted)//only acitvate buttons if ttu has been completed
-            {
-                if (i < CurrentMaxLevel)
-                {
-                    //unlock
-                    //   print("unlocked i: " + i);
-                    buttonsList[i].GetComponent<Button>().interactable = true;
-                }
-            }
+            print("tut IS done, assigning buttons accordingly");
+
+            //if the tutorial has been completed
+            buttonsList[0].interactable = true;
+            buttonsList[1].interactable = false;
+            buttonsList[2].interactable = false;
+            buttonsList[3].interactable = false;
+
+
         }
+        else
+        {
+            print("tut NOT done, assigning buttons accordingly");
+            //if the tutorial hasnt been completed
+            buttonsList[0].interactable = false;
+             buttonsList[1].interactable = true;
+
+            int tutLevelsCompleted = PlayerPrefs.GetInt(PlayerPrefValues.bPlayPrefstutorialStage);
+            //int tutLevelsCompleted = 2;
+
+            switch (tutLevelsCompleted)
+            {
+                case 1:
+                    //buttonsList[1].interactable = false;
+                    buttonsList[2].interactable = true;
+                    break;
+                case 2:
+                   // buttonsList[1].interactable = false;
+                    buttonsList[2].interactable = true;
+                    buttonsList[3].interactable = true;
+                    break;
+
+                case 0:break;
+                default: break;
+
+            }
+
+
+        }
+
     }
 
-    public void loadLevel()
+    public void loadNextLevel()
     {
-        //  int levelToLoad = 1;
-        //PlayerPrefValues.SetCurrentLevel(levelToLoad);
-        LevelLoader(1);//loads teh game scene
+          int levelToLoad = (PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter) + 3);//add 3 so when passed to level assigner it loads the game levels, not tut levels as tut levels are numbered 1-3 for this purpose
+
+        LevelLoader(levelToLoad);//loads teh game scene
     }
 
-    public void loadTutorial()//scene 1 is tutorial, scene 2 is WIP main scene
+    public void loadTutorial1()//scene 1 is tutorial, scene 2 is WIP main scene
     {
-        SceneManager.LoadScene(1);
+        int levelToLoad = 1;
+        LevelLoader(levelToLoad);
+    }
+    public void loadTutorial2()//scene 1 is tutorial, scene 2 is WIP main scene
+    {
+        int levelToLoad = 2;
+        LevelLoader(levelToLoad);
+    }
+    public void loadTutorial3()//scene 1 is tutorial, scene 2 is WIP main scene
+    {
+        int levelToLoad = 3;
+        LevelLoader(levelToLoad);
     }
 
     private void LevelLoader(int levelToLoad)
     {
-        print("should load tut level" + levelToLoad);
+        // print("should load tut level" + levelToLoad);
+        levelMenuManager.AssignNextLevelToLoad(levelToLoad);
+
         SceneManager.LoadScene(2);
     }
 
     public void LoadMainMenu()//save the current level and load the main menu again
     {
+        SceneManager.LoadScene(1);
     }
-
-    public void LoadNextLevel()//update the current level and load the next one
-    {
-    }
-
     //pout in func to be called on new scene loaded which uses the pp level number to load the appropriate level prefab
 
     private void PlayLevelChangeAnimation()

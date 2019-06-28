@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LevelInitManager : MonoBehaviour
 {
+    public int LevelNumberOfPrefab = -1;
+
     //preset values to be used to position the buttons in the right spot and the right size depending on how many buttons are in uset that game
     private Vector3[] GridButtonPosArrayS3 = new[] { new Vector3(-192, -820, 0.08f), new Vector3(90, -820, 0.08f), new Vector3(370, -820, 0.08f) };
 
@@ -73,6 +75,7 @@ public class LevelInitManager : MonoBehaviour
 
     [Header("Win Conditions")]//time, grid movements and exports
     public int[] winBoundariesTimeTaken = new int[] { 30, 60, 90, 120 }; //in seconds
+
     public int[] winBoundariesGridMovements = new int[] { 60, 120, 180, 240 }; //amount of swipes used on the grids
     public int[] winBoundariesGridExports = new int[] { 25, 50, 75, 100 }; //amount of times a value is exported
 
@@ -275,6 +278,8 @@ public class LevelInitManager : MonoBehaviour
         levelManager.buttonHolder = gridsButtons.transform.parent.gameObject;
         endLevelController.menuLoader = menuLoader;
         endLevelController.mapGrids = transform.GetChild(2).gameObject;
+        levelManager.LevelNumber = LevelNumberOfPrefab;
+        endLevelController.menuLoader = menuLoader;
     }
 
     private void SpawnSpawner()

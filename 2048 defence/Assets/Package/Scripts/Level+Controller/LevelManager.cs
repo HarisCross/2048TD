@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     public EndLevelController endLevelController;
     public MenuLoader menuLoader;
     public GameObject buttonHolder;
+    private bool endTimer = false;
     // private string playPrefsLevelCounter = "playPrefsLevelCounter";
     //  private string playPrefstutorialCompleted = "playPrefstutorialCompleted";
 
@@ -55,6 +56,7 @@ public class LevelManager : MonoBehaviour
 
     public void LevelCompeletion()
     {
+        FinishLevelSuccess();
         if (counterSpawnersCompleted == amountOfSpawners)
         {
             //all spawners have finihsed thier waves hence the level is
@@ -80,12 +82,24 @@ public class LevelManager : MonoBehaviour
 
         //  print(spawnController.transform.gameObject + " ended wave by time limit: " + waveNumber);
     }
+    public void SetCurrentLevel()
+    {
+        //called upon level start to set the current level in playerprefs
 
+    }
     public void FinishLevelSuccess()
     {
         //to be called upon wave completion
+        // PlayerPrefs.SetInt(PlayerPrefValues.iPlayPrefsLevelCounter, LevelNumber);
+        endTimer = true;
 
-        PlayerPrefs.SetInt(PlayerPrefValues.playPrefsLevelCounter, LevelNumber);
+        //check if level just done is higher then previous max level, if so then change the previous max level compelted
+
+        if(PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter) < LevelNumber)
+        {
+            print("pp level counter set to: " + LevelNumber + " from: " + PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter));
+            PlayerPrefs.SetInt(PlayerPrefValues.bPlayPrefstutorialCompleted, LevelNumber);
+        }
     }
 
     public void FinishLevelFail()
@@ -95,10 +109,6 @@ public class LevelManager : MonoBehaviour
         //   PlayerPrefs.SetInt(playPrefsLevelCounter, LevelNumber);
     }
 
-    public void CompleteTutorialLevel()
-    {
-        PlayerPrefs.SetInt(PlayerPrefValues.playPrefstutorialCompleted, 1);
-    }
 
     public void IncrementExportCounter()
     {
@@ -131,6 +141,7 @@ public class LevelManager : MonoBehaviour
             //System.Math.Round(currentTimeTakenToFinishAllWaves, 2);
 
             currentTimeTakenToFinishAllWaves = (float)System.Math.Round(tempFloat, 2);
+            if (endTimer) break;
         }
     }
 

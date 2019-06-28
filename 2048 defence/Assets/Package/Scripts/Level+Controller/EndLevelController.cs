@@ -31,8 +31,8 @@ public class EndLevelController : MonoBehaviour
     public GameObject RightImage;
 
     [Header("Other")]
-   /// public float[] intHeightVars = new float[] { -999f, -666f, -333f, 0f };//lowest to heighset
-    public float[] intHeightVars = new float[] { -251f,-584f,-917f,-1250f };//lowest to heighset
+    /// public float[] intHeightVars = new float[] { -999f, -666f, -333f, 0f };//lowest to heighset
+    public float[] intHeightVars = new float[] { -251f, -584f, -917f, -1250f };//highest to lowest
 
     [Header("Testing")]
     public float[] testingValues = new float[] { 75f, 62.5f, 150f };//time taken,grid exports, grid movements
@@ -73,12 +73,11 @@ public class EndLevelController : MonoBehaviour
 
         baseImage.GetComponent<Image>().color = enemy.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color;
     }
+
     private void DisableObjects()
     {
         //disables the objects on screen in order to show end level without things moving or showing over
         mapGrids.SetActive(false);
-
-
     }
 
     public void ActivateEndingSlides()
@@ -94,7 +93,7 @@ public class EndLevelController : MonoBehaviour
     {
         //use time given and compare to time array and move the according background up cerain amount depending on score percentage
 
-      //  float lowBoundary, highBoundary;// find out what boundarys the score given is between
+        //  float lowBoundary, highBoundary;// find out what boundarys the score given is between
         float returnHeightToMoveToo;
 
         //if (currentValueForSection > arrayAssociatedWithCurrValue[3])//is time taken above the LOWEST boundary
@@ -136,18 +135,10 @@ public class EndLevelController : MonoBehaviour
 
         ///////////////////////////////////////
 
-
-
-
-
-
-
-
         if (currentValueForSection < arrayAssociatedWithCurrValue[0])// above 3 stars
         {
-
             returnHeightToMoveToo = intHeightVars[0];
-            print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to three stars" + " to between " + arrayAssociatedWithCurrValue[1] + " and " + arrayAssociatedWithCurrValue[2] + " moving filler to height: " + returnHeightToMoveToo);
+            // print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to three stars" + " to between " + arrayAssociatedWithCurrValue[1] + " and " + arrayAssociatedWithCurrValue[2] + " moving filler to height: " + returnHeightToMoveToo);
 
             StartCoroutine(RaiseImageGivenByFloatGiven(imageToMove, returnHeightToMoveToo));
             return;
@@ -155,19 +146,17 @@ public class EndLevelController : MonoBehaviour
 
         if (currentValueForSection <= arrayAssociatedWithCurrValue[1])//on star 3
         {
+            returnHeightToMoveToo = ReturnHeightToRaiseTheImageToo(currentValueForSection, arrayAssociatedWithCurrValue[0], arrayAssociatedWithCurrValue[1], intHeightVars[1]);
+            // print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to between " + arrayAssociatedWithCurrValue[1] + " and " + arrayAssociatedWithCurrValue[2] + " moving filler to height: " + returnHeightToMoveToo);
 
-            returnHeightToMoveToo = ReturnHeightToRaiseTheImageToo(currentValueForSection, arrayAssociatedWithCurrValue[1], arrayAssociatedWithCurrValue[0], intHeightVars[1]);
-            print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to between " + arrayAssociatedWithCurrValue[1] + " and " + arrayAssociatedWithCurrValue[2] + " moving filler to height: " + returnHeightToMoveToo);
-
-            StartCoroutine(RaiseImageGivenByFloatGiven(imageToMove, returnHeightToMoveToo)); 
+            StartCoroutine(RaiseImageGivenByFloatGiven(imageToMove, returnHeightToMoveToo));
             return;
         }
 
         if (currentValueForSection <= arrayAssociatedWithCurrValue[2])//on star 2
         {
-
-            returnHeightToMoveToo = ReturnHeightToRaiseTheImageToo(currentValueForSection, arrayAssociatedWithCurrValue[2], arrayAssociatedWithCurrValue[1], intHeightVars[2]);
-            print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to between " + arrayAssociatedWithCurrValue[0] + " and " + arrayAssociatedWithCurrValue[1] + " moving filler to height: " + returnHeightToMoveToo);
+            returnHeightToMoveToo = ReturnHeightToRaiseTheImageToo(currentValueForSection, arrayAssociatedWithCurrValue[1], arrayAssociatedWithCurrValue[2], intHeightVars[2]);
+            // print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to between " + arrayAssociatedWithCurrValue[0] + " and " + arrayAssociatedWithCurrValue[1] + " moving filler to height: " + returnHeightToMoveToo);
 
             StartCoroutine(RaiseImageGivenByFloatGiven(imageToMove, returnHeightToMoveToo));
             return;
@@ -175,101 +164,95 @@ public class EndLevelController : MonoBehaviour
 
         if (currentValueForSection <= arrayAssociatedWithCurrValue[3])//on star 1
         {
-
-            returnHeightToMoveToo = ReturnHeightToRaiseTheImageToo(currentValueForSection, arrayAssociatedWithCurrValue[3], arrayAssociatedWithCurrValue[2], intHeightVars[3]);
-            print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to between 0 and " + arrayAssociatedWithCurrValue[0] + " moving filler to height: " + returnHeightToMoveToo);
+            returnHeightToMoveToo = ReturnHeightToRaiseTheImageToo(currentValueForSection, arrayAssociatedWithCurrValue[2], arrayAssociatedWithCurrValue[3], intHeightVars[3]);
+            // print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to between 0 and " + arrayAssociatedWithCurrValue[0] + " moving filler to height: " + returnHeightToMoveToo);
 
             StartCoroutine(RaiseImageGivenByFloatGiven(imageToMove, returnHeightToMoveToo));
             return;
         }
     }
 
-
-private float ReturnHeightToRaiseTheImageToo(float actualValue, float lowerBoundaryValue, float higherBoundaryValue, float lowerBoundaryHeight)
-{
-
+    private float ReturnHeightToRaiseTheImageToo(float actualValue, float lowerBoundaryValue, float higherBoundaryValue, float lowerBoundaryHeight)
+    {
         //pass this the score obtained, the lowest boundary it has passed, the next boundary above and the lower boundarys height value
 
-    //takes the actual value obtained and uses the two boundarys it is between to determine the height the image should be raised by depending on the actual value
-    //adds that value to the lower boundary ie the height of the star below so its the star belows height plus the percentage of the way through the next stars height
+        //takes the actual value obtained and uses the two boundarys it is between to determine the height the image should be raised by depending on the actual value
+        //adds that value to the lower boundary ie the height of the star below so its the star belows height plus the percentage of the way through the next stars height
 
-    float varToReturn = 0f, percenToNextStar = 0f;
+        float varToReturn = 0f, percenToNextStar = 0f;
 
-    percenToNextStar = (actualValue - lowerBoundaryValue) / (higherBoundaryValue - lowerBoundaryValue); // returns between 0 -1 range, is % of how far the value is between the boundarys
+        percenToNextStar = ((actualValue - lowerBoundaryValue) / (higherBoundaryValue - lowerBoundaryValue)); // returns between 0 -1 range, is % of how far the value is between the boundarys
 
-    //use % obtained above to find out how far to raise the height too between two values
+        //use % obtained above to find out how far to raise the height too between two values
 
-    varToReturn = (percenToNextStar * 333f) + lowerBoundaryHeight;//return between 0-333f + the lower boundary should add up to the toal height it needs to go too, should be how far through next star it needs to be
+        varToReturn = (percenToNextStar * 333f) + lowerBoundaryHeight;//return between 0-333f + the lower boundary should add up to the toal height it needs to go too, should be how far through next star it needs to be
 
-        print("testing hegith return value. pecentonextstar = " + percenToNextStar + ", vartoreturn : " + varToReturn + ", lowboundary: " + lowerBoundaryHeight + ",value passed: " + actualValue);
-            
-    return varToReturn;
-}
+        // print("testing hegith return value. pecentonextstar = " + percenToNextStar + ", vartoreturn : " + varToReturn + ", lowboundary: " + lowerBoundaryHeight + ",value passed: " + actualValue);
 
-private IEnumerator RaiseImageGivenByFloatGiven(GameObject imageToRaise, float amountToRaiseToo)//gest given the gameobject to move and the height to raise it too
-{
+        return varToReturn;
+    }
+
+    private IEnumerator RaiseImageGivenByFloatGiven(GameObject imageToRaise, float amountToRaiseToo)//gest given the gameobject to move and the height to raise it too
+    {
         //moves the image given to the height given .y in a preset amount of time
 
-        //////float speed = 1f;
-        //////Vector3 targetPos = imageToRaise.transform.position;
-        //////targetPos.y = amountToRaiseToo;
-
-        //////print("targetpos: " + targetPos + ". currentpos: " + imageToRaise.transform.position);
-
-        //////float step = (speed / (imageToRaise.transform.position - targetPos).magnitude) * Time.fixedDeltaTime;
-        //////float t = 0;
-        //////while (t <= 1.0f)
-        //////{
-        //////    t += step; // Goes from 0 to 1, incrementing by step each time
-        //////    imageToRaise.transform.position = Vector3.Lerp(imageToRaise.transform.position, targetPos, t); // Move objectToMove closer to b
-        //////    yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
-        //////}
-
-        //////imageToRaise.transform.position = targetPos;
-        ///
-
-
+        float speed = 2.5f;
         RectTransform rect = imageToRaise.transform.GetComponent<RectTransform>();
-       // print("rect: " + rect.transform.localPosition + " : " + rect.anchoredPosition);
-        Vector3 newPos = rect.localPosition;
-        newPos.y = amountToRaiseToo;
+        Vector3 targetPos = rect.localPosition;
+        targetPos.y = amountToRaiseToo;
 
-       
+        //print("targetpos: " + targetPos + ". currentpos: " + imageToRaise.transform.position);
 
-       //print("targetpos: " + newPos + ". currentpos: " + rect.transform.localPosition);
+        float step = (speed / (imageToRaise.transform.position - targetPos).magnitude) * Time.fixedDeltaTime;
+        float t = 0;
+        while (t <= 1.0f)
+        {
+            t += step; // Goes from 0 to 1, incrementing by step each time
+            imageToRaise.transform.localPosition = Vector3.Lerp(imageToRaise.transform.localPosition, targetPos, t); // Move objectToMove closer to b
+            yield return new WaitForFixedUpdate();         // Leave the routine and return here in the next frame
+        }
 
+        imageToRaise.transform.position = targetPos;
 
-        imageToRaise.transform.localPosition = newPos;
+        //// RectTransform rect = imageToRaise.transform.GetComponent<RectTransform>();
+        ////// print("rect: " + rect.transform.localPosition + " : " + rect.anchoredPosition);
+        //// Vector3 newPos = rect.localPosition;
+        //// newPos.y = amountToRaiseToo;
+
+        //print("targetpos: " + newPos + ". currentpos: " + rect.transform.localPosition);
+
+        ////imageToRaise.transform.localPosition = newPos;
 
         yield return new WaitForFixedUpdate();//just here to stop the red wiggly line of annoynace
-}
-
-public void AnimTriggerActivateLeftImageStars()//left col is time taken
-{
-    //currentTimeTakenToFinishAllWaves
-
-    CalcHeightForTimeTaken(leftImage, testingValues[0], winBoundariesTimeTaken);
-}
-
-public void AnimTriggerActivateMiddleImageStars()//middle is exports used
-{
-    //currentExportCounter
-
-    CalcHeightForTimeTaken(MiddleImage, testingValues[1], winBoundariesGridExports);
-}
-
-public void AnimTriggerActivateRightImageStars()//right is grid movements done
-{
-    //currentAmountOfTimesGridMoved
-    CalcHeightForTimeTaken(RightImage, testingValues[2], winBoundariesGridMovements);
-}
-
-public void ButtonLoadMainMenu()
-{
-    menuLoader.LoadMainMenu();
-}
-
-public void ButtonLoadNextLevel()
-{
-}
     }
+
+    public void AnimTriggerActivateLeftImageStars()//left col is time taken
+    {
+        //currentTimeTakenToFinishAllWaves
+
+        CalcHeightForTimeTaken(leftImage, testingValues[0], winBoundariesTimeTaken);
+    }
+
+    public void AnimTriggerActivateMiddleImageStars()//middle is exports used
+    {
+        //currentExportCounter
+
+        CalcHeightForTimeTaken(MiddleImage, testingValues[1], winBoundariesGridExports);
+    }
+
+    public void AnimTriggerActivateRightImageStars()//right is grid movements done
+    {
+        //currentAmountOfTimesGridMoved
+        CalcHeightForTimeTaken(RightImage, testingValues[2], winBoundariesGridMovements);
+    }
+
+    public void ButtonLoadMainMenu()
+    {
+        menuLoader.LoadMainMenu();
+    }
+
+    public void ButtonLoadNextLevel()
+    {
+        menuLoader.loadNextLevel();
+    }
+}
