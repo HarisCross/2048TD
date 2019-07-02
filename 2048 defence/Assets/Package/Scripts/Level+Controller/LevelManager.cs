@@ -4,9 +4,12 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public int LevelNumber = -1;
+    public int winConditionStarsNeeded;
+    public int winConditionStarsEarnt;
     public EndLevelController endLevelController;
     public MenuLoader menuLoader;
     public GameObject buttonHolder;
+
     private bool endTimer = false;
     // private string playPrefsLevelCounter = "playPrefsLevelCounter";
     //  private string playPrefstutorialCompleted = "playPrefstutorialCompleted";
@@ -56,16 +59,46 @@ public class LevelManager : MonoBehaviour
 
     public void LevelCompeletion()
     {
-        FinishLevelSuccess();
+
         if (counterSpawnersCompleted == amountOfSpawners)
         {
             //all spawners have finihsed thier waves hence the level is
 
             // print("THE LEVEL IS OVER");
-            endLevelController.TriggerEndSplashScreen(winBoundariesTimeTaken, winBoundariesGridMovements, winBoundariesGridExports, currentTimeTakenToFinishAllWaves, currentExportCounter, currentAmountOfTimesGridMoved);
+           endLevelController.TriggerEndSplashScreen(winBoundariesTimeTaken, winBoundariesGridMovements, winBoundariesGridExports, currentTimeTakenToFinishAllWaves, currentExportCounter, currentAmountOfTimesGridMoved);
+            
         }
-    }
 
+
+    }
+    public void ActivateButtons(int starsEarnt)
+    {
+        winConditionStarsEarnt = starsEarnt;
+        if (LevelWinOrFail())
+        {
+            FinishLevelSuccess();
+        }
+        else
+        {
+            FinishLevelFail();
+        }
+
+    }
+    private bool LevelWinOrFail()
+    {
+
+        if(winConditionStarsEarnt >= winConditionStarsNeeded)
+        {
+            return true;//success
+        }
+        else
+        {
+            return false;//failed 
+        }
+
+
+        
+    }
     public void TriggerEndLevelBGSplash(GameObject min)
     {
         endLevelController.TriggerEndLevelBGSplash(min);
@@ -100,13 +133,17 @@ public class LevelManager : MonoBehaviour
             print("pp level counter set to: " + LevelNumber + " from: " + PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter));
             PlayerPrefs.SetInt(PlayerPrefValues.bPlayPrefstutorialCompleted, LevelNumber);
         }
+
+        endLevelController.nextLevelButton.SetActive(true);
     }
 
     public void FinishLevelFail()
     {
         //to be called upon wave completion
+        endTimer = true;
 
-        //   PlayerPrefs.SetInt(playPrefsLevelCounter, LevelNumber);
+
+        endLevelController.restartLevelButton.SetActive(true);
     }
 
 

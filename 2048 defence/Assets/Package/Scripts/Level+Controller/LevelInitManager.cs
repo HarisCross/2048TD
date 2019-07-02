@@ -79,6 +79,7 @@ public class LevelInitManager : MonoBehaviour
     public int[] winBoundariesGridMovements = new int[] { 60, 120, 180, 240 }; //amount of swipes used on the grids
     public int[] winBoundariesGridExports = new int[] { 25, 50, 75, 100 }; //amount of times a value is exported
 
+    public int winConditionStarsNeeded = 4;
     // Use this for initialization
     private void Start()
     {
@@ -280,6 +281,8 @@ public class LevelInitManager : MonoBehaviour
         endLevelController.mapGrids = transform.GetChild(2).gameObject;
         levelManager.LevelNumber = LevelNumberOfPrefab;
         endLevelController.menuLoader = menuLoader;
+        levelManager.winConditionStarsNeeded = winConditionStarsNeeded;
+        endLevelController.levelManager = levelManager;
     }
 
     private void SpawnSpawner()

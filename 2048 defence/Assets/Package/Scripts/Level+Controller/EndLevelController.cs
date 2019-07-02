@@ -7,10 +7,13 @@ public class EndLevelController : MonoBehaviour
     public GameObject baseImage;
     public GameObject mapGrids;
 
+    public GameObject nextLevelButton;
+    public GameObject restartLevelButton;
     [SerializeField]
     private GameObject levelEndSlides;
 
     public MenuLoader menuLoader;
+    public LevelManager levelManager;
 
     [Header("Win Condition arrays")]
     private int[] winBoundariesTimeTaken; //in seconds, [0] is quickest = 3 stars, [2] is slowest = 1 star
@@ -24,11 +27,14 @@ public class EndLevelController : MonoBehaviour
     private int currentExportCounter = 0;
     private int currentAmountOfTimesGridMoved = 0;
 
-    [Header("Images to Move For Stars")]
+    [Header("Stars")]
     public GameObject leftImage;
 
     public GameObject MiddleImage;
     public GameObject RightImage;
+
+    [SerializeField]
+    private int amountOfStarsEarnt = 0;
 
     [Header("Other")]
     /// public float[] intHeightVars = new float[] { -999f, -666f, -333f, 0f };//lowest to heighset
@@ -139,7 +145,7 @@ public class EndLevelController : MonoBehaviour
         {
             returnHeightToMoveToo = intHeightVars[0];
             // print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to three stars" + " to between " + arrayAssociatedWithCurrValue[1] + " and " + arrayAssociatedWithCurrValue[2] + " moving filler to height: " + returnHeightToMoveToo);
-
+            amountOfStarsEarnt += 3;
             StartCoroutine(RaiseImageGivenByFloatGiven(imageToMove, returnHeightToMoveToo));
             return;
         }
@@ -148,7 +154,7 @@ public class EndLevelController : MonoBehaviour
         {
             returnHeightToMoveToo = ReturnHeightToRaiseTheImageToo(currentValueForSection, arrayAssociatedWithCurrValue[0], arrayAssociatedWithCurrValue[1], intHeightVars[1]);
             // print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to between " + arrayAssociatedWithCurrValue[1] + " and " + arrayAssociatedWithCurrValue[2] + " moving filler to height: " + returnHeightToMoveToo);
-
+            amountOfStarsEarnt += 2;
             StartCoroutine(RaiseImageGivenByFloatGiven(imageToMove, returnHeightToMoveToo));
             return;
         }
@@ -157,7 +163,7 @@ public class EndLevelController : MonoBehaviour
         {
             returnHeightToMoveToo = ReturnHeightToRaiseTheImageToo(currentValueForSection, arrayAssociatedWithCurrValue[1], arrayAssociatedWithCurrValue[2], intHeightVars[2]);
             // print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to between " + arrayAssociatedWithCurrValue[0] + " and " + arrayAssociatedWithCurrValue[1] + " moving filler to height: " + returnHeightToMoveToo);
-
+            amountOfStarsEarnt += 1;
             StartCoroutine(RaiseImageGivenByFloatGiven(imageToMove, returnHeightToMoveToo));
             return;
         }
@@ -166,12 +172,11 @@ public class EndLevelController : MonoBehaviour
         {
             returnHeightToMoveToo = ReturnHeightToRaiseTheImageToo(currentValueForSection, arrayAssociatedWithCurrValue[2], arrayAssociatedWithCurrValue[3], intHeightVars[3]);
             // print("raising: " + imageToMove.gameObject.name + "with " + currentValueForSection + " to between 0 and " + arrayAssociatedWithCurrValue[0] + " moving filler to height: " + returnHeightToMoveToo);
-
+            amountOfStarsEarnt += 0;
             StartCoroutine(RaiseImageGivenByFloatGiven(imageToMove, returnHeightToMoveToo));
             return;
         }
     }
-
     private float ReturnHeightToRaiseTheImageToo(float actualValue, float lowerBoundaryValue, float higherBoundaryValue, float lowerBoundaryHeight)
     {
         //pass this the score obtained, the lowest boundary it has passed, the next boundary above and the lower boundarys height value
@@ -229,23 +234,31 @@ public class EndLevelController : MonoBehaviour
     public void AnimTriggerActivateLeftImageStars()//left col is time taken
     {
         //currentTimeTakenToFinishAllWaves
+        //testingValues[0]
 
-        CalcHeightForTimeTaken(leftImage, testingValues[0], winBoundariesTimeTaken);
+        CalcHeightForTimeTaken(leftImage, currentTimeTakenToFinishAllWaves, winBoundariesTimeTaken);
     }
 
     public void AnimTriggerActivateMiddleImageStars()//middle is exports used
     {
         //currentExportCounter
+        //testingValues[1]
 
-        CalcHeightForTimeTaken(MiddleImage, testingValues[1], winBoundariesGridExports);
+        CalcHeightForTimeTaken(MiddleImage, currentExportCounter, winBoundariesGridExports);
     }
 
     public void AnimTriggerActivateRightImageStars()//right is grid movements done
     {
         //currentAmountOfTimesGridMoved
-        CalcHeightForTimeTaken(RightImage, testingValues[2], winBoundariesGridMovements);
-    }
+        //testingValues[2]
 
+        CalcHeightForTimeTaken(RightImage, currentAmountOfTimesGridMoved, winBoundariesGridMovements);
+        
+    }
+    public void ActivateEndButtons()
+    {
+        levelManager.ActivateButtons(amountOfStarsEarnt);
+    }
     public void ButtonLoadMainMenu()
     {
         menuLoader.LoadMainMenu();

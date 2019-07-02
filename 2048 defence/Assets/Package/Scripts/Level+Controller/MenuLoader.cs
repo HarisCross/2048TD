@@ -183,9 +183,9 @@ public class MenuLoader : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
-    public void LoadMainMenu()//save the current level and load the main menu again
+    public void LoadMainMenu()//load the main menu again
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
     //pout in func to be called on new scene loaded which uses the pp level number to load the appropriate level prefab
 
