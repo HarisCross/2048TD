@@ -12,6 +12,7 @@ public class PlayerPrefValues : MonoBehaviour
 
     [Header("Tutorial settings")]
     public static string bPlayPrefstutorialCompleted = "bPlayPrefstutorialCompleted";// 0 if not completed, if 0 then check next value. 1 if completed so mve onto chcking levels
+
     public static string bPlayPrefstutorialStage = "iplayPrefstutorialCompleted"; //will hold number to mark progress throughout the 3 levels, if 0 then allow only tut 1, if 1 done then allow 2, if 3 done then change above bool
 
     public static bool IntToBoolConvert(int val)

@@ -295,6 +295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelNumber: -1
+  winConditionStarsNeeded: 0
+  winConditionStarsEarnt: 0
   endLevelController: {fileID: 0}
   menuLoader: {fileID: 0}
   buttonHolder: {fileID: 0}
@@ -330,6 +332,7 @@ MonoBehaviour:
   bTutorialCompleted: 0
   tutorialcurrentStage: -1
   currentLevelCompleted: 0
+  levelInintManager: {fileID: 0}
 --- !u!1 &155684656
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +646,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &812040947
 GameObject:
@@ -823,7 +826,7 @@ RectTransform:
   - {fileID: 1626511630}
   - {fileID: 1973138842}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1557,6 +1560,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2330747750430865515, guid: 2f6f5150fe587fe438b2d4513557d023,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1906440175213082, guid: 2f6f5150fe587fe438b2d4513557d023, type: 3}
       propertyPath: m_Name
       value: LevelPrefab
@@ -1934,7 +1942,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 48235245}
-        m_MethodName: loadNextLevel
+        m_MethodName: LoadChosenLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

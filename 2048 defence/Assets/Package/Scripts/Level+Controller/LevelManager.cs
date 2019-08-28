@@ -59,21 +59,19 @@ public class LevelManager : MonoBehaviour
 
     public void LevelCompeletion()
     {
-
         if (counterSpawnersCompleted == amountOfSpawners)
         {
             //all spawners have finihsed thier waves hence the level is
 
             // print("THE LEVEL IS OVER");
-           endLevelController.TriggerEndSplashScreen(winBoundariesTimeTaken, winBoundariesGridMovements, winBoundariesGridExports, currentTimeTakenToFinishAllWaves, currentExportCounter, currentAmountOfTimesGridMoved);
-            
+            endLevelController.TriggerEndSplashScreen(winBoundariesTimeTaken, winBoundariesGridMovements, winBoundariesGridExports, currentTimeTakenToFinishAllWaves, currentExportCounter, currentAmountOfTimesGridMoved);
         }
-
-
     }
+
     public void ActivateButtons(int starsEarnt)
     {
         winConditionStarsEarnt = starsEarnt;
+
         if (LevelWinOrFail())
         {
             FinishLevelSuccess();
@@ -82,23 +80,20 @@ public class LevelManager : MonoBehaviour
         {
             FinishLevelFail();
         }
-
     }
+
     private bool LevelWinOrFail()
     {
-
-        if(winConditionStarsEarnt >= winConditionStarsNeeded)
+        if (winConditionStarsEarnt >= winConditionStarsNeeded)
         {
             return true;//success
         }
         else
         {
-            return false;//failed 
+            return false;//failed
         }
-
-
-        
     }
+
     public void TriggerEndLevelBGSplash(GameObject min)
     {
         endLevelController.TriggerEndLevelBGSplash(min);
@@ -115,11 +110,12 @@ public class LevelManager : MonoBehaviour
 
         //  print(spawnController.transform.gameObject + " ended wave by time limit: " + waveNumber);
     }
+
     public void SetCurrentLevel()
     {
         //called upon level start to set the current level in playerprefs
-
     }
+
     public void FinishLevelSuccess()
     {
         //to be called upon wave completion
@@ -128,7 +124,7 @@ public class LevelManager : MonoBehaviour
 
         //check if level just done is higher then previous max level, if so then change the previous max level compelted
 
-        if(PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter) < LevelNumber)
+        if (PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter) < LevelNumber)
         {
             print("pp level counter set to: " + LevelNumber + " from: " + PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter));
             PlayerPrefs.SetInt(PlayerPrefValues.bPlayPrefstutorialCompleted, LevelNumber);
@@ -142,10 +138,8 @@ public class LevelManager : MonoBehaviour
         //to be called upon wave completion
         endTimer = true;
 
-
         endLevelController.restartLevelButton.SetActive(true);
     }
-
 
     public void IncrementExportCounter()
     {

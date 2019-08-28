@@ -7,21 +7,24 @@ public class MenuLoader : MonoBehaviour
 {
     public GameObject debugUI;
     public GameObject buttonHolder;
+
     //public GameObject mainLevelLoadButton;
     public List<Button> buttonsList = new List<Button>();
-    private Text debugUIText;
 
+    private Text debugUIText;
 
     [Header("Obtained player pref values")]
     [SerializeField]
     private bool bTutorialCompleted = true;
-    public int tutorialcurrentStage = -1;
-    [SerializeField]
 
+    public int tutorialcurrentStage = -1;
+
+    [SerializeField]
     private int currentLevelCompleted = 0;//-1 means not obtained value yet
 
     private AudioManager audioMan;
     private LevelMenuManager levelMenuManager;
+    public LevelInitManager levelInintManager;
 
     // private int  playPrefsCurrentLevel = 0;
 
@@ -79,13 +82,9 @@ public class MenuLoader : MonoBehaviour
             //if tutorial not done then get the tutorial current stage
 
             tutorialcurrentStage = PlayerPrefs.GetInt(PlayerPrefValues.bPlayPrefstutorialStage);
-
         }
 
-
-
         currentLevelCompleted = PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter);
-
     }
 
     private void InitialisePlayerPrefValues()
@@ -98,17 +97,14 @@ public class MenuLoader : MonoBehaviour
         PlayerPrefs.SetInt(PlayerPrefValues.bPlayPrefstutorialStage, 1);
 
         PlayerPrefs.SetInt(PlayerPrefValues.iPlayPrefsLevelCounter, 1);
-       // PlayerPrefs.SetInt(PlayerPrefValues.iPlayPrefsCurrentLevel, 0);
-
-
-
+        // PlayerPrefs.SetInt(PlayerPrefValues.iPlayPrefsCurrentLevel, 0);
     }
 
     private void UpdateTutorialButtons()
     {
-            //get the pp values for tutorial and activate or deactivate all the buttons depnding on values obtianed
+        //get the pp values for tutorial and activate or deactivate all the buttons depnding on values obtianed
 
-        if(PlayerPrefs.GetInt(PlayerPrefValues.bPlayPrefstutorialCompleted) == 1)
+        if (PlayerPrefs.GetInt(PlayerPrefValues.bPlayPrefstutorialCompleted) == 1)
         {
             print("tut IS done, assigning buttons accordingly");
 
@@ -117,15 +113,13 @@ public class MenuLoader : MonoBehaviour
             buttonsList[1].interactable = false;
             buttonsList[2].interactable = false;
             buttonsList[3].interactable = false;
-
-
         }
         else
         {
             print("tut NOT done, assigning buttons accordingly");
             //if the tutorial hasnt been completed
             buttonsList[0].interactable = false;
-             buttonsList[1].interactable = true;
+            buttonsList[1].interactable = true;
 
             int tutLevelsCompleted = PlayerPrefs.GetInt(PlayerPrefValues.bPlayPrefstutorialStage);
             //int tutLevelsCompleted = 2;
@@ -136,25 +130,34 @@ public class MenuLoader : MonoBehaviour
                     //buttonsList[1].interactable = false;
                     buttonsList[2].interactable = true;
                     break;
+
                 case 2:
-                   // buttonsList[1].interactable = false;
+                    // buttonsList[1].interactable = false;
                     buttonsList[2].interactable = true;
                     buttonsList[3].interactable = true;
                     break;
 
-                case 0:break;
+                case 0: break;
                 default: break;
-
             }
-
-
         }
-
     }
 
     public void loadNextLevel()
     {
-          int levelToLoad = (PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter) + 3);//add 3 so when passed to level assigner it loads the game levels, not tut levels as tut levels are numbered 1-3 for this purpose
+        //called from game scene
+        //should use the current highest level too load the next prefab
+
+        levelMenuManager.AssignNextLevelToLoad(0);
+        print("loading next level");
+        SceneManager.LoadScene(2);
+    }
+
+    public void LoadChosenLevel()
+    {
+        //TODO - change back to below for sustained gameplay, only changed during testing
+        //int levelToLoad = (PlayerPrefs.GetInt(PlayerPrefValues.iPlayPrefsLevelCounter));//add 3 so when passed to level assigner it loads the game levels, not tut levels as tut levels are numbered 1-3 for this purpose
+        int levelToLoad = 4;
 
         LevelLoader(levelToLoad);//loads teh game scene
     }
@@ -164,11 +167,13 @@ public class MenuLoader : MonoBehaviour
         int levelToLoad = 1;
         LevelLoader(levelToLoad);
     }
+
     public void loadTutorial2()//scene 1 is tutorial, scene 2 is WIP main scene
     {
         int levelToLoad = 2;
         LevelLoader(levelToLoad);
     }
+
     public void loadTutorial3()//scene 1 is tutorial, scene 2 is WIP main scene
     {
         int levelToLoad = 3;
@@ -187,6 +192,7 @@ public class MenuLoader : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
     //pout in func to be called on new scene loaded which uses the pp level number to load the appropriate level prefab
 
     private void PlayLevelChangeAnimation()

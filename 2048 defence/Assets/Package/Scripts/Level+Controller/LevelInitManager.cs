@@ -80,6 +80,7 @@ public class LevelInitManager : MonoBehaviour
     public int[] winBoundariesGridExports = new int[] { 25, 50, 75, 100 }; //amount of times a value is exported
 
     public int winConditionStarsNeeded = 4;
+
     // Use this for initialization
     private void Start()
     {
@@ -265,9 +266,7 @@ public class LevelInitManager : MonoBehaviour
         //add ui variables to the grid holder to be used and passed down
         GridHolder.GetComponent<MainHolderController>().CentrePos = spawningGridPos;
         GridHolder.GetComponent<MainHolderController>().interactButtonsHolder = gridUIButtons;
-
         GridHolder.GetComponent<InputController>().TimeBetweenMovements = TimeBetweenGridMovements;
-
         GridHolder.GetComponent<UIButtonController>().exportButton = gridUIButtons.transform.GetChild(2).gameObject;
 
         //add arrays to levelmanager
@@ -277,12 +276,15 @@ public class LevelInitManager : MonoBehaviour
         levelManager.endLevelController = endLevelController;
         levelManager.menuLoader = menuLoader;
         levelManager.buttonHolder = gridsButtons.transform.parent.gameObject;
+        levelManager.LevelNumber = LevelNumberOfPrefab;
+        levelManager.winConditionStarsNeeded = winConditionStarsNeeded;
+
         endLevelController.menuLoader = menuLoader;
         endLevelController.mapGrids = transform.GetChild(2).gameObject;
-        levelManager.LevelNumber = LevelNumberOfPrefab;
         endLevelController.menuLoader = menuLoader;
-        levelManager.winConditionStarsNeeded = winConditionStarsNeeded;
         endLevelController.levelManager = levelManager;
+
+        menuLoader.levelInintManager = this.transform.GetComponent<LevelInitManager>();
     }
 
     private void SpawnSpawner()

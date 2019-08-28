@@ -9,6 +9,7 @@ public class EndLevelController : MonoBehaviour
 
     public GameObject nextLevelButton;
     public GameObject restartLevelButton;
+
     [SerializeField]
     private GameObject levelEndSlides;
 
@@ -177,6 +178,7 @@ public class EndLevelController : MonoBehaviour
             return;
         }
     }
+
     private float ReturnHeightToRaiseTheImageToo(float actualValue, float lowerBoundaryValue, float higherBoundaryValue, float lowerBoundaryHeight)
     {
         //pass this the score obtained, the lowest boundary it has passed, the next boundary above and the lower boundarys height value
@@ -253,12 +255,13 @@ public class EndLevelController : MonoBehaviour
         //testingValues[2]
 
         CalcHeightForTimeTaken(RightImage, currentAmountOfTimesGridMoved, winBoundariesGridMovements);
-        
     }
+
     public void ActivateEndButtons()
     {
         levelManager.ActivateButtons(amountOfStarsEarnt);
     }
+
     public void ButtonLoadMainMenu()
     {
         menuLoader.LoadMainMenu();
@@ -267,5 +270,9 @@ public class EndLevelController : MonoBehaviour
     public void ButtonLoadNextLevel()
     {
         menuLoader.loadNextLevel();
+    }
+
+    public void ButtonRestartLevel()
+    {
     }
 }
